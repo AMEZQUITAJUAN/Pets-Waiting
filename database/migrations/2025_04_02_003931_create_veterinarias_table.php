@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('veterinarias', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name',45);
+            $table->string('direccion',45);
+            $table->string('email')->unique();
+            $table->string('hora',45);
+
             $table->timestamps();
         });
     }

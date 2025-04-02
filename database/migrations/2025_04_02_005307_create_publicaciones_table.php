@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->string('titulo', 255);
+            $table->text('descripcion');
+            $table->enum('categoria', ['perdidos', 'adopcion', 'rescatados', 'fundaciones']);
+            $table->string('imagen')->nullable();
+            
             $table->timestamps();
         });
     }

@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('fundaciones', function (Blueprint $table) {
             $table->id();
+
+            $table->string('nombre', 255);
+            $table->text('descripcion');
+            $table->string('contacto', 255);
+            $table->string('email', 100)->unique();
+            
             $table->timestamps();
         });
     }

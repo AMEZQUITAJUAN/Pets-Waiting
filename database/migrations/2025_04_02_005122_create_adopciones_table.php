@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('adopciones', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->foreignId('publicacion_id')->constrained('publicaciones')->onDelete('cascade');
+            $table->enum('estado', ['pendiente', 'aprobada', 'rechazada'])->default('pendiente');
+            
             $table->timestamps();
         });
     }
