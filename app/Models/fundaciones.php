@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class fundaciones extends Model
 {
     use HasFactory;
+    public function donacion(){
+        return $this->hasMany('App\Models\donaciones');
+    }
 }

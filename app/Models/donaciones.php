@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class donaciones extends Model
 {
     use HasFactory;
+    public function usuario(){
+        return $this->belongsTo('App\Models\usuarios');
+    }
+    public function fundacion(){
+        return $this->belongsTo('App\Models\fundaciones');
+    }
 }

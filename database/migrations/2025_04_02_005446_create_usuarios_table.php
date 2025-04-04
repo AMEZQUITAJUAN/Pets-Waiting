@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('tipo', ['usuario', 'administrador', 'super_administrador']);
             $table->timestamps();
-            
+             
             $table->timestamps();
         });
     }
