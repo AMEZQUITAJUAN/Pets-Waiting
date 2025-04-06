@@ -14,16 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('nombre', 100);
-            $table->string('email', 100)->unique();
-            $table->string('password');
-            $table->enum('tipo', ['usuario', 'administrador', 'super_administrador']);
-            $table->timestamps();
-             
-            $table->timestamps();
-        });
+    $table->id();
+    $table->string('nombre', 100);
+    $table->string('email', 100)->unique();
+    $table->string('password', 255);
+    $table->enum('tipo', ['usuario', 'administrador', 'super_administrador']);
+    $table->timestamps(); // ¡Esto ya agrega created_at y updated_at!
+    });
     }
 
     /**
