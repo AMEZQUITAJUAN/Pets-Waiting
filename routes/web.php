@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return "Bienvenidos a Pets-Waiting";
 });
+
+Route::get('prueba', function () {
+    return "Bienvenidos a la Ruta de Prueba";
+});
+
