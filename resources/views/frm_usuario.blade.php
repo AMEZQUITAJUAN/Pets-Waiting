@@ -3,21 +3,47 @@
 @section('content')
 
 
-<form>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets Waiting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Rescate de Mascotas</h1>
+        <p>Dale un hogar a una mascota necesaria</p>
+        <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
+        <a class="btn" href="#adoptar">Adoptar ahora</a>
+        <a class="btn" href="#donar">Haz una donación</a>
+    </header>
+
+    <section class="services">
+        <h2>Nuestros servicios</h2>
+        <div class="service">
+            <h3>Adopción</h3>
+            <p>Encuentra tu compañero perfecto entre nuestras mascotas rescatadas.</p>
+        </div>
+        <div class="service">
+            <h3>Cuidado temporal</h3>
+            <p>Ofrece un lugar temporal a una mascota necesitada.</p>
+        </div>
+        <div class="service">
+            <h3>Búsqueda de mascotas perdidas</h3>
+            <p>Te ayudamos a encontrar a tu mascota perdida.</p>
+        </div>
+    </section>
+
+    <footer>
+        <h2>Únete a nuestra causa</h2>
+        <p>Ingresa tu correo electrónico:</p>
+        <input type="email" placeholder="Tu correo electrónico">
+        <button class="subscribe">Suscribirme al boletín</button>
+    </footer>
+</body>
+</html>
+
 
     @endsection
