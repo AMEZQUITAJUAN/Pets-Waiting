@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('frm_product');
+    return view('frm_usuario');
     return "Bienvenidos a Pets-Waiting";
 });
 
