@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('frm_usuario');
-    return "Bienvenidos a Pets-Waiting";
+
 });
 
 Route::get('prueba', function () {
-    return "Bienvenidos a la Ruta de Prueba";
+    return view('usuarios');
 });
+Route::get('usuarios/create', 'UsuariosController@create')->name('usuarios.create');
+Route::post('usuarios/store', 'UsuariosController@store')->name('usuarios.store');
 

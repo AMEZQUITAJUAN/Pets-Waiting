@@ -16,8 +16,10 @@ public function store(Request $request){
 
 
     $usuario = new usuario();
-    $usuario->name=$request->name;
-    $usuario->price=$request->password;
+    $usuario->Nombre=$request->Nombre;
+    $usuario->email=$request->email;
+    $usuario->contraseña=$request->contraseña;
+    $usuario->telefono=$request->telefono;
     $usuario->save();
     return $usuario;
 }
