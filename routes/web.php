@@ -1,17 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\OrmController;
+use App\Http\Controllers\UsuariosController;
 
 Route::get('/', function () {
     return view('formulario');
@@ -21,6 +12,11 @@ Route::get('/', function () {
 Route::get('prueba', function () {
     return view('usuarios');
 });
-Route::get('usuarios/create', 'UsuariosController@create')->name('usuarios.create');
-Route::post('usuarios/store', 'UsuariosController@store')->name('usuarios.store');
+
+Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
+Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
+
+Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+
+Route::get('/ormconsultas',[OrmController::class,'consultas']);
 

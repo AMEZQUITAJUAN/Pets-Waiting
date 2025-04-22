@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('usuarios', function (Blueprint $table) {
-    $table->id();
-    $table->string('nombre', 100);
-    $table->string('email', 100)->unique();
-    $table->string('password', 255);
-    $table->enum('tipo', ['usuario', 'administrador', 'super_administrador']);
-    $table->timestamps(); // ¡Esto ya agrega created_at y updated_at!
-    });
+            $table->id();
+            $table->string('nombre', 100); // en minúsculas
+            $table->string('email', 100)->unique();
+            $table->string('password', 255); // no 'contraseña'
+            $table->string('telefono', 20)->nullable(); // por si lo usas en el form
+            $table->enum('tipo', ['usuario', 'administrador', 'super_administrador'])->default('usuario');
+            $table->timestamps(); // created_at y updated_at
+        });
     }
 
     /**
