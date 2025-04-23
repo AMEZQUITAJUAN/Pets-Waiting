@@ -16,7 +16,6 @@ class UsuariosController extends Controller
         $usuario->Nombre = $request->Nombre;
         $usuario->email = $request->email;
         $usuario->password = bcrypt($request->password); // Encriptar la contraseña
-        $usuario->telefono = $request->telefono;
         $usuario->save();
 
         return redirect()->route('usuarios.index');

@@ -1,36 +1,37 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg" style="background-color: #f8f3e6; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="resources/assets/mascota.jpg" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Accion</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <!-- Logo con temática de mascotas -->
+        <a class="navbar-brand" href="#" style="color: #5a3e2b; font-weight: bold;">
+            🐾 Rescate de Mascotas
+        </a>
+        <!-- Botón para dispositivos móviles -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Enlaces de navegación -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #5a3e2b;">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #5a3e2b;">Adopción</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #5a3e2b;">Donaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #5a3e2b;">Contacto</a>
+                </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+            <!-- Barra de búsqueda -->
+            <form class="d-flex me-3">
+                <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" style="border-radius: 20px;">
+            </form>
+            <!-- Botón destacado -->
+            <a href="#" class="btn" style="background-color: #ff5722; color: white; border-radius: 20px; padding: 0.5rem 1rem;">
+                Adoptar ahora
+            </a>
+        </div>
     </div>
-  </nav>
+</nav>

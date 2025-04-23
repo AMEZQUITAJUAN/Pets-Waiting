@@ -8,21 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rescate de Mascotas</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{{ asset('styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Dale un hogar a una <span>mascota necesitada</span></h1>
-      <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
-      <div class="hero-buttons">
-        <button class="adoptar">Adoptar ahora</button>
-        <button class="donar">Hacer una donación</button>
-      </div>
-    </div>
-    <div class="hero-image"><img src="" alt="">
-      <div class="placeholder">📷</div>
-    </div>
-  </section>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Dale un hogar a una <span>mascota necesitada</span></h1>
+            <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
+            <div class="hero-buttons">
+                <button class="adoptar">Adoptar ahora</button>
+                <button class="donar">Hacer una donación</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="img/mascota.jpg" alt="Mascota feliz">
+        </div>
+    </section>
 
   <section class="servicios">
     <h2>Nuestros servicios</h2>

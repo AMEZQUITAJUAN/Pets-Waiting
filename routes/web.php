@@ -3,20 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrmController;
 use App\Http\Controllers\UsuariosController;
-
 Route::get('/', function () {
-    return view('formulario');
+    return view('home'); // Página principal con el formulario
+})->name('usuarios.create'); // Nombrar la ruta para usarla en enlaces
 
-});
+
+
 
 Route::get('prueba', function () {
-    return view('usuarios');
+    return view('home');
 });
 
-Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
-Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
 
-Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+
+Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store'); // Guardar usuario
+
+Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index'); // Mostrar lista de usuarios
 
 Route::get('/ormconsultas',[OrmController::class,'consultas']);
 

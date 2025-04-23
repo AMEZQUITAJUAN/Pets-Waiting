@@ -7,13 +7,14 @@
 <body>
     <h1>Usuarios Registrados</h1>
 
+    <a href="{{ route('usuarios.create') }}">Registrar un nuevo usuario</a> <!-- Enlace al formulario -->
+
     <table border="1" cellpadding="10">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
-                <th>Teléfono</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +23,6 @@
                     <td>{{ $usuario->id }}</td>
                     <td>{{ $usuario->Nombre }}</td>
                     <td>{{ $usuario->email }}</td>
-                    <td>{{ $usuario->telefono }}</td>
                 </tr>
             @endforeach
         </tbody>

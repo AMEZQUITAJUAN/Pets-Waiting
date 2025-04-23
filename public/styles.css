@@ -1,167 +1,266 @@
-body {
+/* Reset general */
+* {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  }
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  /* Sección Hero */
-  .hero {
-    background-image:url(img/patas.jpg);
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 70px; /* Espacio para el navbar fijo */
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #f8f3e6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #5a3e2b;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    color: #ff7a1a;
+}
+
+.navbar-nav .nav-link {
+    color: #5a3e2b;
+    font-weight: 500;
+    margin-right: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff7a1a;
+}
+
+.form-control {
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    width: 200px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #ff7a1a;
+    outline: none;
+}
+
+.btn {
+    background-color: #ff5722;
+    color: white;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e64a19;
+}
+
+/* Hero Section */
+/* Hero Section */
+.hero {
+    position: relative; /* Necesario para la superposición */
+    background-image: url('img/patas.jpg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4rem 2rem;
+    padding: 2rem 1rem;
     flex-wrap: wrap;
-  }
+    color: white;
+    z-index: 2;
+}
 
-  .hero-content {
+/* Superposición de color para mejorar la visibilidad del texto */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+    z-index: -1; /* Coloca la superposición detrás del contenido */
+}
+
+.hero-content {
     max-width: 500px;
-  }
+    z-index: 2;/* Asegura que el contenido esté encima de la superposición */
+    margin-right: 1rem;
+}
 
-  .hero h1 {
-    font-size: 2.5rem;
-    color: #004AAD;
-  }
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
 
-  .hero h1 span {
-    color: #004AAD;
-  }
+.hero h1 span {
+    color: #ffcc00;
+}
 
-  .hero p {
-    font-size: 1rem;
-    margin: 1rem 0;
-    color: #555;
-  }
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
 
-  .hero-buttons {
+.hero-buttons {
     display: flex;
     gap: 1rem;
-  }
+}
 
-  .hero-buttons button {
-    padding: 0.75rem 1.5rem;
+.hero-buttons .adoptar {
+    background-color: #ff5722;
+    color: white;
     border: none;
+    padding: 0.75rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
-  }
+    font-size: 1rem;
+}
 
-  .adoptar {
-    background-color: #FF5722;
-    color: white;
-  }
+.hero-buttons .adoptar:hover {
+    background-color: #e64a19;
+}
 
-  .donar {
+.hero-buttons .donar {
     background-color: transparent;
-    color: #FF5722;
-    border: 1px solid #FF5722;
-  }
+    color: #ff5722;
+    border: 2px solid #ff5722;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
 
-  .hero-image .placeholder {
-    width: 250px;
-    height: 200px;
-    background-color: #ccc;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-  }
+.hero-buttons .donar:hover {
+    background-color: #ff5722;
+    color: white;
+}
 
-  /* Servicios */
-  .servicios {
-    background-color: #ccf5da;
+/* Servicios */
+.servicios {
+    background-color: #f0f8f5;
     text-align: center;
     padding: 3rem 2rem;
-  }
+}
 
-  .servicios h2 {
-    font-size: 2rem;
+.servicios h2 {
+    font-size: 2.5rem;
     color: #024e0b;
     margin-bottom: 2rem;
-  }
+}
 
-  .cards {
+.cards {
     display: flex;
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
-  }
+}
 
-  .card {
+.card {
     background-color: white;
     border-radius: 10px;
     padding: 1.5rem;
-    max-width: 250px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
+    max-width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-  .card .icon {
-    font-size: 2rem;
+.card .icon {
+    font-size: 3rem;
     margin-bottom: 1rem;
-  }
+    color: #ff7a1a;
+}
 
-  /* Suscripción */
-  .suscripcion {
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Suscripción */
+.suscripcion {
     background-color: #ffe1c9;
     text-align: center;
     padding: 3rem 2rem;
-  }
+}
 
-  .suscripcion h2 {
+.suscripcion h2 {
     color: #b03c00;
-    font-size: 1.8rem;
-  }
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
 
-  .suscripcion form {
+.suscripcion form {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
     gap: 0.5rem;
     flex-wrap: wrap;
-  }
+}
 
-  .suscripcion input {
+.suscripcion input {
     padding: 0.7rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 250px;
-  }
+}
 
-  .suscripcion button {
+.suscripcion button {
     padding: 0.7rem 1rem;
     background-color: #ff7a1a;
     border: none;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
 
-  .suscripcion p {
+.suscripcion button:hover {
+    background-color: #e64a19;
+}
+
+.suscripcion p {
     font-size: 0.9rem;
     margin-top: 1rem;
     color: #5c3b27;
-  }
+}
 
-  .suscripcion a {
+.suscripcion a {
     color: #b03c00;
     text-decoration: none;
-  }
-/* formulario */
-
-  * {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+.suscripcion a:hover {
+    text-decoration: underline;
 }
 
+/* Formulario */
 .registration-container {
     background-color: white;
     border-radius: 10px;
@@ -169,6 +268,7 @@ body {
     width: 100%;
     max-width: 450px;
     padding: 40px;
+    margin: 2rem auto;
 }
 
 h1 {
@@ -247,5 +347,3 @@ input::placeholder {
 .login-link a:hover {
     text-decoration: underline;
 }
-
-

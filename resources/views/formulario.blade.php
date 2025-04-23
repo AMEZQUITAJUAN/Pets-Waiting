@@ -31,16 +31,11 @@
                 <input type="password" id="password" name="contraseña" placeholder="••••••••" required>
             </div>
 
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" id="telefono" name="telefono" placeholder="Número de contacto">
-            </div>
-
             <button type="submit" class="btn-register">Registrarse</button>
         </form>
 
         <div class="login-link">
-            ¿Ya tienes una cuenta? <a href="#">Inicia sesión</a>
+            ¿Ya tienes una cuenta? <a href="{{ route('usuarios.index') }}">Ver lista de usuarios</a>
         </div>
     </div>
 </body>
