@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="hero-image">
-            <img src="img/mascota.jpg" alt="Mascota feliz">
+            <img src="img/mascotas.png" alt="Mascota feliz">
         </div>
     </section>
 
