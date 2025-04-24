@@ -46,3 +46,5 @@ class Usuario extends Model
     }
 }
 
+$usuario = Usuario::with('mascotas')->find($id);
+

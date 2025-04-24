@@ -24,7 +24,11 @@ class UsuariosController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password), // Encriptar la contraseña
         ]);
-        return redirect()->route('usuarios.index')->with('success', 'Usuario registrado correctamente.');
+
+    }
+
+    public function index() {
+        $usuarios = Usuario::paginate(10); // 10 usuarios por página
+        return view('usuarios.index', compact('usuarios'))->with('links', $usuarios->links());
     }
 }
-
