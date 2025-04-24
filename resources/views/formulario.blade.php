@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,7 +17,7 @@
 
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="Nombre" placeholder="Tu nombre completo" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
             </div>
 
             <div class="form-group">
@@ -28,7 +27,7 @@
 
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="contraseña" placeholder="••••••••" required>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
 
             <button type="submit" class="btn-register">Registrarse</button>

@@ -20,7 +20,7 @@ class UsuarioFactory extends Factory
             'nombre' => $this->faker->name(), // Genera un nombre aleatorio
             'email' => $this->faker->unique()->safeEmail(), // Genera un email único
             'password' => bcrypt('password'), // Contraseña encriptada
-            'telefono' => $this->faker->optional()->phoneNumber(), // Teléfono opcional
+            
         ];
     }
 }

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nombre', 100); // en minúsculas
             $table->string('email', 100)->unique();
             $table->string('password', 255); // no 'contraseña'
-            $table->string('telefono', 20)->nullable(); // por si lo usas en el form
             $table->timestamps(); // created_at y updated_at
         });
     }
