@@ -12,17 +12,23 @@ class UsuariosController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'Nombre' => 'required|string|max:100',
+            'email' => 'required|email|unique:usuarios,email',
+            'password' => 'required|min:8',
+        ]);
+
         $usuario = new Usuario();
         $usuario->Nombre = $request->Nombre;
         $usuario->email = $request->email;
-        $usuario->password = bcrypt($request->password); // Encriptar la contraseña
+        $usuario->password = bcrypt($request->password);
         $usuario->save();
 
         return redirect()->route('usuarios.index');
     }
 
     public function index() {
-        $usuarios = Usuario::all();
-        return view('usuarios.index', compact('usuarios'));
+        $usuarios = Usuario::paginate(10); // 10 usuarios por página
+        return view('usuarios.index', compact('usuarios'))->with('links', $usuarios->links());
     }
 }

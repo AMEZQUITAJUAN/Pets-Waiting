@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,6 +7,16 @@
     <link rel="stylesheet" href="{{ asset('styles.css') }}">
 </head>
 <body>
+{{-- filepath: c:\xampp\htdocs\Pets-Waiting\resources\views\formulario.blade.php --}}
+@if ($errors->any())
+    <div class="error-messages">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="registration-container">
         <h1>Registro de Usuario</h1>
         <p class="subtitle">Crea tu cuenta para empezar a disfrutar de nuestros servicios</p>
@@ -40,3 +49,8 @@
     </div>
 </body>
 </html>
+
+<?php
+use Illuminate\Support\Facades\Hash;
+
+$usuario->password = Hash::make($request->password);
