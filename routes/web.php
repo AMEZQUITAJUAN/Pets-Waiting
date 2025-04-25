@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrmController;
 use App\Http\Controllers\UsuariosController;
 Route::get('/', function () {
-    return view('formulario ');// Página principal con el formulario
+    return view('home');// Página principal con el formulario
 })->name('usuarios.create');
 
 

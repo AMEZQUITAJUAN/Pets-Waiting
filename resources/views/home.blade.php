@@ -51,11 +51,11 @@
   <section class="suscripcion">
     <h2>Únete a nuestra causa</h2>
     <form>
-      <input type="email" placeholder="Tu correo electrónico" required>
-      <button type="submit">Suscribirse al boletín</button>
+        <button type="submit">Iniciar Sesion</button>
     </form>
+    <a href="{{ route('usuarios.create') }}" class="btn-register">Registrarse</a>
     <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
-  </section>
+</section>
 </body>
 </html>
 
