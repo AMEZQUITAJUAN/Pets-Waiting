@@ -31,4 +31,9 @@ class UsuariosController extends Controller
         $usuarios = Usuario::paginate(10); // 10 usuarios por página
         return view('usuarios.index', compact('usuarios'))->with('links', $usuarios->links());
     }
+
+    public function showUsuarioWithMascotas($id) {
+        $usuario = Usuario::with('mascotas')->find($id); // Reemplaza $id con el ID que necesites
+        return view('usuarios.show', compact('usuario'));
+    }
 }

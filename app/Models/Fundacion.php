@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class fundaciones extends Model
+class Fundacion extends Model
 {
     use HasFactory;
     public function donacion(){
-        return $this->hasMany('App\Models\donaciones');
+        return $this->hasMany('App\Models\Donacion');
     }
 }
