@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class Usuario extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre',
+        'email',
+        'password',
+    ];
+   
 
     public function mascotas()
     {

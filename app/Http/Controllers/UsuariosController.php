@@ -8,23 +8,23 @@ use App\Models\Usuario;
 class UsuariosController extends Controller
 {
     public function create() {
-        return view('usuarios.create');
+        return view('formulario'); // Sin espacio al final
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
+        // Validar los datos del formulario
         $request->validate([
-            'Nombre' => 'required|string|max:100',
+            'nombre' => 'required|string|max:100',
             'email' => 'required|email|unique:usuarios,email',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
+        ]);
+        Usuario::create([
+            'nombre' => $request->nombre,
+            'email' => $request->email,
+            'password' => bcrypt($request->password), // Encriptar la contraseña
         ]);
 
-        $usuario = new Usuario();
-        $usuario->Nombre = $request->Nombre;
-        $usuario->email = $request->email;
-        $usuario->password = bcrypt($request->password);
-        $usuario->save();
-
-        return redirect()->route('usuarios.index');
     }
 
     public function index() {

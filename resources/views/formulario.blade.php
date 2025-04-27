@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="Nombre" placeholder="Tu nombre completo" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
             </div>
 
             <div class="form-group">
@@ -37,20 +37,24 @@
 
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="contraseña" placeholder="••••••••" required>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
 
             <button type="submit" class="btn-register">Registrarse</button>
+            <a href="formulario.blade.php"></a>
         </form>
 
         <div class="login-link">
             ¿Ya tienes una cuenta? <a href="{{ route('usuarios.index') }}">Ver lista de usuarios</a>
         </div>
     </div>
+    <section class="suscripcion">
+    <h2>Únete a nuestra causa</h2>
+    <form>
+        <button type="submit">Iniciar Sesion</button>
+    </form>
+    <a href="{{ route('usuarios.create') }}" class="btn-register">Registrarse</a>
+    <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
+</section>
 </body>
 </html>
-
-<?php
-use Illuminate\Support\Facades\Hash;
-
-$usuario->password = Hash::make($request->password);
