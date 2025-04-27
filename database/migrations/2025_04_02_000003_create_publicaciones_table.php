@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
 
             $table->foreignId('publicacion_id')->constrained('publicaciones')->onDelete('cascade');
-=======
->>>>>>> 8deacc72ba314f336d96239c60cdfd7e9a0955df
             $table->string('titulo', 255);
             $table->text('descripcion');
             $table->enum('categoria', ['perdidos', 'adopcion', 'rescatados', 'fundaciones']);

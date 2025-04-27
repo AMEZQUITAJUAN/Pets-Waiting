@@ -31,6 +31,9 @@
     {{ $usuarios->links() }}
 
     <h1>Lista de Mascotas</h1>
+
+    <a href="{{ route('mascotas.create') }}">Registrar una nueva mascota</a>
+
     @if ($mascotas->isEmpty())
         <p>No hay mascotas registradas.</p>
     @else
@@ -47,11 +50,13 @@
             <tbody>
                 @foreach ($mascotas as $mascota)
                     <tr>
-                        <td>{{ $mascota->id }}</td>
-                        <td>{{ $mascota->nombre }}</td>
-                        <td>{{ $mascota->especie }}</td>
-                        <td>{{ $mascota->edad }}</td>
-                        <td>{{ $mascota->usuario->Nombre ?? 'Sin usuario' }}</td>
+                        
+                            <td>{{ $mascota->id }}</td>
+                            <td><a href="{{ route('mascotas.show', $mascota->id) }}">{{ $mascota->nombre }}</a></td>
+                            <td>{{ $mascota->especie }}</td>
+                            <td>{{ $mascota->edad }}</td>
+                            <td>{{ $mascota->usuario->Nombre ?? 'Sin usuario' }}</td>
+                        
                     </tr>
                 @endforeach
             </tbody>

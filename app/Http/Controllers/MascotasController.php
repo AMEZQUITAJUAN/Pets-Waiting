@@ -11,13 +11,25 @@ class MascotasController extends Controller
     public function index()
     {
         $usuarios = Usuario::paginate(10); // Paginación para usuarios
-        $mascotas = Mascota::with('usuario')->get(); // Cargar mascotas con sus usuarios asociados
+        $mascotas = Mascota::with('usuario')->paginate(10); // Paginación para mascotas con sus usuarios asociados
         return view('mascotas.index', compact('usuarios', 'mascotas'));
     }
+
     public function create()
     {
-        return view('mascotas.create');
+        $usuarios = Usuario::all(); // Obtener todos los usuarios
+        return view('mascotas.create', compact('usuarios'));
     }
 
+    public function show($id)
+    {
+        $mascota = Mascota::with('usuario')->find($id);
+
+        if (!$mascota) {
+            return redirect()->route('mascotas.index')->with('error', 'Mascota no encontrada.');
+        }
+
+        return view('mascotas.show', compact('mascota'));
+    }
 }
 

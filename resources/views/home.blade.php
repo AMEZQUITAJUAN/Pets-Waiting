@@ -53,7 +53,9 @@
     <form>
         <button type="submit">Iniciar Sesion</button>
     </form>
-    <a href="{{ route('usuarios.create') }}" class="btn-register">Registrarse</a>
+    <form action="{{ route('usuarios.create') }}" method="GET">
+        <button type="submit" class="btn-register">Registrarse</button>
+    </form>
     <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
 </section>
 </body>
