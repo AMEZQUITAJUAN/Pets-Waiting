@@ -3,6 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalles de la Mascota</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #ccb834;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        strong {
+            font-weight: bold;
+        }
+        a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #cd7031;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        a:hover {
+            background-color: #da7d2b;
+        }
+    </style>
 </head>
 <body>
     <h1>Detalles de la Mascota</h1>

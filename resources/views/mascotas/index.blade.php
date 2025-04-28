@@ -2,14 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Usuarios y Mascotas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios y Mascotas</title>
+    <link rel="stylesheet" href="{{ asset('styles.css') }}">
 </head>
 <body>
     <h1>Usuarios Registrados</h1>
 
-    <a href="{{ route('usuarios.create') }}">Registrar un nuevo usuario</a> <!-- Enlace al formulario -->
+    <a href="{{ route('usuarios.create') }}">Registrar un nuevo usuario</a>
 
-    <table border="1" cellpadding="10">
+    <table>
         <thead>
             <tr>
                 <th>ID</th>
@@ -37,7 +39,7 @@
     @if ($mascotas->isEmpty())
         <p>No hay mascotas registradas.</p>
     @else
-        <table border="1" cellpadding="10">
+        <table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -50,13 +52,11 @@
             <tbody>
                 @foreach ($mascotas as $mascota)
                     <tr>
-                        
-                            <td>{{ $mascota->id }}</td>
-                            <td><a href="{{ route('mascotas.show', $mascota->id) }}">{{ $mascota->nombre }}</a></td>
-                            <td>{{ $mascota->especie }}</td>
-                            <td>{{ $mascota->edad }}</td>
-                            <td>{{ $mascota->usuario->Nombre ?? 'Sin usuario' }}</td>
-                        
+                        <td>{{ $mascota->id }}</td>
+                        <td><a href="{{ route('mascotas.show', $mascota->id) }}">{{ $mascota->nombre }}</a></td>
+                        <td>{{ $mascota->especie }}</td>
+                        <td>{{ $mascota->edad }}</td>
+                        <td>{{ $mascota->usuario->Nombre ?? 'Sin usuario' }}</td>
                     </tr>
                 @endforeach
             </tbody>
