@@ -32,6 +32,17 @@ class MascotasController extends Controller
         return view('mascotas.show', compact('mascota'));
     }
 
+    public function edit($mascota)
+    {
+        $mascota = Mascota::find($mascota);
+        if (!$mascota) {
+            return redirect()->route('mascotas.index')->with('error', 'Mascota no encontrada.');
+        }
+
+        $usuarios = Usuario::all(); // Obtener todos los usuarios
+        return view('mascotas.edit', compact('mascota', 'usuarios'));
+    }
+
     public function store(Request $request)
     {
         // Validar los datos del formulario
@@ -47,6 +58,21 @@ class MascotasController extends Controller
 
         // Redirigir a la lista de mascotas con un mensaje de éxito
         return redirect()->route('mascotas.index')->with('success', 'Mascota registrada exitosamente.');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'especie' => 'required|in:perro,gato,otro',
+            'edad' => 'required|integer|min:0',
+            'usuario_id' => 'required|exists:usuarios,id',
+        ]);
+
+        $mascota = Mascota::findOrFail($id);
+        $mascota->update($request->all());
+
+        return redirect()->route('mascotas.index')->with('success', 'Mascota actualizada exitosamente.');
     }
 }
 

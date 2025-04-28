@@ -29,16 +29,28 @@
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
             </div>
+            
+            @error('nombre')
+                <div class="error">{{ $message }}</div>
+            @enderror
 
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
                 <input type="email" id="email" name="email" placeholder="tu@email.com" required>
             </div>
 
+            @error('email')
+                <div class="error">{{ $message }}</div>
+            @enderror
+
             <div class="form-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
+
+            @error('password')
+                <div class="error">{{ $message }}</div>
+            @enderror
 
             <button type="submit" class="btn-register">Registrarse</button>
             <a href="formulario.blade.php"></a>
