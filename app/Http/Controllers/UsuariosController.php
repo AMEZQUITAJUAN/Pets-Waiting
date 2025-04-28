@@ -7,8 +7,9 @@ use App\Models\Usuario;
 
 class UsuariosController extends Controller
 {
-    public function create() {
-        return view('formulario'); // Sin espacio al final
+    public function create()
+    {
+        return view('formulario'); // Cargar la vista del formulario
     }
 
     public function store(Request $request)
@@ -25,6 +26,7 @@ class UsuariosController extends Controller
             'password' => bcrypt($request->password), // Encriptar la contraseña
         ]);
 
+        return redirect()->route('mascotas.index')->with('success', 'Usuario registrado exitosamente.');
     }
 
     public function index() {

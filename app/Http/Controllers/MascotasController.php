@@ -10,7 +10,7 @@ class MascotasController extends Controller
 {
     public function index()
     {
-        $usuarios = Usuario::paginate(10); // Paginación para usuarios
+        $usuarios = Usuario::orderBy('id', 'desc')->paginate(10); // Paginación para usuarios
         $mascotas = Mascota::with('usuario')->paginate(10); // Paginación para mascotas con sus usuarios asociados
         return view('mascotas.index', compact('usuarios', 'mascotas'));
     }
@@ -30,6 +30,23 @@ class MascotasController extends Controller
         }
 
         return view('mascotas.show', compact('mascota'));
+    }
+
+    public function store(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'especie' => 'required|in:perro,gato,otro',
+            'edad' => 'required|integer|min:0',
+            'usuario_id' => 'required|exists:usuarios,id',
+        ]);
+
+        // Crear la nueva mascota
+        Mascota::create($request->all());
+
+        // Redirigir a la lista de mascotas con un mensaje de éxito
+        return redirect()->route('mascotas.index')->with('success', 'Mascota registrada exitosamente.');
     }
 }
 

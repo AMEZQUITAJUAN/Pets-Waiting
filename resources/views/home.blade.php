@@ -56,6 +56,9 @@
     <form action="{{ route('usuarios.create') }}" method="GET">
         <button type="submit" class="btn-register">Registrarse</button>
     </form>
+<form action="{{ route('mascotas.create') }}" method="GET">
+        <button type="submit" class="btn btn-primary">Registrar una nueva mascota</button>
+    </form>
     <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
 </section>
 </body>
