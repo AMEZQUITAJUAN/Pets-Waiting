@@ -45,5 +45,9 @@
     <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
     <br></br>
     <a href="{{ route('mascotas.edit', $mascota->id) }}">Editar Mascota</a> <!-- Enlace para editar la mascota -->
+    <br></br>
+    <form action="{{route('mascotas.destroy', $mascota->id)}}" method="POST" style="display:inline-block;">
+        <button type="submit">Eliminar</button>
+    </form>
 </body>
 </html>

@@ -25,10 +25,12 @@ Route::get('mascotas/{id}', [MascotasController::class, 'show'])->name('mascotas
 Route::post('mascotas', [MascotasController::class, 'store'])->name('mascotas.store'); // Guardar mascota
 Route::get('mascotas/{mascota}/edit', [MascotasController::class, 'edit'])->name('mascotas.edit'); // Mostrar formulario de edición de mascota
 Route::put('mascotas/{mascota}', [MascotasController::class, 'update'])->name('mascotas.update'); // Actualizar mascota
+Route::delete('mascotas/{mascota}', [MascotasController::class, 'destroy'])->name('mascotas.destroy'); // Eliminar mascota
 
 // Rutas para Usuarios
 Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store'); // Guardar usuario
 Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index'); // Mostrar lista de usuarios
+Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy'); // Eliminar usuario
 
 // Ruta para consultas ORM
 Route::get('/ormconsultas', [OrmController::class, 'consultas'])->name('orm.consultas');

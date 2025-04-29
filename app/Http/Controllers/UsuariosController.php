@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Http\Requests\StoreUsuario; // Asegúrate de importar la clase StoreUsuario
 
 class UsuariosController extends Controller
 {
@@ -12,14 +13,9 @@ class UsuariosController extends Controller
         return view('formulario'); // Cargar la vista del formulario
     }
 
-    public function store(Request $request)
+    public function store(StoreUsuario $request)
     {
-        // Validar los datos del formulario
-        $request->validate([
-            'nombre' => 'required|string|max:100',
-            'email' => 'required|email|unique:usuarios,email',
-            'password' => 'required|min:6',
-        ]);
+        
         Usuario::create([
             'nombre' => $request->nombre,
             'email' => $request->email,
@@ -37,5 +33,14 @@ class UsuariosController extends Controller
     public function showUsuarioWithMascotas($id) {
         $usuario = Usuario::with('mascotas')->find($id); // Reemplaza $id con el ID que necesites
         return view('usuarios.show', compact('usuario'));
+    }
+    public function destroy($id) {
+        $usuario = Usuario::find($id);
+        if ($usuario) {
+            $usuario->delete();
+            return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
+        } else {
+            return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
+        }
     }
 }
