@@ -40,6 +40,7 @@ class MascotasController extends Controller
         }
 
         $usuarios = Usuario::all(); // Obtener todos los usuarios
+         dd($usuarios); // Descomentar esta línea si necesitas depurar $usuarios
         return view('mascotas.edit', compact('mascota', 'usuarios'));
     }
 
