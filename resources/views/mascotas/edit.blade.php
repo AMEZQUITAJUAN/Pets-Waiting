@@ -22,8 +22,7 @@
     {{-- Formulario para editar una mascota --}}
     <form action="{{ route('mascotas.update', $mascota->id) }}" method="POST">
         @csrf
-        @method('PUT') {{-- Método HTTP PUT para actualizar --}}
-        
+        @method('PUT')
         <label for="nombre">nombre:</label>
         <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $mascota->nombre) }}" required>
         <br><br>

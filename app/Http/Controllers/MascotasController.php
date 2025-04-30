@@ -32,14 +32,17 @@ class MascotasController extends Controller
         return view('mascotas.show', compact('mascota'));
     }
 
-    public function edit($mascota)
+    public function edit($id)
     {
-        $mascota = Mascota::find($mascota);
+        $mascota = Mascota::find($id);
+
+        dd($mascota); // Depuración
+
         if (!$mascota) {
             return redirect()->route('mascotas.index')->with('error', 'Mascota no encontrada.');
         }
 
-        $usuarios = Usuario::all(); // Obtener todos los usuarios
+        $usuarios = Usuario::all();
         return view('mascotas.edit', compact('mascota', 'usuarios'));
     }
 

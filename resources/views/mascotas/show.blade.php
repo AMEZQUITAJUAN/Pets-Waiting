@@ -40,11 +40,11 @@
     <p><strong>Nombre:</strong> {{ $mascota->nombre }}</p>
     <p><strong>Especie:</strong> {{ $mascota->especie }}</p>
     <p><strong>Edad:</strong> {{ $mascota->edad }}</p>
-    <p><strong>Usuario Asociado:</strong> {{ $mascota->usuario->Nombre ?? 'Sin usuario' }}</p>
+    <p><strong>Usuario Asociado:</strong> {{ $mascota->usuario->nombre ?? 'Sin usuario' }}</p>
 
     <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
     <br></br>
-    <a href="{{ route('mascotas.edit', $mascota->id) }}">Editar Mascota</a> <!-- Enlace para editar la mascota -->
+    <a href="{{ route('mascotas.edit', $mascota->id) }}">Editar Mascota</a>
     <br></br>
     <form action="{{ route('mascotas.destroy', $mascota->id) }}" method="POST" style="display:inline-block;">
         @csrf <!-- Token CSRF necesario -->

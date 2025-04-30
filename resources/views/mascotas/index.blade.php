@@ -47,16 +47,22 @@
                     <th>Especie</th>
                     <th>Edad</th>
                     <th>Usuario Asociado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($mascotas as $mascota)
                     <tr>
                         <td>{{ $mascota->id }}</td>
-                        <td><a href="{{ route('mascotas.show', $mascota) }}">{{ $mascota->nombre }}</a></td>
+                        <td>{{ $mascota->nombre }}</td>
                         <td>{{ $mascota->especie }}</td>
                         <td>{{ $mascota->edad }}</td>
                         <td>{{ $mascota->usuario->nombre ?? 'Sin usuario' }}</td>
+                        <td>
+                            <a href="{{ route('mascotas.show', $mascota->id) }}" style="background-color: #4CAF50; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">
+                                Ver Mascota
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
