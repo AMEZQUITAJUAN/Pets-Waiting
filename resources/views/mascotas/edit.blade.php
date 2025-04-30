@@ -53,5 +53,5 @@
     </form>
 
     <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
-</body>
+<pre>{{ print_r($usuarios, true) }}</pre></body>
 </html>
