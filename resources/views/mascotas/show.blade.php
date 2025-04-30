@@ -46,8 +46,12 @@
     <br></br>
     <a href="{{ route('mascotas.edit', $mascota->id) }}">Editar Mascota</a> <!-- Enlace para editar la mascota -->
     <br></br>
-    <form action="{{route('mascotas.destroy', $mascota->id)}}" method="POST" style="display:inline-block;">
-        <button type="submit">Eliminar</button>
+    <form action="{{ route('mascotas.destroy', $mascota->id) }}" method="POST" style="display:inline-block;">
+        @csrf <!-- Token CSRF necesario -->
+        @method('DELETE') <!-- Método DELETE para la solicitud -->
+        <button type="submit" style="background-color: red; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+            Eliminar
+        </button>
     </form>
 </body>
 </html>

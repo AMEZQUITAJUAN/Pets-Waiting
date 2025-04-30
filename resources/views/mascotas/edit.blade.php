@@ -24,7 +24,7 @@
         @csrf
         @method('PUT') {{-- Método HTTP PUT para actualizar --}}
         
-        <label for="nombre">Nombre:</label>
+        <label for="nombre">nombre:</label>
         <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $mascota->nombre) }}" required>
         <br><br>
 
@@ -44,7 +44,7 @@
         <select id="usuario_id" name="usuario_id" required>
             @foreach ($usuarios as $usuario)
                 <option value="{{ $usuario->id }}" {{ old('usuario_id', $mascota->usuario_id) == $usuario->id ? 'selected' : '' }}>
-                    {{ $usuario->Nombre }}
+                    {{ $usuario->nombre }}
                 </option>
             @endforeach
         </select>
