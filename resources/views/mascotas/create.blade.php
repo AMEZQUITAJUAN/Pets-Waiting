@@ -121,7 +121,7 @@
             <option value="">Seleccione un usuario</option>
             @foreach ($usuarios as $usuario)
                 <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
-                    {{ $usuario->Nombre }}
+                    {{ $usuario->nombre }}
                 </option>
             @endforeach
         </select>

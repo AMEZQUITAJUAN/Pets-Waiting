@@ -21,7 +21,7 @@ Route::get('prueba', function () {
 // Rutas para Mascotas
 Route::resource('mascotas', MascotasController::class);
 
-// Rutas para Usuarios
+// Rutas para Usuario
 Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store'); // Guardar usuario
 Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index'); // Mostrar lista de usuarios
 Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy'); // Eliminar usuario
