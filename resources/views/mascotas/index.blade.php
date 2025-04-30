@@ -23,7 +23,7 @@
             @foreach ($usuarios as $usuario)
                 <tr>
                     <td>{{ $usuario->id }}</td>
-                    <td>{{ $usuario->Nombre }}</td>
+                    <td>{{ $usuario->nombre }}</td>
                     <td>{{ $usuario->email }}</td>
                 </tr>
             @endforeach
@@ -56,7 +56,7 @@
                         <td><a href="{{ route('mascotas.show', $mascota) }}">{{ $mascota->nombre }}</a></td>
                         <td>{{ $mascota->especie }}</td>
                         <td>{{ $mascota->edad }}</td>
-                        <td>{{ $mascota->usuario->Nombre ?? 'Sin usuario' }}</td>
+                        <td>{{ $mascota->usuario->nombre ?? 'Sin usuario' }}</td>
                     </tr>
                 @endforeach
             </tbody>

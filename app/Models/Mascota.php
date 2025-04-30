@@ -19,5 +19,5 @@ class Mascota extends Model
     public function getRouteKeyName()
     {
         return 'nombre';
-    }    
+    }
 }
