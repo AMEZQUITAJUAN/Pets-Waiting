@@ -36,18 +36,13 @@ class MascotasController extends Controller
     {
         $mascota = Mascota::find($id);
 
-        dd($mascota); // Depuración
+      //  dd($mascota); // Depuración
 
         if (!$mascota) {
             return redirect()->route('mascotas.index')->with('error', 'Mascota no encontrada.');
         }
 
-<<<<<<< HEAD
         $usuarios = Usuario::all();
-=======
-        $usuarios = Usuario::all(); // Obtener todos los usuarios
-         dd($usuarios); // Descomentar esta línea si necesitas depurar $usuarios
->>>>>>> 85a2f60a97f990df304a8d65b3138a03fb9969dd
         return view('mascotas.edit', compact('mascota', 'usuarios'));
     }
 
