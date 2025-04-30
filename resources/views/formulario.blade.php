@@ -29,7 +29,7 @@
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
             </div>
-            
+
             @error('nombre')
                 <div class="error">{{ $message }}</div>
             @enderror

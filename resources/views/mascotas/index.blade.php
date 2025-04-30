@@ -53,7 +53,7 @@
                 @foreach ($mascotas as $mascota)
                     <tr>
                         <td>{{ $mascota->id }}</td>
-                        <td><a href="{{ route('mascotas.show', $mascota->id) }}">{{ $mascota->nombre }}</a></td>
+                        <td><a href="{{ route('mascotas.show', $mascota) }}">{{ $mascota->nombre }}</a></td>
                         <td>{{ $mascota->especie }}</td>
                         <td>{{ $mascota->edad }}</td>
                         <td>{{ $mascota->usuario->nombre ?? 'Sin usuario' }}</td>
