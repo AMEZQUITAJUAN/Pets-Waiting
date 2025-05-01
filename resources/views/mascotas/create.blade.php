@@ -2,7 +2,6 @@
 
 @section('content')
 <!DOCTYPE html>
-<<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -34,6 +33,7 @@
         }
         input[type="text"],
         input[type="number"],
+        input[type="file"],
         select {
             width: calc(100% - 12px);
             padding: 8px;
@@ -99,7 +99,7 @@
     @endif
 
     {{-- Formulario para crear una mascota --}}
-    <form action="{{ route('mascotas.store') }}" method="POST">
+    <form action="{{ route('mascotas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf {{-- Token de seguridad para formularios en Laravel --}}
 
         <label for="nombre">Nombre:</label>
@@ -130,9 +130,14 @@
         </select>
         <br><br>
 
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*">
+        <br><br>
+
         <button type="submit">Registrar Mascota</button>
     </form>
 
     <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
 </body>
 </html>
+@endsection

@@ -48,18 +48,22 @@ class MascotasController extends Controller
 
     public function store(Request $request)
     {
-        // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:100',
-            'especie' => 'required|in:perro,gato,otro',
+            'especie' => 'required|string',
             'edad' => 'required|integer|min:0',
             'usuario_id' => 'required|exists:usuarios,id',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Crear la nueva mascota
-        Mascota::create($request->all());
+        $data = $request->all();
 
-        // Redirigir a la lista de mascotas con un mensaje de éxito
+        if ($request->hasFile('imagen')) {
+            $data['imagen'] = $request->file('imagen')->store('mascotas', 'public');
+        }
+
+        Mascota::create($data);
+
         return redirect()->route('mascotas.index')->with('success', 'Mascota registrada exitosamente.');
     }
 

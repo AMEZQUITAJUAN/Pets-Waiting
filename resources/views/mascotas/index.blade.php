@@ -57,7 +57,7 @@
                 @foreach ($mascotas as $mascota)
                     <div class="col">
                         <div class="card h-100">
-                            <img src="{{ $mascota->imagen ?? 'https://via.placeholder.com/300x200' }}" class="card-img-top" alt="Imagen de {{ $mascota->nombre }}">
+                            <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : 'https://via.placeholder.com/300x200' }}" class="card-img-top" alt="Imagen de {{ $mascota->nombre }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $mascota->nombre }}</h5>
                                 <p class="card-text"><strong>Especie:</strong> {{ $mascota->especie }}</p>
