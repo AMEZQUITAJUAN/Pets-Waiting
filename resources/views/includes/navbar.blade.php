@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #f8f3e6; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f3e6; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
         <!-- Logo con temática de mascotas -->
         <a class="navbar-brand" href="#" style="color: #5a3e2b; font-weight: bold;">
@@ -12,13 +12,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #5a3e2b;">Inicio</a>
+                    <a class="nav-link" href="{{route('home')}}" style="color: #5a3e2b;">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #5a3e2b;">Adopción</a>
+                    <a class="nav-link" href="{{route('mascotas.index')}}" style="color: #5a3e2b;">Adopción</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #5a3e2b;">Donaciones</a>
+                    <a class="nav-link" href="#" style="color: #5a3e2b;">Perdidos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: #5a3e2b;">Contacto</a>
