@@ -1,7 +1,90 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<!DOCTYPE html>
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Mascota</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #c5c034;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select option:first-child {
+            color: #999;
+        }
+        button[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 15px;
+            background-color: #d77c22;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #d77c22;
+        }
+        div[style="color: red;"] {
+            background-color: #ffe0e0;
+            color: #d9534f;
+            padding: 10px;
+            border: 1px solid #d9534f;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        div[style="color: red;"] ul {
+            margin-top: 5px;
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
     <h1>Registrar una Nueva Mascota</h1>
 
     @if ($errors->any())
@@ -14,8 +97,9 @@
         </div>
     @endif
 
-    <form action="{{ route('mascotas.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+    {{-- Formulario para crear una mascota --}}
+    <form action="{{ route('mascotas.store') }}" method="POST">
+        @csrf {{-- Token de seguridad para formularios en Laravel --}}
 
         <!-- Campos existentes -->
         <div class="mb-3">
@@ -38,48 +122,20 @@
             <input type="number" class="form-control" id="edad" name="edad" value="{{ old('edad') }}" min="0" required>
         </div>
 
-        <div class="mb-3">
-            <label for="usuario_id">Usuario Asociado:</label>
-            <select class="form-control" id="usuario_id" name="usuario_id" required>
-                <option value="">Seleccione un usuario</option>
-                @foreach ($usuarios as $usuario)
-                    <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
-                        {{ $usuario->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        <label for="usuario_id">Usuario Asociado:</label>
+        <select id="usuario_id" name="usuario_id" required>
+            <option value="">Seleccione un usuario</option>
+            @foreach ($usuarios as $usuario)
+                <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
+                    {{ $usuario->nombre }}
+                </option>
+            @endforeach
+        </select>
+        <br><br>
 
-        <!-- Campo para la imagen -->
-        <div class="mb-3">
-            <label for="imagen" class="form-label">Imagen de la mascota:</label>
-            <input type="file"
-                   class="form-control @error('imagen') is-invalid @enderror"
-                   id="imagen"
-                   name="imagen"
-                   accept="image/*">
-            <div class="form-text">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</div>
-            @error('imagen')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <!-- Vista previa de la imagen -->
-        <div class="mb-3">
-            <img id="preview" src="#" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Registrar Mascota</button>
-        <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Volver</a>
+        <button type="submit">Registrar Mascota</button>
     </form>
-</div>
 
-<!-- Script para vista previa de la imagen -->
-<script>
-document.getElementById('imagen').onchange = function(e) {
-    const preview = document.getElementById('preview');
-    preview.style.display = 'block';
-    preview.src = URL.createObjectURL(e.target.files[0]);
-};
-</script>
-@endsection
+    <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
+</body>
+</html>

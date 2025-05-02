@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Mascota</title>
-<style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
@@ -75,7 +75,7 @@
 
     {{-- Mostrar errores de validación --}}
     @if ($errors->any())
-        <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
+        <div class="error-container">
             <strong>Por favor corrige los siguientes errores:</strong>
             <ul>
                 @foreach ($errors->all() as $error)
@@ -86,13 +86,12 @@
     @endif
 
     {{-- Formulario para editar una mascota --}}
-    <form action="{{ route('mascotas.update', $mascota->id) }}" method="POST">
+    <form action="{{ route('mascotas.update', $mascota->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT') {{-- Método HTTP PUT para actualizar --}}
         
-        <label for="nombre">nombre:</label>
+        <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $mascota->nombre) }}" required>
-        <br><br>
 
         <label for="especie">Especie:</label>
         <select id="especie" name="especie" required>
@@ -100,11 +99,9 @@
             <option value="gato" {{ old('especie', $mascota->especie) == 'gato' ? 'selected' : '' }}>Gato</option>
             <option value="otro" {{ old('especie', $mascota->especie) == 'otro' ? 'selected' : '' }}>Otro</option>
         </select>
-        <br><br>
 
         <label for="edad">Edad:</label>
         <input type="number" id="edad" name="edad" value="{{ old('edad', $mascota->edad) }}" min="0" required>
-        <br><br>
 
         <label for="usuario_id">Usuario Asociado:</label>
         <select id="usuario_id" name="usuario_id" required>
@@ -114,13 +111,22 @@
                 </option>
             @endforeach
         </select>
-        <br><br>
 
-        <button type="submit" class="btn btn-primary">Actualizar Mascota</button>
+        <label for="imagen">Imagen Actual:</label>
+        @if ($mascota->imagen)
+            <img src="{{ asset('storage/' . $mascota->imagen) }}" alt="Imagen de {{ $mascota->nombre }}" style="width: 100%; margin-bottom: 15px;">
+        @else
+            <p>No hay imagen disponible.</p>
+        @endif
+
+        <label for="imagen">Actualizar Imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*">
+
+        <button type="submit">Actualizar Mascota</button>
     </form>
 
-
-    <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
+    <a href="{{ route('mascotas.index') }}" class="back-link">Volver a la lista de mascotas</a>
+</div>
 </body>
 </html>
 
