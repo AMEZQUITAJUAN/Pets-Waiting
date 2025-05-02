@@ -50,16 +50,23 @@ class MascotasController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:100',
-            'especie' => 'required|string',
+            'especie' => 'required|in:perro,gato,otro',
             'edad' => 'required|integer|min:0',
             'usuario_id' => 'required|exists:usuarios,id',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Crear la nueva mascota
-        Mascota::create($request->all());
+        $mascota = new Mascota($request->except('imagen'));
 
-        // Redirigir a la lista de mascotas con un mensaje de éxito
-        return redirect()->route('mascotas.index')->with('success', 'Mascota registrada exitosamente.');
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('mascotas', 'public');
+            $mascota->imagen = $path; // Guarda solo el path relativo
+        }
+
+        $mascota->save();
+
+        return redirect()->route('mascotas.index')
+            ->with('success', 'Mascota registrada exitosamente.');
     }
 
     public function update(Request $request, $id)
@@ -84,8 +91,5 @@ class MascotasController extends Controller
 
         return redirect()->route('mascotas.index')->with('success', 'Mascota eliminada exitosamente.');
     }
-
-
-
 }
 
