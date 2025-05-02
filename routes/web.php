@@ -1,12 +1,15 @@
 <?php
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MascotasController;
-use App\Http\Controllers\OrmController;
+use App\Http\Controllers\AdopcionesController; // Corrige el import
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta principal - solo mantén esta
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Ruta de adopción (corrige el nombre del controlador)
+Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
 Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');

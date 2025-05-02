@@ -15,10 +15,11 @@
                     <a class="nav-link" href="{{route('home')}}" style="color: #5a3e2b;">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('mascotas.index')}}" style="color: #5a3e2b;">Adopción</a>
+
+                    <a class="nav-link" href="{{ route('mascotas.index') }}" style="color: #5a3e2b;">Adopción</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #5a3e2b;">Perdidos</a>
+                    <a class="nav-link" href="{{route('adopcion')}}" style="color: #5a3e2b;">Perdidos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: #5a3e2b;">Contacto</a>

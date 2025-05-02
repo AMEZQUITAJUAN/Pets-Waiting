@@ -58,6 +58,7 @@
                    id="imagen"
                    name="imagen"
                    accept="image/*">
+            <div class="form-text">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</div>
             @error('imagen')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -67,17 +68,6 @@
         <div class="mb-3">
             <img id="preview" src="#" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
         </div>
-
-        <!-- Para mostrar imágenes en cualquier vista -->
-        @if($mascota->imagen)
-            <img src="{{ Storage::url($mascota->imagen) }}"
-                 class="card-img-top"
-                 alt="Imagen de {{ $mascota->nombre }}">
-        @else
-            <img src="https://via.placeholder.com/300x200"
-                 class="card-img-top"
-                 alt="Sin imagen">
-        @endif
 
         <button type="submit" class="btn btn-primary">Registrar Mascota</button>
         <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Volver</a>
