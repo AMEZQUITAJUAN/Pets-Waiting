@@ -20,5 +20,5 @@ Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('us
 // Rutas para Mascotas
 Route::resource('mascotas', MascotasController::class);
 
-// Ruta para consultas ORM
-Route::get('/ormconsultas', [OrmController::class, 'consultas'])->name('orm.consultas');
+// Ruta para formulario de inicio
+Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');

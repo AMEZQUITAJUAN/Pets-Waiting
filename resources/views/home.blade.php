@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <<section class="hero">
+    <section class="hero">
         <div class="hero-content">
             <h1>Dale un hogar a una <span>mascota necesitada</span></h1>
             <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
@@ -11,6 +11,7 @@
                 <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Ver todas las mascotas</a>
             </div>
         </div>
+    </section>
 
     <!-- Mascotas Section -->
     <div class="container mt-5">
@@ -39,6 +40,11 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <!-- Botón Ver Más -->
+            <div class="text-center mt-4">
+                <a href="{{ route('adopcion') }}" class="btn btn-primary">Ver Más</a>
             </div>
 
             <!-- Paginación -->

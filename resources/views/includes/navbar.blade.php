@@ -12,26 +12,24 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}" style="color: #5a3e2b;">Inicio</a>
+                    <a class="nav-link" href="{{ route('home') }}" style="color: #5a3e2b;">Inicio</a>
                 </li>
                 <li class="nav-item">
-
                     <a class="nav-link" href="{{ route('mascotas.index') }}" style="color: #5a3e2b;">Adopción</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('adopcion')}}" style="color: #5a3e2b;">Perdidos</a>
+                    <a class="nav-link" href="{{ route('adopcion') }}" style="color: #5a3e2b;">Perdidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #5a3e2b;">¿Por que Adoptar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: #5a3e2b;">Contacto</a>
                 </li>
             </ul>
-            <!-- Barra de búsqueda -->
-            <form class="d-flex me-3">
-                <input class="form-control" type="search" placeholder="Buscar" aria-label="Search" style="border-radius: 20px;">
-            </form>
-            <!-- Botón destacado -->
-            <a href="#" class="btn" style="background-color: #ff5722; color: white; border-radius: 20px; padding: 0.5rem 1rem;">
-                Adoptar ahora
+            <!-- Botón de Iniciar Sesión -->
+            <a href="{{ route('frminicio') }}" class="btn" style="background-color: #007bff; color: white; border-radius: 20px; padding: 0.5rem 1rem;">
+                Iniciar Sesión
             </a>
         </div>
     </div>

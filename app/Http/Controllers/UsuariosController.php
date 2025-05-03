@@ -43,4 +43,9 @@ class UsuariosController extends Controller
             return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
         }
     }
+
+    public function showLoginForm()
+    {
+        return view('frminicio'); // Asegúrate de que esta vista exista
+    }
 }

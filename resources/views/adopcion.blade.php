@@ -1,211 +1,159 @@
 @extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gestión de Adopción</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #e0f7e9;
-    margin: 0;
-    padding: 20px;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopción de Mascotas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
 
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+        .hero-section {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
 
-  /* formulario */
-  .form-section {
-    background: #d0e8f2;
-    padding: 20px;
-    border-radius: 8px;
-    flex: 1 1 300px;
-    max-width: 600px;
-  }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-  h2 {
-    color: #007bff;
-  }
+        .hero-section p {
+            font-size: 1.2rem;
+        }
 
-  label {
-    display: block;
-    margin-top: 10px;
-  }
+        .hero-section .btn {
+            margin-top: 20px;
+            background-color: #ffc107;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
 
-  input[type="text"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
+        .hero-section .btn:hover {
+            background-color: #e0a800;
+        }
 
-  textarea {
-    resize: vertical;
-  }
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
 
-  .btn {
-    display: inline-block;
-    padding: 10px 15px;
-    margin-top: 15px;
-    background-color: orange;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+        .filters input,
+        .filters select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
 
-  .btn:hover {
-    background-color: #e65c00;
-  }
+        .pets-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
 
-  /* mascotas disponibles */
-  .pets-section {
-    background-color: #f0f4f8;
-    padding: 20px;
-    border-radius: 8px;
-    flex: 1 1 300px;
-    max-width: 600px;
-  }
+        .pet-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            text-align: center;
+        }
 
-  h3 {
-    margin-top: 0;
-  }
+        .pet-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
-  .pet-card {
-    background: white;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
+        .pet-card h3 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
 
-  .adopt-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-  }
+        .pet-card p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
 
-  .adopt-btn:hover {
-    background-color: #218838;
-  }
+        .pet-card .adopt-btn {
+            display: block;
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-  /* pie de contacto */
-  footer {
-    background-color: #ffd8b1;
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .contacto {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .contacto p {
-    margin: 8px 0;
-  }
-
-  /* inputs de contacto */
-  .contact-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-</style>
+        .pet-card .adopt-btn:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-  <!-- Formulario solicitud -->
-  <div class="form-section">
-    <h2>Solicitud de Adopción</h2>
-    <form id="adopcionForm" action="#" method="POST" onsubmit="return false;">
-      <label for="nombre">Nombre completo</label>
-      <input type="text" id="nombre" placeholder="Tu nombre" required />
-
-      <label for="email">Correo electrónico</label>
-      <input type="text" id="email" placeholder="tu@email.com" required />
-
-      <label for="telefono">Teléfono</label>
-      <input type="text" id="telefono" placeholder="Número de teléfono" required />
-
-      <label for="tipoMascota">Tipo de mascota que deseas adoptar</label>
-      <select id="tipoMascota" required>
-        <option value="">Seleccionar</option>
-        <option>Perro</option>
-        <option>Gato</option>
-        <option>Otras</option>
-      </select>
-
-      <label for="razas">Raza</label>
-      <input type="text" id="razas" placeholder="Ejemplo: Labrador" />
-
-      <label for="porque">¿Por qué quieres adoptar?</label>
-      <textarea id="porque" rows="4" placeholder="Cuéntanos un poco sobre ti"></textarea>
-
-      <button class="btn" onclick="alert('Solicitud enviada')">Enviar solicitud</button>
-    </form>
-  </div>
-
-  <!-- Lista mascotas disponibles -->
-  <div class="pets-section">
-    <h2>Mascotas Disponibles para Adopción</h2>
-
-    <div class="pet-card">
-      <h3>Luna</h3>
-      <p>Tipo: Perro</p>
-      <p>Raza: Labrador</p>
-      <p>Edad: 2 años</p>
-      <button class="adopt-btn">Adoptar a Luna</button>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Adopción de Perros y Gatos</h1>
+        <p>Busca por las características de la mascota que deseas adoptar</p>
+        <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
     </div>
-    <div class="pet-card">
-      <h3>Milo</h3>
-      <img src="foto/descarga.webp" alt="">
-      <p>Tipo: Gato</p>
-      <p>Raza: Siamés</p>
-      <p>Edad: 1 año</p>
-      <button class="adopt-btn">Adoptar a Milo</button>
-    </div>
-    <div class="pet-card">
-      <h3>Rocky</h3>
-      <p>Tipo: Perro</p>
-      <p>Raza: Pastor Alemán</p>
-      <p>Edad: 3 años</p>
-      <button class="adopt-btn">Adoptar a Rocky</button>
-    </div>
-  </div>
-</div>
 
-<!-- Pie de contacto -->
-<footer>
-  <div class="contacto">
-    <h3>Contacto</h3>
-    <p>Si tienes alguna pregunta sobre el proceso de adopción, no dudes en contactarnos:</p>
-    <p>Email: adopciones@rescatardemascotas.com</p>
-    <p>Teléfono: +34 123 456 789</p>
-    <p>¡Gracias por ayudar a nuestras mascotas!</p>
-  </div>
-</footer>
+    <!-- Filtros -->
+    <div class="filters">
+        <select>
+            <option value="">¿Qué especie?</option>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+        </select>
+        <select>
+            <option value="">¿Qué tamaño?</option>
+            <option value="pequeño">Pequeño</option>
+            <option value="mediano">Mediano</option>
+            <option value="grande">Grande</option>
+        </select>
+        <select>
+            <option value="">¿Qué género?</option>
+            <option value="macho">Macho</option>
+            <option value="hembra">Hembra</option>
+        </select>
+        <input type="text" placeholder="Por nombre">
+        <input type="text" placeholder="¿Cuál ciudad?">
+    </div>
 
+    <!-- Lista de Mascotas -->
+    <div class="pets-container">
+        @foreach ($mascotas as $mascota)
+            <div class="pet-card">
+                <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : 'https://via.placeholder.com/300x200' }}" alt="Imagen de {{ $mascota->nombre }}">
+                <h3>{{ $mascota->nombre }}</h3>
+                <p><strong>Especie:</strong> {{ $mascota->especie }}</p>
+                <p><strong>Edad:</strong> {{ $mascota->edad }} años</p>
+                <a href="{{ route('mascotas.show', $mascota->id) }}" class="adopt-btn">Adoptar a {{ $mascota->nombre }}</a>
+            </div>
+        @endforeach
+    </div>
 </body>
 </html>
+@endsection
