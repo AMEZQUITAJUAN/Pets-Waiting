@@ -89,24 +89,25 @@
 <div class="login-card">
   <h2>Iniciar Sesión</h2>
   <p>Ingresa tus datos para acceder a tu cuenta</p>
-  <form id="loginForm" action="#" method="POST" onsubmit="return false;">
+  <form id="loginForm" action="{{ route('login') }}" method="POST">
+    @csrf
     <label for="email">Correo electrónico</label>
-    <input type="email" id="email" placeholder="tu@email.com" required />
+    <input type="email" id="email" name="email" placeholder="tu@email.com" required />
 
     <label for="password">Contraseña</label>
-    <input type="password" id="password" placeholder="Tu contraseña" required />
+    <input type="password" id="password" name="password" placeholder="Tu contraseña" required />
 
     <label for="rol" class="rol-select">Rol</label>
-    <select id="rol" required>
-      <option value="">Selecciona tu rol</option>
-      <option value="admin">Administrador</option>
-      <option value="user">Usuario</option>
+    <select id="rol" name="rol" required>
+        <option value="">Selecciona tu rol</option>
+        <option value="admin">Administrador</option>
+        <option value="user">Usuario</option>
     </select>
 
-    <button onclick="alert('Inicio de sesión')">Iniciar Sesión</button>
+    <button type="submit">Iniciar Sesión</button>
   </form>
   <div class="footer">
-    ¿No tienes cuenta? <a href="#">Regístrate aquí</a>
+    ¿No tienes cuenta? <a href="{{ route('usuarios.create') }}">Regístrate aquí</a>
   </div>
 </div>
 

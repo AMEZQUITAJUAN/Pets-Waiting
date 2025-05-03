@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f3e6; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
         <!-- Logo con temática de mascotas -->
-        <a class="navbar-brand" href="#" style="color: #5a3e2b; font-weight: bold;">
+        <a class="navbar-brand" href="{{ route('home') }}" style="color: #5a3e2b; font-weight: bold;">
             🐾 Rescate de Mascotas
         </a>
         <!-- Botón para dispositivos móviles -->
@@ -21,7 +21,7 @@
                     <a class="nav-link" href="{{ route('adopcion') }}" style="color: #5a3e2b;">Perdidos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #5a3e2b;">¿Por que Adoptar</a>
+                    <a class="nav-link" href="{{ route('porquea') }}" style="color: #5a3e2b;">¿Por qué Adoptar?</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: #5a3e2b;">Contacto</a>

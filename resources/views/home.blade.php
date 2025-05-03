@@ -47,6 +47,11 @@
                 <a href="{{ route('adopcion') }}" class="btn btn-primary">Ver Más</a>
             </div>
 
+            <section class="suscripcion">
+    <h2>Únete a nuestra causa</h2>
+    <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
+</section>
+
             <!-- Paginación -->
             <div class="d-flex justify-content-center mt-4">
                 {{ $mascotas->links() }}

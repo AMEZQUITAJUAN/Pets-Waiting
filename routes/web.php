@@ -10,6 +10,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Ruta de adopción (corrige el nombre del controlador)
 Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
+Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
 Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
@@ -22,3 +23,14 @@ Route::resource('mascotas', MascotasController::class);
 
 // Ruta para formulario de inicio
 Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
+
+// Ruta para login
+Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+
+// Ruta para el dashboard de administrador
+Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
+
+// Ruta para porque adoptar
+Route::get('/porque-adoptar', function () {
+    return view('porquea');
+})->name('porquea');

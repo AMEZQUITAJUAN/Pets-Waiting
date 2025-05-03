@@ -63,13 +63,5 @@
             ¿Ya tienes una cuenta? <a href="{{ route('usuarios.index') }}">Ver lista de usuarios</a>
         </div>
     </div>
-    <section class="suscripcion">
-    <h2>Únete a nuestra causa</h2>
-    <form>
-        <button type="submit">Iniciar Sesion</button>
-    </form>
-    <a href="{{ route('usuarios.create') }}" class="btn-register">Registrarse</a>
-    <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
-</section>
 </body>
 </html>
