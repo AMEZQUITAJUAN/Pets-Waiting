@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,15 +17,16 @@
         }
 
         .hero-section {
+
             background-color: #007bff;
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 3cm 20px;
         }
 
         .hero-section h1 {
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .hero-section p {
@@ -114,12 +116,13 @@
 </head>
 <body>
     <!-- Hero Section -->
+
     <div class="hero-section">
         <h1>Adopción de Perros y Gatos</h1>
         <p>Busca por las características de la mascota que deseas adoptar</p>
         <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
     </div>
-
+<
     <!-- Filtros -->
     <div class="filters">
         <select>
@@ -146,10 +149,11 @@
     <div class="pets-container">
         @foreach ($mascotas as $mascota)
             <div class="pet-card">
-                <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : 'https://via.placeholder.com/300x200' }}" alt="Imagen de {{ $mascota->nombre }}">
+                <img src="{{ $mascota->imagen ? ('storage/' . $mascota->imagen) : 'https://via.placeholder.com/300x200' }}" alt="Imagen de {{ $mascota->nombre }}">
                 <h3>{{ $mascota->nombre }}</h3>
                 <p><strong>Especie:</strong> {{ $mascota->especie }}</p>
                 <p><strong>Edad:</strong> {{ $mascota->edad }} años</p>
+                <p><strong>cuidador temporal:</strong> {{ $mascota->usuario->nombre ?? 'Sin usuario' }} </p>
                 <a href="{{ route('mascotas.show', $mascota->id) }}" class="adopt-btn">Adoptar a {{ $mascota->nombre }}</a>
             </div>
         @endforeach

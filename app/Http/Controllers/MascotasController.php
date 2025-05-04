@@ -13,6 +13,7 @@ class MascotasController extends Controller
         $usuarios = Usuario::orderBy('id', 'desc')->paginate(10); // Paginación para usuarios
         $mascotas = Mascota::with('usuario')->paginate(10); // Paginación para mascotas con sus usuarios asociados
         return view('mascotas.index', compact('usuarios', 'mascotas'));
+       
     }
 
     public function create()
@@ -91,5 +92,6 @@ class MascotasController extends Controller
 
         return redirect()->route('mascotas.index')->with('success', 'Mascota eliminada exitosamente.');
     }
+
 }
 

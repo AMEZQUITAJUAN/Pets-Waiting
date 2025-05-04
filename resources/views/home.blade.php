@@ -22,9 +22,17 @@
                 @foreach ($mascotas as $mascota)
                     <div class="col">
                         <div class="card h-100">
-                            <img src="{{ $mascota->imagen ?? 'https://via.placeholder.com/300x200' }}"
-                                 class="card-img-top"
-                                 alt="Imagen de {{ $mascota->nombre }}">
+                            @if($mascota->imagen)
+                                <img src="{{ asset('storage/' . $mascota->imagen) }}"
+                                     class="card-img-top"
+                                     alt="Foto de {{ $mascota->nombre }}"
+                                     style="height: 200px; object-fit: cover;">
+                            @else
+                                <img src="{{ asset('img/no-image.jpg') }}"
+                                     class="card-img-top"
+                                     alt="Sin imagen"
+                                     style="height: 200px; object-fit: cover;">
+                            @endif
                             <div class="card-body">
                                 <h5 class="card-title">{{ $mascota->nombre }}</h5>
                                 <p class="card-text">

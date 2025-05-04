@@ -1,36 +1,50 @@
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f3e6; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f3e6;">
     <div class="container-fluid">
-        <!-- Logo con temática de mascotas -->
-        <a class="navbar-brand" href="{{ route('home') }}" style="color: #5a3e2b; font-weight: bold;">
+        <a class="navbar-brand" href="{{ route('home') }}">
             🐾 Rescate de Mascotas
         </a>
-        <!-- Botón para dispositivos móviles -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- Enlaces de navegación -->
+
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}" style="color: #5a3e2b;">Inicio</a>
+                    <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}"
+                       href="{{ route('home') }}">
+                        Inicio
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('mascotas.index') }}" style="color: #5a3e2b;">Adopción</a>
+                    <a class="nav-link {{ Request::routeIs('adopcion') ? 'active' : '' }}"
+                       href="{{ route('adopcion') }}">
+                        Adopción
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('adopcion') }}" style="color: #5a3e2b;">Perdidos</a>
+                    <a class="nav-link {{ Request::routeIs('perdidos.*') ? 'active' : '' }}"
+                       href="{{ route('perdidos.index') }}">
+                        Perdidos
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('porquea') }}" style="color: #5a3e2b;">¿Por qué Adoptar?</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #5a3e2b;">Contacto</a>
+                    <a class="nav-link {{ Request::routeIs('porquea') ? 'active' : '' }}"
+                       href="{{ route('porquea') }}">
+                        ¿Por qué Adoptar?
+                    </a>
                 </li>
             </ul>
-            <!-- Botón de Iniciar Sesión -->
-            <a href="{{ route('frminicio') }}" class="btn" style="background-color: #007bff; color: white; border-radius: 20px; padding: 0.5rem 1rem;">
-                Iniciar Sesión
-            </a>
+
+            <div class="d-flex">
+                <a href="{{ route('frminicio') }}"
+                   class="btn btn-primary">
+                    Iniciar Sesión
+                </a>
+            </div>
         </div>
     </div>
 </nav>

@@ -12,5 +12,6 @@ class AdopcionesController extends Controller
         $mascotas = Mascota::with('usuario')->latest()->paginate(6);
         return view('adopcion', compact('mascotas'));
     }
+    
 }
 
