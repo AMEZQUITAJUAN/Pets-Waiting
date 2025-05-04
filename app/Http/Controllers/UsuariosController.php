@@ -14,16 +14,27 @@ class UsuariosController extends Controller
         return view('formulario'); // Cargar la vista del formulario
     }
 
-    public function store(StoreUsuario $request)
+    public function store(Request $request)
     {
-        
-        Usuario::create([
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|email|unique:usuarios,email',
+            'password' => 'required|min:6',
+        ]);
+
+        // Crear el usuario
+        $usuario = Usuario::create([
             'nombre' => $request->nombre,
             'email' => $request->email,
             'password' => bcrypt($request->password), // Encriptar la contraseña
         ]);
 
-        return redirect()->route('mascotas.index')->with('success', 'Usuario registrado exitosamente.');
+        // Autenticar al usuario automáticamente
+        auth()->login($usuario);
+
+        // Redirigir al home
+        return redirect()->route('home')->with('success', 'Usuario registrado exitosamente.');
     }
 
     public function index() {

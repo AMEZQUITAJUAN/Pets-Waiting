@@ -11,40 +11,56 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}"
-                       href="{{ route('home') }}">
+                    <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
                         Inicio
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('adopcion') ? 'active' : '' }}"
-                       href="{{ route('adopcion') }}">
+                    <a class="nav-link {{ Request::routeIs('adopcion') ? 'active' : '' }}" href="{{ route('adopcion') }}">
                         Adopción
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('perdidos.*') ? 'active' : '' }}"
-                       href="{{ route('perdidos.index') }}">
+                    <a class="nav-link {{ Request::routeIs('perdidos.*') ? 'active' : '' }}" href="{{ route('perdidos.index') }}">
                         Perdidos
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('porquea') ? 'active' : '' }}"
-                       href="{{ route('porquea') }}">
+                    <a class="nav-link {{ Request::routeIs('porquea') ? 'active' : '' }}" href="{{ route('porquea') }}">
                         ¿Por qué Adoptar?
                     </a>
                 </li>
             </ul>
 
             <div class="d-flex">
-                <a href="{{ route('frminicio') }}"
-                   class="btn btn-primary">
-                    Iniciar Sesión
-                </a>
+                @auth
+                    <!-- Mostrar círculo con iniciales -->
+                    <div class="user-circle">
+                        {{ strtoupper(substr(auth()->user()->nombre, 0, 1)) }}
+                    </div>
+                @else
+                    <!-- Mostrar botón de Iniciar Sesión -->
+                    <a href="{{ route('frminicio') }}" class="btn btn-primary">
+                        Iniciar Sesión
+                    </a>
+                @endauth
             </div>
         </div>
     </div>
 </nav>
+
+<style>
+.user-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+</style>
