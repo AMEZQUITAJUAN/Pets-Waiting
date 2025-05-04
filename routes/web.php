@@ -27,6 +27,12 @@ Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('fr
 // Ruta para login
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
 
+// Ruta para logout
+Route::post('/logout', function () {
+    auth()->logout();
+    return redirect()->route('home')->with('success', 'Has cerrado sesión exitosamente.');
+})->name('logout');
+
 // Ruta para el dashboard de administrador
 Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
 
