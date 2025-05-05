@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <h1 class="text-primary fw-bold">{{ $mascota->nombre }}</h1>
             <div class="d-flex gap-2 mb-3">
-                <a href="#" class="btn btn-success btn-lg">Adoptar</a>
+                <a href="{{ route('adopcion.create', ['mascota' => $mascota->id]) }}" class="btn btn-primary">Adoptar</a>
                 <a href="#" class="btn btn-outline-danger btn-lg">Compartir</a>
             </div>
 

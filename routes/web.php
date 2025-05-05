@@ -43,3 +43,14 @@ Route::get('/porque-adoptar', function () {
 
 // Rutas para Perdidos (usando resource)
 Route::resource('perdidos', PerdidoController::class);
+
+Route::get('/frmadopcion/create', [AdopcionesController::class, 'create'])->name('adopcion.create'); // Muestra el formulario
+Route::post('/frmadopcion/store', [AdopcionesController::class, 'store'])->name('adopcion.store'); // Procesa el formulario
+
+Route::get('/frmadopcion', function () {
+    return redirect()->route('adopcion.create');
+});
+
+Route::get('/frmadopcion/create/{mascota}', [AdopcionesController::class, 'create'])->name('frmadopcion.create');
+
+Route::get('/adopciones/create/{mascota}', [AdopcionesController::class, 'create'])->name('adopcion.create');
