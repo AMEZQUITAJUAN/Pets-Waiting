@@ -117,7 +117,7 @@ body {
 }
 
 .hero h1 span {
-    color: #ffcc00;
+    color: #fff;
 }
 
 .hero p {
@@ -395,7 +395,7 @@ tbody tr:nth-child(even) {
 }
 
 tbody a {
-    color: #007bff;
+    color: #5bb376;
 }
 
 p {
