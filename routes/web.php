@@ -14,21 +14,22 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
-Route::get('/registro', [UsuariosController::class, 'create'])->name('usuarios.create');
-Route::post('/usuarios', [UsuariosController::class, 'store'])->name('usuarios.store');
+Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
+Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
+Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
-// Rutas de autenticación
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Rutas para Mascotas
+Route::resource('mascotas', MascotasController::class);
 
-// Rutas protegidas
-Route::middleware(['auth'])->group(function () {
-    Route::resource('mascotas', MascotasController::class);
-    Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-    Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
-    Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
-});
+// Ruta para formulario de inicio
+Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
+
+// Ruta para login
+Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+
+// Ruta para el dashboard de administrador
+Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
 
 // Rutas públicas adicionales
 Route::get('/porque-adoptar', function () {

@@ -1,57 +1,69 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalles de la Mascota</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        h1 {
-            color: #ccb834;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        p {
-            margin-bottom: 10px;
-        }
-        strong {
-            font-weight: bold;
-        }
-        a {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #cd7031;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        a:hover {
-            background-color: #da7d2b;
-        }
-    </style>
-</head>
-<body>
-    <h1>Detalles de la Mascota</h1>
-    <p><strong>Nombre:</strong> {{ $mascota->nombre }}</p>
-    <p><strong>Especie:</strong> {{ $mascota->especie }}</p>
-    <p><strong>Edad:</strong> {{ $mascota->edad }}</p>
-    <p><strong>Usuario Asociado:</strong> {{ $mascota->usuario->nombre ?? 'Sin usuario' }}</p>
+@extends('layouts.app')
 
-    <a href="{{ route('mascotas.index') }}">Volver a la lista de mascotas</a>
-    <br></br>
-    <a href="{{ route('mascotas.edit', $mascota->id) }}">Editar Mascota</a>
-    <br></br>
-    <form action="{{ route('mascotas.destroy', $mascota->id) }}" method="POST" style="display:inline-block;">
-        @csrf <!-- Token CSRF necesario -->
-        @method('DELETE') <!-- Método DELETE para la solicitud -->
-        <button type="submit" style="background-color: red; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
-            Eliminar
-        </button>
-    </form>
-</body>
-</html>
+@section('content')
+<div class="container mt-5">
+    <div class="row">
+        <!-- Imagen de la mascota -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : 'https://via.placeholder.com/600x400' }}" 
+                     alt="Imagen de {{ $mascota->nombre }}" 
+                     class="img-fluid rounded">
+            </div>
+        </div>
+
+        <!-- Detalles de la mascota -->
+        <div class="col-md-6">
+            <h1 class="text-primary fw-bold">{{ $mascota->nombre }}</h1>
+            <div class="d-flex gap-2 mb-3">
+                <a href="#" class="btn btn-success btn-lg">Adoptar</a>
+                <a href="#" class="btn btn-outline-danger btn-lg">Compartir</a>
+            </div>
+
+            <ul class="list-unstyled">
+                <li class="mb-2"><strong>Género:</strong> <span class="text-secondary">{{ ucfirst($mascota->genero ?? 'No especificado') }}</span></li>
+                <li class="mb-2"><strong>Tamaño:</strong> <span class="text-secondary">{{ ucfirst($mascota->tamano ?? 'No especificado') }}</span></li>
+                <li class="mb-2"><strong>Edad:</strong> <span class="text-secondary">{{ $mascota->edad }} años</span></li>
+                <li class="mb-2"><strong>Esterilizado/Castrado:</strong> <span class="text-secondary">{{ $mascota->esterilizado ? 'Sí' : 'No' }}</span></li>
+                <li class="mb-2"><strong>Ubicación:</strong> <span class="text-secondary">{{ $mascota->ubicacion ?? 'No especificada' }}</span></li>
+            </ul>
+
+            <p class="mt-3 text-muted">
+                {{ $mascota->descripcion ?? 'No hay descripción disponible para esta mascota.' }}
+            </p>
+
+            <!-- Información de contacto -->
+            <h4 class="mt-4 text-primary">Contacto:</h4>
+            <div class="card shadow-sm p-3">
+                <p class="mb-1"><strong>Nombre:</strong> {{ $mascota->usuario->nombre ?? 'No especificado' }}</p>
+                <p class="mb-1"><strong>Email:</strong> {{ $mascota->usuario->email ?? 'No especificado' }}</p>
+                <p class="mb-0"><strong>Teléfono:</strong> {{ $mascota->usuario->telefono ?? 'No especificado' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .btn-lg {
+        font-size: 1.2rem;
+        padding: 0.5rem 1.5rem;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-secondary {
+        color: #6c757d !important;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+</style>
+@endsection

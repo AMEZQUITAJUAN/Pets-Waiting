@@ -70,7 +70,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Registrar Mascota</button>
-        <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('adopcion') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 

@@ -34,13 +34,14 @@
 
             <div class="d-flex">
                 @auth
-                    <span class="navbar-text me-3">
-                        Bienvenido, {{ Auth::user()->nombre }}
-                    </span>
-                 
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    <!-- Mostrar círculo con iniciales -->
+                    <div class="user-circle me-3">
+                        {{ strtoupper(substr(auth()->user()->nombre, 0, 1)) }}
+                    </div>
+                    <!-- Botón de cerrar sesión -->
+                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
-                        <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-primary">Iniciar Sesión</a>
@@ -63,5 +64,14 @@
     font-weight: bold;
     font-size: 16px;
     text-transform: uppercase;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
 }
 </style>
