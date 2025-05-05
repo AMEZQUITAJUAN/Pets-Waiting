@@ -7,7 +7,7 @@
             <h1>Dale un hogar a una <span>mascota necesitada</span></h1>
             <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
             <div class="hero-buttons">
-                <a href="{{ route('mascotas.create') }}" class="btn btn-primary">Adopta una mascota</a>
+                <a href="{{ route('adopcion') }}" class="btn btn-primary">Adopta una mascota</a>
                 <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Ver todas las mascotas</a>
             </div>
         </div>
@@ -54,11 +54,6 @@
             <div class="text-center mt-4">
                 <a href="{{ route('adopcion') }}" class="btn btn-primary">Ver Más</a>
             </div>
-
-            <section class="suscripcion">
-    <h2>Únete a nuestra causa</h2>
-    <p>Al suscribirte, aceptas recibir actualizaciones sobre nuestras mascotas y eventos. <a href="#">Términos y condiciones</a>.</p>
-</section>
 
             <!-- Paginación -->
             <div class="d-flex justify-content-center mt-4">
