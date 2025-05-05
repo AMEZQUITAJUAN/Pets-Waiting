@@ -37,3 +37,8 @@ Route::get('/porque-adoptar', function () {
 })->name('porquea');
 
 Route::resource('perdidos', PerdidoController::class);
+
+// Rutas de autenticación
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

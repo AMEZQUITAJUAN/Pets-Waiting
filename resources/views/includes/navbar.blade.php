@@ -34,11 +34,9 @@
 
             <div class="d-flex">
                 @auth
-                    <!-- Mostrar círculo con iniciales -->
                     <div class="user-circle me-3">
                         {{ strtoupper(substr(auth()->user()->nombre, 0, 1)) }}
                     </div>
-                    <!-- Botón de cerrar sesión -->
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
