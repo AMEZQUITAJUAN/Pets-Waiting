@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Http\Requests\StoreUsuario; // Asegúrate de importar la clase StoreUsuario
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UsuariosController extends Controller
 {
@@ -16,25 +17,34 @@ class UsuariosController extends Controller
 
     public function store(Request $request)
     {
-        // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'email' => 'required|email|unique:usuarios,email',
-            'password' => 'required|min:6',
+            'email' => 'required|string|email|max:255|unique:usuarios',
+            'password' => 'required|string|min:6',
         ]);
 
-        // Crear el usuario
-        $usuario = Usuario::create([
-            'nombre' => $request->nombre,
-            'email' => $request->email,
-            'password' => bcrypt($request->password), // Encriptar la contraseña
-        ]);
+        try {
+            $usuario = Usuario::create([
+                'nombre' => $request->nombre,
+                'email' => $request->email,
+                'password' => $request->password, // El mutador se encargará de hashear
+                'rol' => 'user'
+            ]);
 
-        // Autenticar al usuario automáticamente
-        auth()->login($usuario);
+            // Registrar el éxito
+            Log::info('Usuario registrado exitosamente', ['email' => $usuario->email]);
 
-        // Redirigir al home
-        return redirect()->route('home')->with('success', 'Usuario registrado exitosamente.');
+            // Autenticar al usuario después del registro
+            auth()->login($usuario);
+
+            return redirect()->route('home')
+                ->with('success', '¡Registro exitoso! Bienvenido ' . $usuario->nombre);
+
+        } catch (\Exception $e) {
+            Log::error('Error al registrar usuario: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Error al registrar usuario'])
+                        ->withInput($request->except('password'));
+        }
     }
 
     public function index() {
@@ -98,4 +108,15 @@ class UsuariosController extends Controller
         // Aquí puedes cargar datos específicos para el administrador
         return view('admin'); // Asegúrate de que esta vista exista
     }
+
+    public function createTestUser()
+    {
+        Usuario::create([
+            'nombre' => 'Test User',
+            'email' => 'test@test.com',
+            'password' => 'password123',
+            'rol' => 'user'
+        ]);
+    }
 }
+

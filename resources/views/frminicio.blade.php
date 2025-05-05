@@ -1,115 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Iniciar Sesión</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f1f9ff;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+@extends('layouts.app')
 
-  .login-card {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    max-width: 400px;
-    width: 100%;
-  }
-
-  h2 {
-    color: #003366;
-    text-align: center;
-  }
-
-  p {
-    text-align: center;
-    color: #777;
-  }
-
-  label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-  }
-
-  input[type="email"],
-  input[type="password"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-
-  .rol-select {
-    margin-top: 10px;
-  }
-
-  button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #218838;
-  }
-
-  .footer {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-  }
-
-  .footer a {
-    color: #ff6600;
-    text-decoration: none;
-  }
-</style>
-</head>
-<body>
-
+@section('content')
 <div class="login-card">
-  <h2>Iniciar Sesión</h2>
-  <p>Ingresa tus datos para acceder a tu cuenta</p>
-  <form id="loginForm" action="{{ route('login') }}" method="POST">
-    @csrf
-    <label for="email">Correo electrónico</label>
-    <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+    <h2>Iniciar Sesión</h2>
+    <p>Ingresa tus datos para acceder a tu cuenta</p>
 
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" name="password" placeholder="Tu contraseña" required />
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <label for="rol" class="rol-select">Rol</label>
-    <select id="rol" name="rol" required>
-        <option value="">Selecciona tu rol</option>
-        <option value="admin">Administrador</option>
-        <option value="user">Usuario</option>
-    </select>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <label for="email">Correo electrónico</label>
+        <input type="email"
+               id="email"
+               name="email"
+               value="{{ old('email') }}"
+               placeholder="tu@email.com"
+               required />
 
-    <button type="submit">Iniciar Sesión</button>
-  </form>
-  <div class="footer">
-    ¿No tienes cuenta? <a href="{{ route('usuarios.create') }}">Regístrate aquí</a>
-  </div>
+        <label for="password">Contraseña</label>
+        <input type="password"
+               id="password"
+               name="password"
+               placeholder="Tu contraseña"
+               required />
+
+        <label for="rol" class="rol-select">Rol</label>
+        <select id="rol" name="rol" required>
+            <option value="">Selecciona tu rol</option>
+            <option value="admin" {{ old('rol') == 'admin' ? 'selected' : '' }}>Administrador</option>
+            <option value="user" {{ old('rol') == 'user' ? 'selected' : '' }}>Usuario</option>
+        </select>
+
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <div class="footer">
+        ¿No tienes cuenta? <a href="{{ route('usuarios.create') }}">Regístrate aquí</a>
+    </div>
 </div>
-
-</body>
-</html>
+@endsection

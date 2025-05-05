@@ -4,6 +4,7 @@ use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\AdopcionesController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\PerdidoController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta principal
@@ -27,30 +28,12 @@ Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('fr
 // Ruta para login
 Route::post('/login', [UsuariosController::class, 'login'])->name('login');
 
-// Ruta para logout
-Route::post('/logout', function () {
-    auth()->logout();
-    return redirect()->route('home')->with('success', 'Has cerrado sesión exitosamente.');
-})->name('logout');
-
 // Ruta para el dashboard de administrador
 Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
 
-// Ruta para porque adoptar
+// Rutas públicas adicionales
 Route::get('/porque-adoptar', function () {
     return view('porquea');
 })->name('porquea');
 
-// Rutas para Perdidos (usando resource)
 Route::resource('perdidos', PerdidoController::class);
-
-Route::get('/frmadopcion/create', [AdopcionesController::class, 'create'])->name('adopcion.create'); // Muestra el formulario
-Route::post('/frmadopcion/store', [AdopcionesController::class, 'store'])->name('adopcion.store'); // Procesa el formulario
-
-Route::get('/frmadopcion', function () {
-    return redirect()->route('adopcion.create');
-});
-
-Route::get('/frmadopcion/create/{mascota}', [AdopcionesController::class, 'create'])->name('frmadopcion.create');
-
-Route::get('/adopciones/create/{mascota}', [AdopcionesController::class, 'create'])->name('adopcion.create');
