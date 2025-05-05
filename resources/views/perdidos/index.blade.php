@@ -5,9 +5,12 @@
     <div class="text-center">
         <h1>Mascotas Perdidas</h1>
         <p class="lead">Ayúdanos a encontrar estas mascotas</p>
-        <a href="{{ route('perdidos.create') }}" class="btn btn-primary mb-4">
-            Reportar Mascota Perdida
-        </a>
+        <form action="{{ route('perdidos.create') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-primary mb-4">
+                Reportar Mascota Perdida
+            </button>
+        </form>
     </div>
 
     @if(session('success'))

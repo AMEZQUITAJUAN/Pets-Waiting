@@ -34,15 +34,16 @@
 
             <div class="d-flex">
                 @auth
-                    <!-- Mostrar círculo con iniciales -->
-                    <div class="user-circle">
-                        {{ strtoupper(substr(auth()->user()->nombre, 0, 1)) }}
-                    </div>
+                    <span class="navbar-text me-3">
+                        Bienvenido, {{ Auth::user()->nombre }}
+                    </span>
+                 
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+                    </form>
                 @else
-                    <!-- Mostrar botón de Iniciar Sesión -->
-                    <a href="{{ route('frminicio') }}" class="btn btn-primary">
-                        Iniciar Sesión
-                    </a>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Iniciar Sesión</a>
                 @endauth
             </div>
         </div>

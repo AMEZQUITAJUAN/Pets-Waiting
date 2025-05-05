@@ -4,6 +4,7 @@ use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\AdopcionesController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\PerdidoController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta principal
@@ -13,27 +14,25 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
-Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
-Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
-Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+Route::get('/registro', [UsuariosController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios', [UsuariosController::class, 'store'])->name('usuarios.store');
 
-// Rutas para Mascotas
-Route::resource('mascotas', MascotasController::class);
+// Rutas de autenticación
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Ruta para formulario de inicio
-Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
+// Rutas protegidas
+Route::middleware(['auth'])->group(function () {
+    Route::resource('mascotas', MascotasController::class);
+    Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+    Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
+});
 
-// Ruta para login
-Route::post('/login', [UsuariosController::class, 'login'])->name('login');
-
-// Ruta para el dashboard de administrador
-Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
-
-// Ruta para porque adoptar
+// Rutas públicas adicionales
 Route::get('/porque-adoptar', function () {
     return view('porquea');
 })->name('porquea');
 
-// Rutas para Perdidos (usando resource)
 Route::resource('perdidos', PerdidoController::class);

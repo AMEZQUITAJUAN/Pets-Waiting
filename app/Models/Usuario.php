@@ -5,15 +5,19 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Hash;
 
 class Usuario extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'usuarios';
+
     protected $fillable = [
         'nombre',
         'email',
         'password',
+        'rol'
     ];
 
     protected $hidden = [
@@ -21,30 +25,28 @@ class Usuario extends Authenticatable
         'remember_token',
     ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // Mutador para hashear la contraseña
+    public function setPasswordAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['password'] = Hash::make($value);
+        }
+    }
+
+    // Método para verificar la contraseña
+    public function validatePassword($password)
+    {
+        return Hash::check($password, $this->password);
+    }
+
     public function mascotas()
     {
         return $this->hasMany(Mascota::class);
     }
 }
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
-class AddRolToUsuariosTable extends Migration
-{
-    public function up()
-    {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->string('rol')->default('user'); // Valores: 'admin' o 'user'
-        });
-    }
-
-    public function down()
-    {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->dropColumn('rol');
-        });
-    }
-}
 

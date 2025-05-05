@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #f9f9f9;
+    background-color: #f1f9ff;
     color: #333;
     line-height: 1.6;
     padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
@@ -263,91 +263,95 @@ body {
 
 /* Formulario */
 .registration-container {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 450px;
-    padding: 40px;
+    max-width: 500px;
     margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.registration-container h1 {
     color: #333;
-    font-size: 24px;
-    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .subtitle {
+    text-align: center;
     color: #666;
-    font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
-label {
+.form-group label {
     display: block;
+    margin-bottom: 0.5rem;
     color: #333;
-    font-weight: 600;
-    margin-bottom: 8px;
-    font-size: 14px;
 }
 
-input {
+.form-group input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 0.75rem;
     border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: border-color 0.3s;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-input:focus {
-    outline: none;
-    border-color: #4a90e2;
+.error-messages {
+    background: #fff3f3;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
-input::placeholder {
-    color: #999;
+.error-messages ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    color: #d32f2f;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 }
 
 .btn-register {
-    background-color: #4a90e2;
+    width: 100%;
+    padding: 0.75rem;
+    background: #4CAF50;
     color: white;
     border: none;
-    border-radius: 6px;
-    padding: 12px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 4px;
+    font-size: 1rem;
     cursor: pointer;
-    margin-top: 10px;
     transition: background-color 0.3s;
 }
 
 .btn-register:hover {
-    background-color: #3a7bc8;
+    background: #45a049;
 }
 
 .login-link {
     text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
+    margin-top: 1.5rem;
     color: #666;
 }
 
 .login-link a {
-    color: #4a90e2;
+    color: #4CAF50;
     text-decoration: none;
-    font-weight: 600;
 }
 
 .login-link a:hover {
     text-decoration: underline;
 }
+
 /* index*/
 body {
     font-family: sans-serif;
@@ -399,4 +403,99 @@ p {
     font-style: italic;
 }
 /* show*/
+
+/* Estilos para el login */
+.login-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+    margin: 40px auto;
+}
+
+.login-card h2 {
+    color: #003366;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-card p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.login-card label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-card input[type="email"],
+.login-card input[type="password"],
+.login-card select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.login-card .rol-select {
+    margin-top: 10px;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-card button:hover {
+    background-color: #218838;
+}
+
+.login-card .footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-card .footer a {
+    color: #ff6600;
+    text-decoration: none;
+}
+
+.login-card .footer a:hover {
+    text-decoration: underline;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-danger ul {
+    margin: 0;
+    padding-left: 20px;
+}
 
