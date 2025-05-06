@@ -8,7 +8,7 @@
 
 body {
     background-color: #f1f9ff;
-    color: #8e13a0;
+    color: #333;
     line-height: 1.6;
     padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
     margin: 0;
@@ -34,7 +34,7 @@ body {
 }
 
 .navbar-brand:hover {
-    color: #1aff2d;
+    color: #ff7a1a;
 }
 
 .navbar-nav .nav-link {

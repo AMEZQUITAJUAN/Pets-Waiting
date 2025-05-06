@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f3e6;">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}">
-            🐾 Rescate de Mascotas
+            <img src="img/mascotas.png" alt="Logo" class="navbar-logo">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -42,7 +42,7 @@
                         <button type="submit" class="btn btn-danger btn-sm">Cerrar Sesión</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-primary">Iniciar Sesión</a>
+                    <a href="{{ route('login.submit') }}" class="btn btn-primary">Iniciar Sesión</a>
                 @endauth
             </div>
         </div>
@@ -50,11 +50,43 @@
 </nav>
 
 <style>
+.navbar {
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #fbfaf8 !important;
+}
+
+.navbar-logo {
+    height: 50px; /* Ajusta este valor según necesites */
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-brand {
+    padding: 0;
+    margin-right: 1rem;
+}
+
+.nav-link {
+    color: #7209b9 !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #1a6179 !important;
+}
+
+.nav-link.active {
+    color: #ec0d0d !important;
+}
+
 .user-circle {
     width: 40px;
     height: 40px;
-    background-color: #007bff;
-    color: white;
+    background-color: #dd0505ef;
+    color: rgb(229, 202, 121);
     border-radius: 50%;
     display: flex;
     justify-content: center;

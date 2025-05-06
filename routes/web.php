@@ -27,8 +27,10 @@ Route::resource('mascotas', MascotasController::class);
 // Ruta para formulario de inicio
 Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
 
-// Ruta para login
-Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+// Rutas para autenticación
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Ruta para el dashboard de administrador
 Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
