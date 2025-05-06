@@ -100,7 +100,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(99, 43, 43, 0.5); /* Fondo negro semitransparente */
+    background: #90604e62; /* Fondo negro semitransparente */
     z-index: -1; /* Coloca la superposición detrás del contenido */
 }
 
@@ -114,15 +114,19 @@ body {
     font-size: 2.8rem;
     margin-bottom: 1rem;
     color: #fff;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 .hero h1 span {
     color: #fff;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    color: #fff;
+    font: 1em sans-serif;
 }
 
 .hero-buttons {
@@ -130,9 +134,9 @@ body {
     gap: 1rem;
 }
 
-.hero-buttons .adoptar {
-    background-color: #f3592a;
-    color: white;
+.hero-buttons .btn-primary {
+    background-color: #2234ff;
+    color: #fff;
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 5px;
@@ -140,23 +144,19 @@ body {
     font-size: 1rem;
 }
 
-.hero-buttons .adoptar:hover {
-    background-color: #f3592a;
-}
-
-.hero-buttons .donar {
-    background-color: transparent;
-    color: #ff5722;
-    border: 2px solid #ff5722;
+.hero-buttons .btn-secondary {
+    background-color: #2234ff;
+    color: #fff;
+    border: none;
     padding: 0.75rem 1.5rem;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
 }
 
-.hero-buttons .donar:hover {
-    background-color: #ff5722;
-    color: white;
+.hero-buttons a:hover {
+    background-color: #5e4137;
+    color: #fff;
 }
 
 /* Servicios */
@@ -361,6 +361,7 @@ body {
 h1 {
     color: #333;
     text-align: center;
+    font-weight: bold; /* Texto en negrita */
 }
 
 a {
@@ -401,6 +402,7 @@ tbody a {
 p {
     text-align: center;
     font-style: italic;
+    font-weight: 300; /* Texto más delgado */
 }
 /* show*/
 
