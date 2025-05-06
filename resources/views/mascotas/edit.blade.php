@@ -125,7 +125,7 @@
         <button type="submit">Actualizar Mascota</button>
     </form>
 
-    <a href="{{ route('mascotas.index') }}" class="back-link">Volver a la lista de mascotas</a>
+    <a href="{{ route('mascotas.index') }}" class="back-link">Volver Admin</a>
 </div>
 </body>
 </html>

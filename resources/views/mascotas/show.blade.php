@@ -6,8 +6,8 @@
         <!-- Imagen de la mascota -->
         <div class="col-md-6">
             <div class="card shadow-sm">
-                <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : 'https://via.placeholder.com/600x400' }}" 
-                     alt="Imagen de {{ $mascota->nombre }}" 
+                <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : 'https://via.placeholder.com/600x400' }}"
+                     alt="Imagen de {{ $mascota->nombre }}"
                      class="img-fluid rounded">
             </div>
         </div>
@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <h1 class="text-primary fw-bold">{{ $mascota->nombre }}</h1>
             <div class="d-flex gap-2 mb-3">
-                <a href="#" class="btn btn-success btn-lg">Adoptar</a>
+                <a href="{{ route('adopciones.create', ['mascota' => $mascota->id]) }}" class="btn btn-primary">Adoptar</a>
                 <a href="#" class="btn btn-outline-danger btn-lg">Compartir</a>
             </div>
 

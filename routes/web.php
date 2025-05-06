@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Rutas para Adopción
+Route::get('/adopciones/{mascota}/create', [AdopcionesController::class, 'create'])->name('adopciones.create');
+Route::post('/adopciones', [AdopcionesController::class, 'store'])->name('adopciones.store');
 Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
@@ -25,8 +27,10 @@ Route::resource('mascotas', MascotasController::class);
 // Ruta para formulario de inicio
 Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
 
-// Ruta para login
-Route::post('/login', [UsuariosController::class, 'login'])->name('login');
+// Rutas para autenticación
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Ruta para el dashboard de administrador
 Route::get('/admin/dashboard', [UsuariosController::class, 'index'])->name('admin.dashboard');
@@ -37,8 +41,3 @@ Route::get('/porque-adoptar', function () {
 })->name('porquea');
 
 Route::resource('perdidos', PerdidoController::class);
-
-// Rutas de autenticación
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
