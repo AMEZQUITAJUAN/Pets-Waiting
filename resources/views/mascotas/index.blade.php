@@ -38,7 +38,7 @@
 </html>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Lista de Mascotas</h1>
+    <h1 class="text-center mb-4">Lista de Adopciones</h1>
     <a href="{{ route('mascotas.create') }}" class="btn btn-primary mb-4">Registrar una nueva mascota</a>
 
     @if ($mascotas->isEmpty())
