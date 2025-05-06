@@ -100,7 +100,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(24, 24, 143, 0.5); /* Fondo negro semitransparente */
+    background: rgba(99, 43, 43, 0.5); /* Fondo negro semitransparente */
     z-index: -1; /* Coloca la superposición detrás del contenido */
 }
 
@@ -131,7 +131,7 @@ body {
 }
 
 .hero-buttons .adoptar {
-    background-color: #ff5722;
+    background-color: #f3592a;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -141,7 +141,7 @@ body {
 }
 
 .hero-buttons .adoptar:hover {
-    background-color: #e64a19;
+    background-color: #f3592a;
 }
 
 .hero-buttons .donar {
