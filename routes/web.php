@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Rutas para Adopción
+Route::get('/adopciones/{mascota}/create', [AdopcionesController::class, 'create'])->name('adopciones.create');
+Route::post('/adopciones', [AdopcionesController::class, 'store'])->name('adopciones.store');
 Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
