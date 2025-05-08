@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #f8f3e6;">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="img/mascotas.png" alt="Logo" class="navbar-logo">
+            <img src="{{asset('img/mascotas.png')}}" alt="Logo" class="navbar-logo">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

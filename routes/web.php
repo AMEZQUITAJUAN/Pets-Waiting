@@ -41,4 +41,6 @@ Route::get('/porque-adoptar', function () {
 })->name('porquea');
 
 // Rutas para Perdidos
-Route::resource('perdidos', PerdidosController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('perdidos', PerdidosController::class);
+});

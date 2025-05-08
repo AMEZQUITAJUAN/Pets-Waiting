@@ -30,17 +30,24 @@ class PerdidosController extends Controller
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $perdido = new Perdido($request->except('imagen'));
+        try {
+            $perdido = new Perdido($request->except('imagen'));
+            $perdido->usuario_id = auth()->id(); // Agregar esta línea
 
-        if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('perdidos', 'public');
-            $perdido->imagen = $path;
+            if ($request->hasFile('imagen')) {
+                $path = $request->file('imagen')->store('perdidos', 'public');
+                $perdido->imagen = $path;
+            }
+
+            $perdido->save();
+
+            return redirect()->route('perdidos.index')
+                ->with('success', 'Mascota perdida registrada exitosamente');
+        } catch (\Exception $e) {
+            return back()
+                ->withErrors(['error' => 'Error al guardar: ' . $e->getMessage()])
+                ->withInput();
         }
-
-        $perdido->save();
-
-        return redirect()->route('perdidos.index')
-            ->with('success', 'Mascota perdida registrada exitosamente');
     }
 
     public function show(Perdido $perdido)

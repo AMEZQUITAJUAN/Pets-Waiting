@@ -26,7 +26,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: #fff;            
+            color: #fff;
             padding:1cm 30px;
         }
 
@@ -44,7 +44,7 @@
             margin-bottom: 1rem;
             color: #fff;
             font: 1em sans-serif;
-            
+
         }
 
         .hero-section .btn {
@@ -56,7 +56,7 @@
             border: none;
             border-radius: 5px;
             text-decoration: none;
-            
+
         }
 
         .hero-section .btn:hover {
@@ -105,7 +105,7 @@
             width: 300px;
             overflow: hidden;
             text-align: center;
-            
+
         }
 
         .pet-card img {
@@ -115,15 +115,15 @@
         }
 
         .pet-card h3 {
-            
-            color:#000000; 
+
+            color:#000000;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-size: 1.5rem;
             margin: 10px 0;
         }
 
         .pet-card p {
-            color: #000000; 
+            color: #000000;
     font-family:Arial, Helvetica, sans-serif;
             margin: 5px 0;
             font-size: 1rem;
@@ -155,27 +155,7 @@
         <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
     </div>
 
-    <!-- Filtros -->
-    <div class="filters">
-        <select>
-            <option value="">¿Qué especie?</option>
-            <option value="perro">Perro</option>
-            <option value="gato">Gato</option>
-        </select>
-        <select>
-            <option value="">¿Qué tamaño?</option>
-            <option value="pequeño">Pequeño</option>
-            <option value="mediano">Mediano</option>
-            <option value="grande">Grande</option>
-        </select>
-        <select>
-            <option value="">¿Qué género?</option>
-            <option value="macho">Macho</option>
-            <option value="hembra">Hembra</option>
-        </select>
-        <input type="text" placeholder="Por nombre">
-        <input type="text" placeholder="¿Cuál ciudad?">
-    </div>
+    
 
     <!-- Lista de Mascotas -->
     <div class="pets-container">
