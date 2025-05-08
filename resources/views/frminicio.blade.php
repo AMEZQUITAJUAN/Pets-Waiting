@@ -43,7 +43,6 @@
                 Administrador
             </label>
         </div>
-
         <button type="submit">Iniciar Sesión</button>
     </form>
 

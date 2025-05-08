@@ -17,50 +17,76 @@
         }
 
         .hero-section {
-
-            background-color: #007bff;
-            color: white;
+            background-image: url('img/newpatas.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 3cm 20px;
+            color: #fff;            
+            padding:1cm 30px;
         }
 
         .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            color: #fff;
+            padding: 0cm;
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
         }
 
         .hero-section p {
             font-size: 1.2rem;
+            padding: 1rem 1rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font: 1em sans-serif;
+            
         }
 
         .hero-section .btn {
             margin-top: 20px;
-            background-color: #ffc107;
-            color: black;
+            background-color: #2234ff;
+            color: white;
             font-weight: bold;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             text-decoration: none;
+            
         }
 
         .hero-section .btn:hover {
-            background-color: #e0a800;
+            background-color: #d81b60;
         }
 
         .filters {
+            color:rgb(250, 248, 250);
             display: flex;
             justify-content: center;
             gap: 10px;
             margin: 20px 0;
+            font-family:fantasy
         }
 
-        .filters input,
-        .filters select {
+        .filters input[type="text"] {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1rem;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+        .filters select {
+            background-color: #2234ff;
+            color:rgb(250, 248, 249);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
         }
 
         .pets-container {
@@ -75,10 +101,11 @@
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6pxrgb(165, 42, 136);
             width: 300px;
             overflow: hidden;
             text-align: center;
+            
         }
 
         .pet-card img {
@@ -88,18 +115,23 @@
         }
 
         .pet-card h3 {
+            
+            color:#000000; 
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-size: 1.5rem;
             margin: 10px 0;
         }
 
         .pet-card p {
+            color: #000000; 
+    font-family:Arial, Helvetica, sans-serif;
             margin: 5px 0;
             font-size: 1rem;
         }
 
         .pet-card .adopt-btn {
             display: block;
-            background-color: #28a745;
+            background-color: #2234ff;
             color: white;
             padding: 10px;
             margin: 10px;
@@ -110,7 +142,7 @@
         }
 
         .pet-card .adopt-btn:hover {
-            background-color: #218838;
+            background-color: #d81b60;
         }
     </style>
 </head>
@@ -118,11 +150,11 @@
     <!-- Hero Section -->
 
     <div class="hero-section">
-        <h1>Adopción de Perros y Gatos</h1>
-        <p>Busca por las características de la mascota que deseas adoptar</p>
+        <h1>ADOPCION DE PERROS Y GATOS</h1>
+        <p>Busca por las características de la mascota que deseas adoptar.</p>
         <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
     </div>
-<
+
     <!-- Filtros -->
     <div class="filters">
         <select>
@@ -153,7 +185,7 @@
                 <h3>{{ $mascota->nombre }}</h3>
                 <p><strong>Especie:</strong> {{ $mascota->especie }}</p>
                 <p><strong>Edad:</strong> {{ $mascota->edad }} años</p>
-                <p><strong>cuidador temporal:</strong> {{ $mascota->usuario->nombre ?? 'Sin usuario' }} </p>
+                <p><strong>Cuidador temporal:</strong> {{ $mascota->usuario->nombre ?? 'Sin usuario' }} </p>
                 <a href="{{ route('mascotas.show', $mascota->id) }}" class="adopt-btn">Adoptar a {{ $mascota->nombre }}</a>
             </div>
         @endforeach

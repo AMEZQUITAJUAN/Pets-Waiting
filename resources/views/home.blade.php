@@ -4,7 +4,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Dale un hogar a una <span>mascota necesitada</span></h1>
+            <h1>DALE UN HOGAR A UNA <span>MASCOTA NECESITADA</span></h1>
             <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
             <div class="hero-buttons">
                 <a href="{{ route('adopcion') }}" class="btn btn-primary">Adopta una mascota</a>
