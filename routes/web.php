@@ -41,3 +41,4 @@ Route::get('/porque-adoptar', function () {
 })->name('porquea');
 
 Route::resource('perdidos', PerdidoController::class);
+Route::get('/perdidos/{id}', [PerdidoController::class, 'show'])->name('perdidos.show');

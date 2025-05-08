@@ -41,6 +41,8 @@
                             <strong>Ubicación:</strong> {{ $perdido->ubicacion }}<br>
                             <strong>Fecha:</strong> {{ $perdido->fecha_perdida }}
                         </p>
+                        <!-- Botón para ir a la vista de show -->
+                        <a href="{{ route('perdidos.show', $perdido->id) }}" class="btn btn-primary">Ver Detalles</a>
                     </div>
                 </div>
             </div>
