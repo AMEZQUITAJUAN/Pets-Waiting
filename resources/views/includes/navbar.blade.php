@@ -68,18 +68,18 @@
 }
 
 .nav-link {
-    color: #7209b9 !important;
+    color: #2234ff            !important;
     font-weight: 500;
     padding: 0.5rem 1rem !important;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #1a6179 !important;
+    color: #d81b60 !important;
 }
 
 .nav-link.active {
-    color: #ec0d0d !important;
+    color: #d81b60 !important;
 }
 
 .user-circle {

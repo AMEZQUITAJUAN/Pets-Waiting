@@ -32,12 +32,7 @@
                placeholder="Tu contraseña"
                required />
 
-        <label for="rol" class="rol-select">Rol</label>
-        <select id="rol" name="rol" required>
-            <option value="">Selecciona tu rol</option>
-            <option value="admin" {{ old('rol') == 'admin' ? 'selected' : '' }}>Administrador</option>
-            <option value="user" {{ old('rol') == 'user' ? 'selected' : '' }}>Usuario</option>
-        </select>
+       
 
         <button type="submit">Iniciar Sesión</button>
     </form>

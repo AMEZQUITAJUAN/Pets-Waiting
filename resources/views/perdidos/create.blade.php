@@ -69,3 +69,103 @@
 </div>
 @endsection
 
+<style>
+/* Estilo general del contenedor */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Título del formulario */
+.container h2 {
+    text-align: center;
+    color: #333; /* Color del texto */
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Estilo para las etiquetas */
+.form-label {
+    font-weight: bold;
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Estilo para los campos de entrada */
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Color azul al enfocar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para el botón principal */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el botón secundario */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Estilo para el área de texto */
+textarea.form-control {
+    resize: none; /* Evita que el usuario cambie el tamaño */
+}
+
+/* Estilo para las alertas de error */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para la lista de errores */
+.alert-danger ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Espaciado entre los campos */
+.mb-3 {
+    margin-bottom: 20px;
+}
+</style>
+

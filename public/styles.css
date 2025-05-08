@@ -80,28 +80,16 @@ body {
 /* Hero Section */
 .hero {
     position: relative; /* Necesario para la superposición */
-    background-image: url('img/patas.jpg');
+    background-image: url('img/newpatas.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center;   
+    height: 60vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 1rem;
     flex-wrap: wrap;
     color: white;
     z-index: 2;
-}
-
-/* Superposición de color para mejorar la visibilidad del texto */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #90604e62; /* Fondo negro semitransparente */
-    z-index: -1; /* Coloca la superposición detrás del contenido */
 }
 
 .hero-content {
@@ -127,11 +115,15 @@ body {
     margin-bottom: 2rem;
     color: #fff;
     font: 1em sans-serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .hero-buttons {
     display: flex;
     gap: 1rem;
+    padding: 10px 40px;
+    
+
 }
 
 .hero-buttons .btn-primary {
@@ -155,7 +147,48 @@ body {
 }
 
 .hero-buttons a:hover {
-    background-color: #5e4137;
+    background-color: #d81b60;
+    color: #fff;
+}
+
+.card-body h5{
+    color: #fff;
+    background-color: #000000;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+
+.card-body .card-text {
+    color: #000000; 
+    font-family:Arial, Helvetica, sans-serif
+}
+
+.card-footer.text-center .btn.btn-success {
+    background-color: #2234ff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.card-footer.text-center .btn.btn-success:hover {
+    background-color: #d81b60;
+    color: #fff;
+}
+
+.text-center.mt-4 .btn-primary {
+    background-color: #2234ff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.text-center.mt-4 a:hover {
+    background-color: #d81b60;
     color: #fff;
 }
 
@@ -272,7 +305,7 @@ body {
 }
 
 .registration-container h1 {
-    color: #333;
+    color: #000000;
     text-align: center;
     margin-bottom: 1rem;
 }
@@ -324,7 +357,7 @@ body {
 .btn-register {
     width: 100%;
     padding: 0.75rem;
-    background: #4CAF50;
+    background: #2234ff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -334,7 +367,7 @@ body {
 }
 
 .btn-register:hover {
-    background: #45a049;
+    background: #d81b60;
 }
 
 .login-link {
@@ -344,7 +377,8 @@ body {
 }
 
 .login-link a {
-    color: #4CAF50;
+    background-color: #2234ff;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -353,15 +387,31 @@ body {
 }
 
 /* index*/
-body {
-    font-family: sans-serif;
-    margin: 20px;
+.container .mt-4 .text-center{
+    background-image: url('img/newpatas.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;            
+            padding:1cm 30px;
 }
 
 h1 {
-    color: #333;
+    color: #000000;
     text-align: center;
     font-weight: bold; /* Texto en negrita */
+}
+
+.card .h-100 {
+    display: flex;
+    justify-content: center;
+    gap: 9rem;
+    flex-wrap: wrap;
 }
 
 a {
@@ -408,19 +458,18 @@ p {
 
 /* Estilos para el login */
 .login-card {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    max-width: 400px;
-    width: 100%;
-    margin: 40px auto;
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .login-card h2 {
-    color: #003366;
+    color: #000000;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 .login-card p {
@@ -431,8 +480,7 @@ p {
 
 .login-card label {
     display: block;
-    margin-top: 15px;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
     color: #333;
 }
 
@@ -447,15 +495,12 @@ p {
     box-sizing: border-box;
 }
 
-.login-card .rol-select {
-    margin-top: 10px;
-}
 
 .login-card button {
     width: 100%;
     padding: 15px;
     margin-top: 20px;
-    background-color: #28a745;
+    background-color: #2234ff;
     color: white;
     border: none;
     border-radius: 6px;
@@ -465,21 +510,23 @@ p {
 }
 
 .login-card button:hover {
-    background-color: #218838;
+    background-color: #d81b60;
 }
 
 .login-card .footer {
     text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
+    margin-top: 1.5rem;
+    color: #666;
 }
 
 .login-card .footer a {
-    color: #ff6600;
+    background-color: #2234ff;
+    color: #ffffff;
     text-decoration: none;
 }
 
 .login-card .footer a:hover {
+    color: #000;
     text-decoration: underline;
 }
 
@@ -500,4 +547,3 @@ p {
     margin: 0;
     padding-left: 20px;
 }
-
