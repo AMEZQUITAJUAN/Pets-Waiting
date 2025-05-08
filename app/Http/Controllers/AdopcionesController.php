@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mascota;
+use App\Models\Adopcion;
 use Illuminate\Http\Request;
 
 class AdopcionesController extends Controller
@@ -22,20 +23,37 @@ class AdopcionesController extends Controller
     // Procesar datos del formulario
     public function store(Request $request)
     {
-        // Validar la data
         $validated = $request->validate([
+            'mascota_id' => 'required|exists:mascotas,id',
             'nombre' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'telefono' => 'required|string|max:20',
+            'ciudad' => 'required|string|max:255',
+            'ocupacion' => 'required|string|max:255',
             'tipoMascota' => 'required|string',
-            'razas' => 'nullable|string|max:100',
-            'porque' => 'nullable|string',
+            'razas' => 'nullable|string|max:255',
+            'porque' => 'required|string',
         ]);
 
-        // Aquí puedes guardar los datos en la base de datos, enviar email, etc.
-        // Ejemplo: Adopcion::create($validated);
-
-        return view('frmadopcion', compact('mascotas'));
+        try {
+            Adopcion::create([
+                'mascota_id' => $validated['mascota_id'],
+                'nombre' => $validated['nombre'],
+                'email' => $validated['email'],
+                'telefono' => $validated['telefono'],
+                'ciudad' => $validated['ciudad'],
+                'ocupacion' => $validated['ocupacion'],
+                'tipo_mascota' => $validated['tipoMascota'],
+                'razas' => $validated['razas'],
+                'porque' => $validated['porque'],
+                'estado' => 'pendiente'
+            ]);
+            return redirect()->back()->with('success', 'Tu solicitud de adopción ha sido enviada correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['error' => 'Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.']);
+        }
     }
 }
 

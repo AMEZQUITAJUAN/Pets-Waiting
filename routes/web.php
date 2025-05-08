@@ -3,7 +3,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MascotasController;
 use App\Http\Controllers\AdopcionesController;
 use App\Http\Controllers\UsuariosController;
-use App\Http\Controllers\PerdidoController;
+use App\Http\Controllers\PerdidosController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +40,5 @@ Route::get('/porque-adoptar', function () {
     return view('porquea');
 })->name('porquea');
 
-Route::resource('perdidos', PerdidoController::class);
-Route::get('/perdidos/{id}', [PerdidoController::class, 'show'])->name('perdidos.show');
+// Rutas para Perdidos
+Route::resource('perdidos', PerdidosController::class);

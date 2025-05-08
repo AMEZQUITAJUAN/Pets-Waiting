@@ -9,6 +9,8 @@ class Perdido extends Model
 {
     use HasFactory;
 
+    protected $table = 'perdidos';
+
     protected $fillable = [
         'nombre',
         'especie',
@@ -16,9 +18,14 @@ class Perdido extends Model
         'descripcion',
         'ubicacion',
         'fecha_perdida',
-        'imagen',
         'contacto',
+        'imagen',
+        'usuario_id',
         'estado'
+    ];
+
+    protected $casts = [
+        'fecha_perdida' => 'date'
     ];
 
     public function usuario()

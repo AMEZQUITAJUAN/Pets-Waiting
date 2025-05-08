@@ -13,13 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
+
+
         Schema::create('adopciones', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
-            $table->foreignId('publicacion_id')->constrained('publicaciones')->onDelete('cascade');
+            $table->foreignId('mascota_id')->constrained('mascotas')->onDelete('cascade');
+            $table->string('nombre');
+            $table->string('email');
+            $table->string('telefono');
+            $table->string('ciudad');
+            $table->string('ocupacion');
+            $table->string('tipo_mascota');
+            $table->string('razas')->nullable();
+            $table->text('porque');
             $table->enum('estado', ['pendiente', 'aprobada', 'rechazada'])->default('pendiente');
-            
             $table->timestamps();
         });
     }
@@ -32,5 +39,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('adopciones');
+        
     }
 };

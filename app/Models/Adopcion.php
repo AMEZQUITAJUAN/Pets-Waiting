@@ -8,7 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 class Adopcion extends Model
 {
     use HasFactory;
-    public function usuario(){
-        return $this->belongsTo('App\Models\Usuario');
+    // Removed duplicate usuario method
+protected $table = 'adopciones';
+
+protected $fillable = [
+        'mascota_id',
+        'nombre',
+        'email',
+        'telefono',
+        'ciudad',
+        'ocupacion',
+        'tipo_mascota',
+        'razas',
+        'porque',
+        'estado'
+    ];
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
+    public function mascota()
+    {
+        return $this->belongsTo(Mascota::class);
     }
 }

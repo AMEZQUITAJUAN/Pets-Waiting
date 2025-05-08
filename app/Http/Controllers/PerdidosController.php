@@ -2,22 +2,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perdido;
-use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PerdidoController extends Controller
+class PerdidosController extends Controller
 {
     public function index()
     {
-        $perdidos = Perdido::with('usuario')->paginate(10);
+        $perdidos = Perdido::latest()->paginate(10);
         return view('perdidos.index', compact('perdidos'));
     }
 
     public function create()
     {
-        $usuarios = Usuario::all();
-        return view('perdidos.create', compact('usuarios'));
+        return view('perdidos.create');
     }
 
     public function store(Request $request)
@@ -25,12 +23,11 @@ class PerdidoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:100',
             'especie' => 'required|in:perro,gato,otro',
-            'raza' => 'nullable|string|max:50',
             'descripcion' => 'required|string',
             'ubicacion' => 'required|string',
             'fecha_perdida' => 'required|date',
             'contacto' => 'required|string',
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $perdido = new Perdido($request->except('imagen'));
@@ -46,42 +43,34 @@ class PerdidoController extends Controller
             ->with('success', 'Mascota perdida registrada exitosamente');
     }
 
-    public function show($id)
+    public function show(Perdido $perdido)
     {
-        $perdido = Perdido::with('usuario')->findOrFail($id);
         return view('perdidos.show', compact('perdido'));
     }
 
-    public function edit($id)
+    public function edit(Perdido $perdido)
     {
-        $perdido = Perdido::findOrFail($id);
-        $usuarios = Usuario::all();
-        return view('perdidos.edit', compact('perdido', 'usuarios'));
+        return view('perdidos.edit', compact('perdido'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Perdido $perdido)
     {
         $request->validate([
             'nombre' => 'required|string|max:100',
             'especie' => 'required|in:perro,gato,otro',
-            'raza' => 'nullable|string|max:50',
             'descripcion' => 'required|string',
             'ubicacion' => 'required|string',
             'fecha_perdida' => 'required|date',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'usuario_id' => 'required|exists:usuarios,id',
-            'estado' => 'required|in:perdido,encontrado'
+            'contacto' => 'required|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $perdido = Perdido::findOrFail($id);
         $perdido->fill($request->except('imagen'));
 
         if ($request->hasFile('imagen')) {
-            // Eliminar imagen antigua si existe
             if ($perdido->imagen) {
                 Storage::disk('public')->delete($perdido->imagen);
             }
-
             $path = $request->file('imagen')->store('perdidos', 'public');
             $perdido->imagen = $path;
         }
@@ -92,11 +81,8 @@ class PerdidoController extends Controller
             ->with('success', 'Mascota perdida actualizada exitosamente');
     }
 
-    public function destroy($id)
+    public function destroy(Perdido $perdido)
     {
-        $perdido = Perdido::findOrFail($id);
-
-        // Eliminar imagen si existe
         if ($perdido->imagen) {
             Storage::disk('public')->delete($perdido->imagen);
         }

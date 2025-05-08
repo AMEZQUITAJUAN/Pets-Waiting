@@ -21,9 +21,9 @@ return new class extends Migration
             $table->text('descripcion');
             $table->string('ubicacion');
             $table->date('fecha_perdida');
+            $table->string('contacto');
             $table->string('imagen')->nullable();
-            $table->string('contacto'); // Agregamos campo de contacto
-            $table->foreignId('usuario_id')->nullable()->constrained('usuarios')->nullOnDelete(); // Hacemos opcional la relación
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
             $table->enum('estado', ['perdido', 'encontrado'])->default('perdido');
             $table->timestamps();
         });

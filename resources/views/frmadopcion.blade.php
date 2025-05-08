@@ -12,30 +12,35 @@
         </div>
     @endif
 
-    <form action="{{ route('adopciones.store') }}" method="POST" id="adopcionForm">
+    <form action="{{ route('adopciones.store') }}" method="POST">
         @csrf
-        <!-- Campo oculta para la mascota -->
         <input type="hidden" name="mascota_id" value="{{ $mascota->id }}">
-        <p>Estás adoptando a: {{ $mascota->nombre }}</p>
 
-        {{-- Datos personales --}}
-        <label for="nombre">Nombre completo</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" required />
+        <div class="mb-3">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
 
-        <label for="email">Correo electrónico</label>
-        <input type="email" name="email" id="email" placeholder="tu@email.com" required />
+        <div class="mb-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
 
-        <label for="telefono">Teléfono</label>
-        <input type="text" name="telefono" id="telefono" placeholder="Número de teléfono" required />
+        <div class="mb-3">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" required>
+        </div>
 
-        {{-- Datos de localización y ocupación --}}
-        <label for="ciudad">Ciudad</label>
-        <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad donde vives" required />
+        <div class="mb-3">
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+        </div>
 
-        <label for="ocupacion">Ocupación</label>
-        <input type="text" name="ocupacion" id="ocupacion" placeholder="Tu ocupación" required />
+        <div class="mb-3">
+            <label for="ocupacion">Ocupación:</label>
+            <input type="text" class="form-control" id="ocupacion" name="ocupacion" required>
+        </div>
 
-        {{-- Datos de la mascota --}}
         <label for="tipoMascota">Tipo de mascota que deseas adoptar</label>
         <select name="tipoMascota" id="tipoMascota" required>
             <option value="">Seleccionar</option>
