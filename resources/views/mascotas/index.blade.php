@@ -26,7 +26,13 @@
         <!-- Tab Mascotas en Adopción -->
         <div class="tab-pane fade show active" id="mascotas" role="tabpanel">
             <h2 class="text-center mb-4">Mascotas en Adopción</h2>
-            <a href="{{ route('mascotas.create') }}" class="btn btn-primary mb-4">Registrar Nueva Mascota</a>
+
+            @if (auth()->user()->rol === 'admin')
+                <!-- Contenido para administradores -->
+                <a href="{{ route('mascotas.create') }}" class="btn btn-primary mb-4">Registrar Nueva Mascota</a>
+            @else
+                <p class="text-center text-danger">No tienes permiso para ver esta página.</p>
+            @endif
 
             @if ($mascotas->isEmpty())
                 <p class="text-center">No hay mascotas registradas.</p>

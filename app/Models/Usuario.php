@@ -47,6 +47,11 @@ class Usuario extends Authenticatable
     {
         return $this->hasMany(Mascota::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->rol === 'admin';
+    }
 }
 
 

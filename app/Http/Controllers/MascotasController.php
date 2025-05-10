@@ -10,6 +10,11 @@ use App\Models\Adopcion;
 
 class MascotasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index', 'create', 'edit', 'destroy']);
+    }
+
     public function index()
     {
         $mascotas = Mascota::paginate(10);

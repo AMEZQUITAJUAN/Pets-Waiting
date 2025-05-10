@@ -44,3 +44,7 @@ Route::get('/porque-adoptar', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('perdidos', PerdidosController::class);
 });
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('mascotas', MascotasController::class);
+});
