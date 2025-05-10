@@ -185,7 +185,7 @@ h2 {
         </div>
         <p>Ahora puedes empezar a buscar a tu nuevo amigo. ¡Adopta y dale una segunda oportunidad!</p>
         <div class="centered-button">
-            <a href="{{ route('mascotas.index') }}" class="btn">Ver mascotas</a>
+            <a href="{{ route('adopcion') }}" class="btn">Ver mascotas</a>
         </div>
     </section>
 
