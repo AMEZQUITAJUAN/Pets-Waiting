@@ -8,7 +8,6 @@
             <p>Juntos podemos salvar vidas y crear familias felices. Adopta, no compres.</p>
             <div class="hero-buttons">
                 <a href="{{ route('adopcion') }}" class="btn btn-primary">Adopta una mascota</a>
-                <a href="{{ route('mascotas.index') }}" class="btn btn-secondary">Ver todas las mascotas</a>
             </div>
         </div>
     </section>

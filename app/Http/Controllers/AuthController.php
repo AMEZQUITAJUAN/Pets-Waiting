@@ -43,7 +43,13 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             Log::info('Login exitoso', ['usuario' => $usuario->id]);
-            return redirect()->intended('/');
+
+            // Redirigir según el rol del usuario
+            if ($usuario->rol === 'admin') {
+                return redirect()->route('mascotas.index'); // Redirige a mascotas.index para administradores
+            }
+
+            return redirect()->route('home'); // Redirige a home para usuarios normales
 
         } catch (\Exception $e) {
             Log::error('Error en login: ' . $e->getMessage());

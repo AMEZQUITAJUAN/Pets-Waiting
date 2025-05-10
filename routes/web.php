@@ -23,6 +23,7 @@ Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('us
 
 // Rutas para Mascotas
 Route::resource('mascotas', MascotasController::class);
+Route::get('/mascotas', [MascotasController::class, 'index'])->name('mascotas.index');
 
 // Ruta para formulario de inicio
 Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
@@ -46,5 +47,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::resource('mascotas', MascotasController::class);
+    Route::resource('mascotas.index', MascotasController::class);
 });

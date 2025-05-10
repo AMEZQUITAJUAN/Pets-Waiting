@@ -37,7 +37,7 @@ class UsuariosController extends Controller
             // Autenticar al usuario después del registro
             auth()->login($usuario);
 
-            return redirect()->route('home')
+            return redirect()->route('mascotas.index')
                 ->with('success', '¡Registro exitoso! Bienvenido ' . $usuario->nombre);
 
         } catch (\Exception $e) {
@@ -97,16 +97,16 @@ class UsuariosController extends Controller
 
         // Redirigir según el rol
         if ($usuario->rol === 'admin') {
-            return redirect()->route('admin.dashboard'); // Cambia esta ruta según tu lógica
+            return redirect()->route('mascotas.index'); // Cambia esta ruta según tu lógica
         }
 
-        return redirect()->route('home');
+        return redirect()->route('mascotas.index');
     }
 
     public function adminDashboard()
     {
         // Aquí puedes cargar datos específicos para el administrador
-        return view('admin'); // Asegúrate de que esta vista exista
+        return view('mascotas.index'); // Asegúrate de que esta vista exista
     }
 
     public function createTestUser()
