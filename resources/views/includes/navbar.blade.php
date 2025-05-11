@@ -30,6 +30,42 @@
                         ¿Por qué Adoptar?
                     </a>
                 </li>
+
+                @auth
+                    @if(auth()->user()->rol === 'admin')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                                Administración
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                <li>
+                                    <a class="dropdown-item {{ Request::routeIs('usuarios.*') ? 'active' : '' }}"
+                                       href="{{ route('usuarios.index') }}">
+                                        <i class="fas fa-users"></i> Usuarios
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ Request::routeIs('mascotas.*') ? 'active' : '' }}"
+                                       href="{{ route('mascotas.index') }}">
+                                        <i class="fas fa-paw"></i> Mascotas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item {{ Request::routeIs('perdidos.*') ? 'active' : '' }}"
+                                       href="{{ route('perdidos.index') }}">
+                                        <i class="fas fa-search"></i> Perdidos
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <i class="fas fa-chart-bar"></i> Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                @endauth
             </ul>
 
             <div class="d-flex">
@@ -103,5 +139,39 @@
 
 .btn-danger:hover {
     background-color: #c82333;
+}
+
+.dropdown-item {
+    color: #2234ff !important;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #d81b60 !important;
+}
+
+.dropdown-item.active {
+    background-color: #e9ecef;
+    color: #d81b60 !important;
+}
+
+.dropdown-item i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+    border-color: #dee2e6;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 0.5rem;
 }
 </style>

@@ -84,6 +84,7 @@
                     <thead>
                         <tr>
                             <th>Fecha</th>
+                            <th>ID</th>
                             <th>Mascota</th>
                             <th>Ubicación</th>
                             <th>Estado</th>
@@ -94,7 +95,8 @@
                         @foreach ($perdidos as $perdido)
                             <tr>
                                 <td>{{ $perdido->fecha_perdida }}</td>
-                                <td>{{ $perdido->nombre_mascota }}</td>
+                                <td>{{ $perdido->id }}</td>
+                                <td>{{ $perdido->nombre }}</td>
                                 <td>{{ $perdido->ubicacion }}</td>
                                 <td>{{ $perdido->estado }}</td>
                                 <td>
@@ -119,6 +121,7 @@
                     <thead>
                         <tr>
                             <th>Fecha</th>
+                            <th>ID</th>
                             <th>Solicitante</th>
                             <th>Mascota</th>
                             <th>Estado</th>
@@ -129,11 +132,12 @@
                         @foreach ($adopciones as $adopcion)
                             <tr>
                                 <td>{{ $adopcion->created_at->format('d/m/Y') }}</td>
+                                <td>{{ $adopcion->id }}</td>
                                 <td>{{ $adopcion->nombre }}</td>
                                 <td>{{ $adopcion->mascota->nombre }}</td>
                                 <td>{{ $adopcion->estado }}</td>
                                 <td>
-                                    
+
                             </tr>
                         @endforeach
                     </tbody>
