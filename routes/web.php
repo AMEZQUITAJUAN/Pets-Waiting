@@ -41,9 +41,17 @@ Route::get('/porque-adoptar', function () {
     return view('porquea');
 })->name('porquea');
 
-// Rutas para Perdidos
+// Rutas públicas
+Route::get('/perdidos', [PerdidosController::class, 'index'])->name('perdidos.index');
+Route::get('/perdidos/create', [PerdidosController::class, 'create'])->name('perdidos.create');
+Route::post('/perdidos', [PerdidosController::class, 'store'])->name('perdidos.store');
+Route::get('/perdidos/{perdido}', [PerdidosController::class, 'show'])->name('perdidos.show');
+
+// Rutas protegidas
 Route::middleware(['auth'])->group(function () {
-    Route::resource('perdidos', PerdidosController::class);
+    Route::get('/perdidos/{perdido}/edit', [PerdidosController::class, 'edit'])->name('perdidos.edit');
+    Route::put('/perdidos/{perdido}', [PerdidosController::class, 'update'])->name('perdidos.update');
+    Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->name('perdidos.destroy');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

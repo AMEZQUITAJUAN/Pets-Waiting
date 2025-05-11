@@ -5,12 +5,22 @@
     <div class="text-center">
         <h1>Mascotas Perdidas</h1>
         <p class="lead">Ayúdanos a encontrar estas mascotas</p>
-        <form action="{{ route('perdidos.create') }}" method="GET">
-            @csrf
-            <button type="submit" class="btn btn-primary mb-4">
+
+        @auth
+            <a href="{{ route('perdidos.create') }}"
+               class="btn btn-primary btn-lg rounded-pill px-4 py-2"
+               style="background-color: #0D6EFD; border: none; font-weight: 500;">
                 Reportar Mascota Perdida
-            </button>
-        </form>
+            </a>
+        @else
+            <div class="alert alert-info border-0" style="background: transparent;">
+                <a href="{{ route('login') }}"
+                   class="btn btn-primary btn-lg rounded-pill px-4 py-2"
+                   style="background-color: #0D6EFD; border: none; font-weight: 500;">
+                    Reportar Mascota Perdida
+                </a>
+            </div>
+        @endauth
     </div>
 
     @if(session('success'))
@@ -39,10 +49,27 @@
                         <p class="card-text">
                             <strong>Especie:</strong> {{ ucfirst($perdido->especie) }}<br>
                             <strong>Ubicación:</strong> {{ $perdido->ubicacion }}<br>
-                            <strong>Fecha:</strong> {{ $perdido->fecha_perdida }}
+                            <strong>Fecha:</strong> {{ \Carbon\Carbon::parse($perdido->fecha_perdida)->format('d/m/Y') }}
                         </p>
-                        <!-- Botón para ir a la vista de show -->
                         <a href="{{ route('perdidos.show', $perdido->id) }}" class="btn btn-primary">Ver Detalles</a>
+
+                        @auth
+                            @if(auth()->user()->id === $perdido->usuario_id || auth()->user()->rol === 'admin')
+                                <a href="{{ route('perdidos.edit', $perdido->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <form action="{{ route('perdidos.destroy', $perdido->id) }}"
+                                      method="POST"
+                                      class="d-inline"
+                                      onsubmit="return confirm('¿Estás seguro de eliminar este registro?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -51,6 +78,10 @@
                 <p>No hay mascotas perdidas registradas.</p>
             </div>
         @endforelse
+    </div>
+
+    <div class="mt-4">
+        {{ $perdidos->links() }}
     </div>
 </div>
 @endsection

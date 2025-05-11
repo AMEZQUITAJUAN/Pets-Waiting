@@ -63,7 +63,7 @@
             <input type="file" class="form-control" id="imagen" name="imagen">
         </div>
 
-        <button type="submit" class="btn btn-primary">Reportar Mascota</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{{ route('perdidos.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>

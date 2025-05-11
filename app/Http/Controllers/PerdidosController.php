@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Storage;
 
 class PerdidosController extends Controller
 {
+    public function __construct()
+    {
+        // Excluir index y show del middleware auth
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $perdidos = Perdido::latest()->paginate(10);
