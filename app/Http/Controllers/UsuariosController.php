@@ -37,8 +37,9 @@ class UsuariosController extends Controller
             // Autenticar al usuario después del registro
             auth()->login($usuario);
 
-            return redirect()->route('mascotas.index')
-                ->with('success', '¡Registro exitoso! Bienvenido ' . $usuario->nombre);
+            // Redirigir al formulario de adopción
+            return redirect()->route('adopciones.create', ['mascota' => 1]) // Cambia '1' por el ID de la mascota si es necesario
+                ->with('success', '¡Registro exitoso! Ahora puedes llenar el formulario de adopción.');
 
         } catch (\Exception $e) {
             Log::error('Error al registrar usuario: ' . $e->getMessage());

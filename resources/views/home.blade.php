@@ -11,6 +11,7 @@
             </div>
         </div>
     </section>
+    
 
     <!-- Mascotas Section -->
     <div class="container mt-5">
@@ -38,11 +39,7 @@
                                     <strong>Especie:</strong> {{ $mascota->especie }}<br>
                                     <strong>Edad:</strong> {{ $mascota->edad }} años<br>
                                     <strong>Cuidador:</strong> {{ $mascota->usuario->nombre ?? 'Sin cuidador' }}
-                                </p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a href="{{ route('mascotas.show', $mascota->id) }}"
-                                   class="btn btn-success">Ver Detalles</a>
+                                    <a href="{{ route('mascotas.show', $mascota->id) }}" class="adopt-btn">Adoptar a {{ $mascota->nombre }}</a>
                             </div>
                         </div>
                     </div>

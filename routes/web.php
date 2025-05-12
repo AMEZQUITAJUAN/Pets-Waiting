@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perdidos/{perdido}/edit', [PerdidosController::class, 'edit'])->name('perdidos.edit');
     Route::put('/perdidos/{perdido}', [PerdidosController::class, 'update'])->name('perdidos.update');
     Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->name('perdidos.destroy');
+    Route::get('/mascotas/create', [MascotasController::class, 'create'])->name('mascotas.create');
+    Route::get('/adopciones/{mascota}/create', [AdopcionesController::class, 'create'])->name('adopciones.create');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

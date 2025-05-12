@@ -30,19 +30,8 @@
                id="password"
                name="password"
                placeholder="Tu contraseña"
-               required />
-
-        <label for="rol" class="rol-select">Rol</label>
-        <div class="role-options">
-            <label>
-                <input type="radio" name="rol" value="user" {{ old('rol', 'user') == 'user' ? 'checked' : '' }}>
-                Usuario
-            </label>
-            <label>
-                <input type="radio" name="rol" value="admin" {{ old('rol') == 'admin' ? 'checked' : '' }}>
-                Administrador
-            </label>
-        </div>
+               required />      
+       
         <button type="submit">Iniciar Sesión</button>
     </form>
 
