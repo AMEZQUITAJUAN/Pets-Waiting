@@ -45,7 +45,12 @@ class Usuario extends Authenticatable
 
     public function mascotas()
     {
-        return $this->hasMany(Mascota::class);
+        return $this->hasMany(Mascota::class, 'usuario_id');
+    }
+
+    public function perdidos()
+    {
+        return $this->hasMany(Perdido::class, 'usuario_id');
     }
 
     public function isAdmin()

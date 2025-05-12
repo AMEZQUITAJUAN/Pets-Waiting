@@ -152,10 +152,14 @@
     <div class="hero-section">
         <h1>ADOPCION DE PERROS Y GATOS</h1>
         <p>Busca por las características de la mascota que deseas adoptar.</p>
-        <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
+        @auth
+            <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
+        @else
+            <a href="{{ route('login') }}" class="btn">Inicia sesión para publicar</a>
+        @endauth
     </div>
 
-    
+
 
     <!-- Lista de Mascotas -->
     <div class="pets-container">

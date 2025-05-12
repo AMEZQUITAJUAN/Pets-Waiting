@@ -39,11 +39,12 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="adminDropdown">
                                 <li>
-                                    <a class="dropdown-item {{ Request::routeIs('usuarios.*') ? 'active' : '' }}"
-                                       href="{{ route('usuarios.index') }}">
+                                    <a class="dropdown-item {{ Request::routeIs('usuarios_list') ? 'active' : '' }}"
+                                       href="{{ route('usuarios_list') }}">
                                         <i class="fas fa-users"></i> Usuarios
                                     </a>
                                 </li>
+                               
                                 <li>
                                     <a class="dropdown-item {{ Request::routeIs('mascotas.*') ? 'active' : '' }}"
                                        href="{{ route('mascotas.index') }}">

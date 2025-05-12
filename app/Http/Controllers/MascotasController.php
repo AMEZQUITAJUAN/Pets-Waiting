@@ -26,8 +26,12 @@ class MascotasController extends Controller
 
     public function create()
     {
-        $usuarios = Usuario::all(); // Obtener todos los usuarios
-        return view('mascotas.create', compact('usuarios'));
+        if (!auth()->check()) {
+            return redirect()->route('login')
+                ->with('error', 'Debes iniciar sesión para publicar una mascota.');
+        }
+
+        return view('mascotas.create');
     }
 
     public function show($id)

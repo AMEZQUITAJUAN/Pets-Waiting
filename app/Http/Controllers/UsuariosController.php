@@ -47,12 +47,6 @@ class UsuariosController extends Controller
                         ->withInput($request->except('password'));
         }
     }
-
-    public function index() {
-        $usuarios = Usuario::paginate(10); // 10 usuarios por página
-        return view('usuarios.index', compact('usuarios'))->with('links', $usuarios->links());
-    }
-
     public function showUsuarioWithMascotas($id) {
         $usuario = Usuario::with('mascotas')->find($id); // Reemplaza $id con el ID que necesites
         return view('usuarios.show', compact('usuario'));
@@ -118,6 +112,27 @@ class UsuariosController extends Controller
             'password' => 'password123',
             'rol' => 'user'
         ]);
+    }
+
+    public function adminIndex()
+    {
+        try {
+            $usuarios = Usuario::with(['mascotas', 'perdidos'])->get();
+            return view('admin.usuarios_list', compact('usuarios'));
+        } catch (\Exception $e) {
+            Log::error('Error en adminIndex: ' . $e->getMessage());
+            return back()->with('error', 'Error al cargar la lista de usuarios');
+        }
+    }
+
+    public function adminDestroy(User $usuario)
+    {
+        if($usuario->rol === 'admin') {
+            return back()->with('error', 'No se puede eliminar un administrador');
+        }
+
+        $usuario->delete();
+        return redirect()->route('admin.usuarios')->with('success', 'Usuario eliminado correctamente');
     }
 }
 
