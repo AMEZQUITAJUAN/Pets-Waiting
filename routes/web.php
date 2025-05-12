@@ -41,21 +41,22 @@ Route::get('/porque-adoptar', function () {
     return view('porquea');
 })->name('porquea');
 
-// Rutas públicas
+// Rutas para mascotas perdidas
 Route::get('/perdidos', [PerdidosController::class, 'index'])->name('perdidos.index');
 Route::get('/perdidos/create', [PerdidosController::class, 'create'])->name('perdidos.create');
 Route::post('/perdidos', [PerdidosController::class, 'store'])->name('perdidos.store');
 Route::get('/perdidos/{perdido}', [PerdidosController::class, 'show'])->name('perdidos.show');
+Route::get('/perdidos/{perdido}/edit', [PerdidosController::class, 'edit'])->name('perdidos.edit');
+Route::put('/perdidos/{perdido}', [PerdidosController::class, 'update'])->name('perdidos.update');
+Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->name('perdidos.destroy');
 
 // Rutas protegidas
 Route::middleware(['auth'])->group(function () {
-    Route::get('/perdidos/{perdido}/edit', [PerdidosController::class, 'edit'])->name('perdidos.edit');
-    Route::put('/perdidos/{perdido}', [PerdidosController::class, 'update'])->name('perdidos.update');
-    Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->name('perdidos.destroy');
     Route::get('/mascotas/create', [MascotasController::class, 'create'])->name('mascotas.create');
     Route::get('/adopciones/{mascota}/create', [AdopcionesController::class, 'create'])->name('adopciones.create');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('mascotas.index', MascotasController::class);
+    Route::get('/admin/perdidos', [PerdidosController::class, 'adminIndex'])->name('admin.perdidos');
 });

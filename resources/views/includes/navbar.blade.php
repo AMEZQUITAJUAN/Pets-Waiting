@@ -52,7 +52,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item {{ Request::routeIs('perdidos.*') ? 'active' : '' }}"
-                                       href="{{ route('perdidos.index') }}">
+                                       href="{{ route('admin.perdidos') }}">
                                         <i class="fas fa-search"></i> Perdidos
                                     </a>
                                 </li>

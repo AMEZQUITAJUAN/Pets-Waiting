@@ -11,12 +11,19 @@ class PerdidosController extends Controller
     {
         // Excluir index y show del middleware auth
         $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('admin')->only(['adminIndex']);
     }
 
     public function index()
     {
         $perdidos = Perdido::latest()->paginate(10);
         return view('perdidos.index', compact('perdidos'));
+    }
+
+    public function adminIndex()
+    {
+        $perdidos = Perdido::orderBy('created_at', 'desc')->paginate(10);
+        return view('perdidos.perdidos_admin_index', compact('perdidos'));
     }
 
     public function create()

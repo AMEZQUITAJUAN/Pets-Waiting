@@ -9,11 +9,7 @@
                 Mascotas en Adopción
             </button>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="perdidos-tab" data-bs-toggle="tab" data-bs-target="#perdidos" type="button" role="tab">
-                Mascotas Perdidas
-            </button>
-        </li>
+       
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="adopciones-tab" data-bs-toggle="tab" data-bs-target="#adopciones" type="button" role="tab">
                 Solicitudes de Adopción
@@ -73,43 +69,7 @@
         </div>
 
         <!-- Tab Mascotas Perdidas -->
-        <div class="tab-pane fade" id="perdidos" role="tabpanel">
-            <h2 class="text-center mb-4">Mascotas Perdidas</h2>
-            <a href="{{ route('perdidos.create') }}" class="btn btn-primary mb-4">Reportar Mascota Perdida</a>
-
-            @if ($perdidos->isEmpty())
-                <p class="text-center">No hay mascotas perdidas registradas.</p>
-            @else
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>ID</th>
-                            <th>Mascota</th>
-                            <th>Ubicación</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($perdidos as $perdido)
-                            <tr>
-                                <td>{{ $perdido->fecha_perdida }}</td>
-                                <td>{{ $perdido->id }}</td>
-                                <td>{{ $perdido->nombre }}</td>
-                                <td>{{ $perdido->ubicacion }}</td>
-                                <td>{{ $perdido->estado }}</td>
-                                <td>
-                                    <a href="{{ route('perdidos.show', $perdido->id) }}" class="btn btn-info btn-sm">Detalles</a>
-                                    <a href="{{ route('perdidos.edit', $perdido->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
-
+        <
         <!-- Tab Solicitudes de Adopción -->
         <div class="tab-pane fade" id="adopciones" role="tabpanel">
             <h2 class="text-center mb-4">Solicitudes de Adopción</h2>
