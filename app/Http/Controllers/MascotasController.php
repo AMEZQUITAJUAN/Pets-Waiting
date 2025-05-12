@@ -12,7 +12,8 @@ class MascotasController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->only(['index', 'create', 'edit', 'destroy']);
+        // Solo autenticación para create y store
+        $this->middleware('auth')->only(['create', 'store']);
     }
 
     public function index()
@@ -26,12 +27,19 @@ class MascotasController extends Controller
 
     public function create()
     {
-        if (!auth()->check()) {
-            return redirect()->route('login')
-                ->with('error', 'Debes iniciar sesión para publicar una mascota.');
-        }
+        try {
+            if (!auth()->check()) {
+                return redirect()->route('login')
+                    ->with('error', 'Debes iniciar sesión para publicar una mascota');
+            }
 
-        return view('mascotas.create');
+            \Log::info('Usuario accediendo a create: ' . auth()->id());
+            return view('mascotas.create');
+        } catch (\Exception $e) {
+            \Log::error('Error en create: ' . $e->getMessage());
+            return redirect()->route('adopcion')
+                ->with('error', 'Error al cargar el formulario');
+        }
     }
 
     public function show($id)
@@ -61,25 +69,48 @@ class MascotasController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:100',
-            'especie' => 'required|in:perro,gato,otro',
-            'edad' => 'required|integer|min:0',
-            'usuario_id' => 'required|exists:usuarios,id',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+        try {
+            // Validar la solicitud
+            $validated = $request->validate([
+                'nombre' => 'required|string|max:100',
+                'especie' => 'required|in:perro,gato,otro',
+                'edad' => 'required|integer|min:0',
+                'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
 
-        $mascota = new Mascota($request->except('imagen'));
+            // Crear la mascota con los datos validados
+            $mascota = new Mascota();
+            $mascota->nombre = $validated['nombre'];
+            $mascota->especie = $validated['especie'];
+            $mascota->edad = $validated['edad'];
+            $mascota->usuario_id = auth()->id();
+            $mascota->estado = 'disponible'; // Agregar estado por defecto
 
-        if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('mascotas', 'public');
-            $mascota->imagen = $path; // Guarda solo el path relativo
+            // Manejar la imagen si se proporcionó una
+            if ($request->hasFile('imagen')) {
+                $path = $request->file('imagen')->store('public/mascotas');
+                $mascota->imagen = str_replace('public/', '', $path);
+            }
+
+            // Guardar y verificar
+            if (!$mascota->save()) {
+                throw new \Exception('Error al guardar la mascota en la base de datos');
+            }
+
+            \Log::info('Mascota guardada exitosamente', [
+                'id' => $mascota->id,
+                'usuario_id' => $mascota->usuario_id
+            ]);
+
+            return redirect()->route('adopcion')
+                ->with('success', 'Mascota registrada exitosamente');
+
+        } catch (\Exception $e) {
+            \Log::error('Error en store: ' . $e->getMessage());
+            return back()
+                ->withInput()
+                ->with('error', 'Error al registrar la mascota: ' . $e->getMessage());
         }
-
-        $mascota->save();
-
-        return redirect()->route('mascotas.index')
-            ->with('success', 'Mascota registrada exitosamente.');
     }
 
     public function update(Request $request, $id)
@@ -105,5 +136,18 @@ class MascotasController extends Controller
         return redirect()->route('mascotas.index')->with('success', 'Mascota eliminada exitosamente.');
     }
 
+    public function adopcionIndex()
+    {
+        try {
+            $mascotas = Mascota::with('usuario')
+                ->latest()
+                ->get();
+
+            return view('adopcion', compact('mascotas'));
+        } catch (\Exception $e) {
+            \Log::error('Error cargando mascotas: ' . $e->getMessage());
+            return back()->with('error', 'Error al cargar las mascotas');
+        }
+    }
 }
 

@@ -44,11 +44,11 @@
                                         <i class="fas fa-users"></i> Usuarios
                                     </a>
                                 </li>
-                               
+
                                 <li>
                                     <a class="dropdown-item {{ Request::routeIs('mascotas.*') ? 'active' : '' }}"
                                        href="{{ route('mascotas.index') }}">
-                                        <i class="fas fa-paw"></i> Mascotas
+                                        <i class="fas fa-paw"></i> Adopciones
                                     </a>
                                 </li>
                                 <li>
@@ -58,11 +58,7 @@
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                        <i class="fas fa-chart-bar"></i> Dashboard
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </li>
                     @endif

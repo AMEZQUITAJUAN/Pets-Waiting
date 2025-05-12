@@ -153,9 +153,13 @@
         <h1>ADOPCION DE PERROS Y GATOS</h1>
         <p>Busca por las características de la mascota que deseas adoptar.</p>
         @auth
-            <a href="{{ route('mascotas.create') }}" class="btn">Publica una mascota</a>
+            <a href="{{ url('/publicar-mascota') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Publicar una mascota
+            </a>
         @else
-            <a href="{{ route('login') }}" class="btn">Inicia sesión para publicar</a>
+            <a href="{{ route('login') }}" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt"></i> Inicia sesión para publicar
+            </a>
         @endauth
     </div>
 
@@ -163,16 +167,30 @@
 
     <!-- Lista de Mascotas -->
     <div class="pets-container">
-        @foreach ($mascotas as $mascota)
-            <div class="pet-card">
-                <img src="{{ $mascota->imagen ? ('storage/' . $mascota->imagen) : 'https://via.placeholder.com/300x200' }}" alt="Imagen de {{ $mascota->nombre }}">
-                <h3>{{ $mascota->nombre }}</h3>
-                <p><strong>Especie:</strong> {{ $mascota->especie }}</p>
-                <p><strong>Edad:</strong> {{ $mascota->edad }} años</p>
-                <p><strong>Cuidador temporal:</strong> {{ $mascota->usuario->nombre ?? 'Sin usuario' }} </p>
-                <a href="{{ route('mascotas.show', $mascota->id) }}" class="adopt-btn">Adoptar a {{ $mascota->nombre }}</a>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-        @endforeach
+        @endif
+
+        @if($mascotas->isEmpty())
+            <div class="alert alert-info">
+                No hay mascotas disponibles para adopción en este momento.
+            </div>
+        @else
+            @foreach($mascotas as $mascota)
+                <div class="pet-card">
+                    <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : asset('images/default-pet.jpg') }}"
+                         alt="Foto de {{ $mascota->nombre }}">
+                    <h3>{{ $mascota->nombre }}</h3>
+                    <p>Especie: {{ ucfirst($mascota->especie) }}</p>
+                    <p>Edad: {{ $mascota->edad }} años</p>
+                    <a href="{{ route('mascotas.show', $mascota->id) }}" class="btn btn-primary">
+                        Ver detalles
+                    </a>
+                </div>
+            @endforeach
+        @endif
     </div>
 </body>
 </html>

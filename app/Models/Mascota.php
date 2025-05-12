@@ -11,7 +11,18 @@ class Mascota extends Model
 
     protected $table = 'mascotas'; // Asegúrate de que el nombre de la tabla sea correcto
 
-    protected $fillable = ['nombre', 'especie', 'edad', 'usuario_id', 'imagen'];
+    protected $fillable = [
+        'nombre',
+        'especie',
+        'edad',
+        'imagen',
+        'usuario_id',
+        'estado'
+    ];
+
+    protected $attributes = [
+        'estado' => 'disponible'
+    ];
 
     public function usuario(){
         return $this->belongsTo('App\Models\Usuario');

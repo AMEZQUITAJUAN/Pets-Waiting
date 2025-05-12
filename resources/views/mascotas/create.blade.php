@@ -38,17 +38,7 @@
             <input type="number" class="form-control" id="edad" name="edad" value="{{ old('edad') }}" min="0" required>
         </div>
 
-        <div class="mb-3">
-            <label for="usuario_id">Usuario Asociado:</label>
-            <select class="form-control" id="usuario_id" name="usuario_id" required>
-                <option value="">Seleccione un usuario</option>
-                @foreach ($usuarios as $usuario)
-                    <option value="{{ $usuario->id }}" {{ old('usuario_id') == $usuario->id ? 'selected' : '' }}>
-                        {{ $usuario->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+
 
         <!-- Campo para la imagen -->
         <div class="mb-3">

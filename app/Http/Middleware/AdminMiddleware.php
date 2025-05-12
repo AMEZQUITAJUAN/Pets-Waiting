@@ -9,10 +9,18 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
+        // Verifica si el usuario está autenticado y es admin
         if (Auth::check() && Auth::user()->rol === 'admin') {
             return $next($request);
         }
 
-        return redirect()->route('home')->with('error', 'No tienes permiso para acceder a esta página.');
+        // Si la ruta es para crear mascota, solo verifica autenticación
+        if ($request->routeIs('mascotas.create') && Auth::check()) {
+            return $next($request);
+        }
+
+        // Si no cumple los requisitos, redirige
+        return redirect()->route('home')
+            ->with('error', 'No tienes permiso para acceder a esta página.');
     }
 }

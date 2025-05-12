@@ -11,20 +11,22 @@ use Illuminate\Support\Facades\Route;
 // Ruta principal
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Rutas públicas
+Route::get('/adopcion', [MascotasController::class, 'adopcionIndex'])->name('adopcion');
+
 // Rutas para Adopción
 Route::get('/adopciones/{mascota}/create', [AdopcionesController::class, 'create'])->name('adopciones.create');
 Route::post('/adopciones', [AdopcionesController::class, 'store'])->name('adopciones.store');
-Route::get('/adopcion', [AdopcionesController::class, 'index'])->name('adopcion');
 
 // Rutas para Usuario
 Route::get('usuarios/create', [UsuariosController::class, 'create'])->name('usuarios.create');
 Route::post('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
-//Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
 Route::delete('usuarios/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
 // Rutas para Mascotas
 Route::resource('mascotas', MascotasController::class);
 Route::get('/mascotas', [MascotasController::class, 'index'])->name('mascotas.index');
+Route::get('/mascotas/{mascota}', [MascotasController::class, 'show'])->name('mascotas.show');
 
 // Ruta para formulario de inicio
 Route::get('/frminicio', [UsuariosController::class, 'showLoginForm'])->name('frminicio');
@@ -51,11 +53,10 @@ Route::get('/perdidos/{perdido}/edit', [PerdidosController::class, 'edit'])->nam
 Route::put('/perdidos/{perdido}', [PerdidosController::class, 'update'])->name('perdidos.update');
 Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->name('perdidos.destroy');
 
-// Rutas protegidas
+// Rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
-    Route::get('/mascotas/create', [MascotasController::class, 'create'])->name('mascotas.create');
+    Route::get('/publicar-mascota', [MascotasController::class, 'create'])->name('mascotas.create');
     Route::post('/mascotas', [MascotasController::class, 'store'])->name('mascotas.store');
-    Route::get('/adopciones/{mascota}/create', [AdopcionesController::class, 'create'])->name('adopciones.create');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -64,5 +65,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/usuarios', [UsuariosController::class, 'adminIndex'])->name('usuarios_list');
     Route::delete('/admin/usuarios/{usuario}', [UsuariosController::class, 'adminDestroy'])->name('admin.usuarios.destroy');
     Route::get('/usuarios/lista', [UsuariosController::class, 'adminIndex'])->name('usuarios_list');
-
 });
