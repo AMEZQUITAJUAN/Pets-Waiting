@@ -4,6 +4,12 @@
 <div class="container">
     <h1>Registrar una Nueva Mascota</h1>
 
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -17,7 +23,6 @@
     <form action="{{ route('mascotas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <!-- Campos existentes -->
         <div class="mb-3">
             <label for="nombre">Nombre:</label>
             <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
@@ -38,9 +43,6 @@
             <input type="number" class="form-control" id="edad" name="edad" value="{{ old('edad') }}" min="0" required>
         </div>
 
-
-
-        <!-- Campo para la imagen -->
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen de la mascota:</label>
             <input type="file"
@@ -48,13 +50,11 @@
                    id="imagen"
                    name="imagen"
                    accept="image/*">
-            <div class="form-text">Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</div>
             @error('imagen')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
 
-        <!-- Vista previa de la imagen -->
         <div class="mb-3">
             <img id="preview" src="#" alt="Vista previa" style="display: none; max-width: 200px; margin-top: 10px;">
         </div>
@@ -64,7 +64,6 @@
     </form>
 </div>
 
-<!-- Script para vista previa de la imagen -->
 <script>
 document.getElementById('imagen').onchange = function(e) {
     const preview = document.getElementById('preview');

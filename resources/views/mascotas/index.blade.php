@@ -9,7 +9,7 @@
                 Mascotas en Adopción
             </button>
         </li>
-       
+
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="adopciones-tab" data-bs-toggle="tab" data-bs-target="#adopciones" type="button" role="tab">
                 Solicitudes de Adopción
@@ -40,7 +40,6 @@
                             <th>Nombre</th>
                             <th>Especie</th>
                             <th>Edad</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -51,7 +50,7 @@
                                 <td>{{ $mascota->nombre }}</td>
                                 <td>{{ $mascota->especie }}</td>
                                 <td>{{ $mascota->edad }} años</td>
-                                <td>{{ $mascota->estado }}</td>
+
                                 <td>
                                     <a href="{{ route('mascotas.show', $mascota->id) }}" class="btn btn-success btn-sm">Ver</a>
                                     <a href="{{ route('mascotas.edit', $mascota->id) }}" class="btn btn-warning btn-sm">Editar</a>
@@ -84,7 +83,6 @@
                             <th>ID</th>
                             <th>Solicitante</th>
                             <th>Mascota</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -95,8 +93,7 @@
                                 <td>{{ $adopcion->id }}</td>
                                 <td>{{ $adopcion->nombre }}</td>
                                 <td>{{ $adopcion->mascota->nombre }}</td>
-                                <td>{{ $adopcion->estado }}</td>
-                                <td>
+                            
 
                             </tr>
                         @endforeach

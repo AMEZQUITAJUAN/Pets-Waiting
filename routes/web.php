@@ -57,8 +57,10 @@ Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->na
 Route::middleware(['auth'])->group(function () {
     Route::get('/publicar-mascota', [MascotasController::class, 'create'])->name('mascotas.create');
     Route::post('/mascotas', [MascotasController::class, 'store'])->name('mascotas.store');
+    Route::get('/mascotas/crear', [MascotasController::class, 'create'])->name('mascotas.create');
 });
 
+// Rutas protegidas por autenticación y rol de administrador
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('mascotas.index', MascotasController::class);
     Route::get('/admin/perdidos', [PerdidosController::class, 'adminIndex'])->name('admin.perdidos');

@@ -15,16 +15,13 @@ return new class extends Migration
     {
         Schema::create('mascotas', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
-            $table->string('nombre', 100);
+            $table->string('nombre');
             $table->enum('especie', ['perro', 'gato', 'otro']);
-            $table->string('raza', 100)->nullable();
-            $table->integer('edad')->nullable();
-            $table->text('descripcion')->nullable();
+            $table->integer('edad');
             $table->string('imagen')->nullable();
-            
+            $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
         });
     }
 

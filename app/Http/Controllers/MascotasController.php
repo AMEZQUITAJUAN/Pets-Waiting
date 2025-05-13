@@ -70,6 +70,9 @@ class MascotasController extends Controller
     public function store(Request $request)
     {
         try {
+            // Logging para depuración
+            \Log::info('Datos recibidos en store:', $request->all());
+
             // Validar la solicitud
             $validated = $request->validate([
                 'nombre' => 'required|string|max:100',
@@ -84,29 +87,26 @@ class MascotasController extends Controller
             $mascota->especie = $validated['especie'];
             $mascota->edad = $validated['edad'];
             $mascota->usuario_id = auth()->id();
-            $mascota->estado = 'disponible'; // Agregar estado por defecto
 
             // Manejar la imagen si se proporcionó una
             if ($request->hasFile('imagen')) {
-                $path = $request->file('imagen')->store('public/mascotas');
-                $mascota->imagen = str_replace('public/', '', $path);
+                $imagen = $request->file('imagen');
+                $nombreImagen = time() . '.' . $imagen->getClientOriginalExtension();
+                $imagen->move(public_path('storage/mascotas'), $nombreImagen);
+                $mascota->imagen = 'mascotas/' . $nombreImagen;
+                \Log::info('Imagen guardada como:', ['ruta' => $mascota->imagen]);
             }
 
             // Guardar y verificar
-            if (!$mascota->save()) {
-                throw new \Exception('Error al guardar la mascota en la base de datos');
-            }
-
-            \Log::info('Mascota guardada exitosamente', [
-                'id' => $mascota->id,
-                'usuario_id' => $mascota->usuario_id
-            ]);
+            $guardado = $mascota->save();
+            \Log::info('Resultado de guardar:', ['guardado' => $guardado, 'id' => $mascota->id ?? 'no-id']);
 
             return redirect()->route('adopcion')
                 ->with('success', 'Mascota registrada exitosamente');
 
         } catch (\Exception $e) {
             \Log::error('Error en store: ' . $e->getMessage());
+            \Log::error('Trace: ' . $e->getTraceAsString());
             return back()
                 ->withInput()
                 ->with('error', 'Error al registrar la mascota: ' . $e->getMessage());

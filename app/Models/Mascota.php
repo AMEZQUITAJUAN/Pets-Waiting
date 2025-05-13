@@ -9,26 +9,27 @@ class Mascota extends Model
 {
     use HasFactory;
 
-    protected $table = 'mascotas'; // Asegúrate de que el nombre de la tabla sea correcto
+    protected $table = 'mascotas';
 
     protected $fillable = [
         'nombre',
         'especie',
         'edad',
         'imagen',
-        'usuario_id',
-        'estado'
+        'usuario_id'
     ];
 
-    protected $attributes = [
-        'estado' => 'disponible'
-    ];
+    public function adopcion()
+    {
+        return $this->hasMany('App\Models\Adopcion');
+    }
 
     public function usuario(){
         return $this->belongsTo('App\Models\Usuario');
     }
+
     public function getRouteKeyName()
     {
-        return 'nombre';
+        return 'id'; // Cambiado a 'id' para evitar problemas con rutas
     }
 }
