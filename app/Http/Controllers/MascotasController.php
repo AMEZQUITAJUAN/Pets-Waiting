@@ -7,6 +7,7 @@ use App\Models\Mascota;
 use App\Models\Usuario; // Asegúrate de importar el modelo correctamente
 use App\Models\Perdido;
 use App\Models\Adopcion;
+use Illuminate\Support\Facades\Storage;
 
 class MascotasController extends Controller
 {
@@ -115,17 +116,54 @@ class MascotasController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:100',
-            'especie' => 'required|in:perro,gato,otro',
-            'edad' => 'required|integer|min:0',
-            'usuario_id' => 'required|exists:usuarios,id',
-        ]);
+        try {
+            // Validación de campos
+            $request->validate([
+                'nombre' => 'required|string|max:100',
+                'especie' => 'required|in:perro,gato,otro',
+                'edad' => 'required|integer|min:0',
+                'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        $mascota = Mascota::findOrFail($id);
-        $mascota->update($request->all());
+            // Encontrar la mascota
+            $mascota = Mascota::findOrFail($id);
 
-        return redirect()->route('mascotas.index')->with('success', 'Mascota actualizada exitosamente.');
+            // Verificar que el usuario es el propietario o un admin
+            if (auth()->id() !== $mascota->usuario_id && auth()->user()->rol !== 'admin') {
+                return back()->with('error', 'No tienes permiso para editar esta mascota');
+            }
+
+            // Actualizar los datos de la mascota
+            $mascota->nombre = $request->nombre;
+            $mascota->especie = $request->especie;
+            $mascota->edad = $request->edad;
+            $mascota->usuario_id = auth()->id(); // Siempre usar el usuario autenticado
+
+            // Manejo de la imagen
+            if ($request->hasFile('imagen')) {
+                // Eliminar imagen anterior si existe
+                if ($mascota->imagen) {
+                    Storage::disk('public')->delete($mascota->imagen);
+                }
+
+                // Almacenamiento de la nueva imagen
+                $imagenPath = $request->file('imagen')->store('mascotas', 'public');
+                $mascota->imagen = $imagenPath;
+            }
+
+            // Guardar los cambios
+            $mascota->save();
+
+            \Log::info('Mascota actualizada: ID '.$mascota->id);
+
+            // Redirección a la página de adopción
+            return redirect()->route('adopcion')
+                ->with('success', 'Mascota actualizada exitosamente.');
+        } catch (\Exception $e) {
+            \Log::error('Error al actualizar mascota: ' . $e->getMessage());
+            return back()->withInput()
+                ->with('error', 'Error al actualizar la mascota: ' . $e->getMessage());
+        }
     }
 
     public function destroy($id)

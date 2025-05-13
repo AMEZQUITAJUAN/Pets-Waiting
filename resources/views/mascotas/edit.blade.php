@@ -12,7 +12,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 20px;
         }
         .container {
             background-color: #ffffff;
@@ -40,14 +41,14 @@
             font-size: 14px;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #1e3aab;
             color: white;
             border: none;
             cursor: pointer;
             font-weight: bold;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #0e58c6;
         }
         .error-container {
             color: red;
@@ -67,13 +68,34 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success-alert {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Editar Mascota</h1>
 
-    {{-- Mostrar errores de validación --}}
+    @if (session('success'))
+        <div class="success-alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
     @if ($errors->any())
         <div class="error-container">
             <strong>Por favor corrige los siguientes errores:</strong>
@@ -85,11 +107,10 @@
         </div>
     @endif
 
-    {{-- Formulario para editar una mascota --}}
     <form action="{{ route('mascotas.update', $mascota->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT') {{-- Método HTTP PUT para actualizar --}}
-        
+        @method('PUT')
+
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $mascota->nombre) }}" required>
 
@@ -103,30 +124,46 @@
         <label for="edad">Edad:</label>
         <input type="number" id="edad" name="edad" value="{{ old('edad', $mascota->edad) }}" min="0" required>
 
-        <label for="usuario_id">Usuario Asociado:</label>
-        <select id="usuario_id" name="usuario_id" required>
-            @foreach ($usuarios as $usuario)
-                <option value="{{ $usuario->id }}" {{ old('usuario_id', $mascota->usuario_id) == $usuario->id ? 'selected' : '' }}>
-                    {{ $usuario->nombre }}
-                </option>
-            @endforeach
-        </select>
+        <input type="hidden" name="usuario_id" value="{{ auth()->id() }}">
 
         <label for="imagen">Imagen Actual:</label>
         @if ($mascota->imagen)
-            <img src="{{ asset('storage/' . $mascota->imagen) }}" alt="Imagen de {{ $mascota->nombre }}" style="width: 100%; margin-bottom: 15px;">
+            <img src="{{ asset('storage/' . $mascota->imagen) }}" class="image-preview" alt="Imagen de {{ $mascota->nombre }}">
         @else
             <p>No hay imagen disponible.</p>
         @endif
 
         <label for="imagen">Actualizar Imagen:</label>
         <input type="file" id="imagen" name="imagen" accept="image/*">
+        <small>Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
 
         <button type="submit">Actualizar Mascota</button>
     </form>
 
-    <a href="{{ route('mascotas.index') }}" class="back-link">Volver Admin</a>
+    <a href="{{ route('adopcion') }}" class="back-link">Volver</a>
 </div>
+
+<script>
+    // Vista previa de la imagen cuando se selecciona
+    document.getElementById('imagen').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            const preview = document.querySelector('.image-preview') || document.createElement('img');
+            if (!preview.classList.contains('image-preview')) {
+                preview.classList.add('image-preview');
+                document.querySelector('label[for="imagen"]').after(preview);
+            }
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 </body>
 </html>
 
