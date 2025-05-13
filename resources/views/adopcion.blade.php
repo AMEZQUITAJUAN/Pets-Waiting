@@ -1,159 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adopción de Mascotas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-
-        .hero-section {
-            background-image: url('img/newpatas.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            padding:1cm 30px;
-        }
-
-        .hero-section h1 {
-            color: #fff;
-            padding: 0cm;
-            font-size: 3.8rem;
-            margin-bottom: 1rem;
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            padding: 1rem 1rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            font: 1em sans-serif;
-
-        }
-
-        .hero-section .btn {
-            margin-top: 20px;
-            background-color: #2234ff;
-            color: white;
-            font-weight: bold;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-
-        }
-
-        .hero-section .btn:hover {
-            background-color: #d81b60;
-        }
-
-        .filters {
-            color:rgb(250, 248, 250);
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-            font-family:fantasy
-        }
-
-        .filters input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-        }
-        .filters select {
-            background-color: #2234ff;
-            color:rgb(250, 248, 249);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-        }
-
-        .pets-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .pet-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6pxrgb(165, 42, 136);
-            width: 300px;
-            overflow: hidden;
-            text-align: center;
-
-        }
-
-        .pet-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .pet-card h3 {
-
-            color:#000000;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 1.5rem;
-            margin: 10px 0;
-        }
-
-        .pet-card p {
-            color: #000000;
-    font-family:Arial, Helvetica, sans-serif;
-            margin: 5px 0;
-            font-size: 1rem;
-        }
-
-        .pet-card .adopt-btn {
-            display: block;
-            background-color: #2234ff;
-            color: white;
-            padding: 10px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .pet-card .adopt-btn:hover {
-            background-color: #d81b60;
-        }
-    </style>
-</head>
-<body>
+<div class="container mt-4">
     <!-- Hero Section -->
-
     <div class="hero-section">
-        <h1>ADOPCION DE PERROS Y GATOS</h1>
+        <h1>ADOPCIÓN DE PERROS Y GATOS</h1>
         <p>Busca por las características de la mascota que deseas adoptar.</p>
         @auth
-            <a href="{{ url('/publicar-mascota') }}" class="btn btn-primary">
+            <a href="{{ route('mascotas.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Publicar una mascota
             </a>
         @else
@@ -163,35 +17,120 @@
         @endauth
     </div>
 
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    <!-- Lista de Mascotas simplificada -->
+    <div class="row">
+        @forelse($mascotas as $mascota)
+            <div class="col-md-4 mb-4">
+                <div class="card mascota-card">
+                    <!-- Solo una imagen con fondo blanco -->
+                    <div class="img-container" style="background-color: white; padding: 10px;">
+                        @if($mascota->imagen)
+                            <img src="{{ asset('storage/' . $mascota->imagen) }}"
+                                class="card-img-top mascota-imagen"
+                                alt="Foto de {{ $mascota->nombre }}">
+                        @else
+                            <img src="{{ asset('img/no-image.jpg') }}"
+                                class="card-img-top mascota-imagen"
+                                alt="Sin imagen">
+                        @endif
+                    </div>
 
-    <!-- Lista de Mascotas -->
-    <div class="pets-container">
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+                    <!-- Banner con nombre -->
+                    <div class="mascota-nombre-banner">
+                        <h5 class="mb-0">{{ $mascota->nombre }}</h5>
+                    </div>
 
-        @if($mascotas->isEmpty())
-            <div class="alert alert-info">
-                No hay mascotas disponibles para adopción en este momento.
-            </div>
-        @else
-            @foreach($mascotas as $mascota)
-                <div class="pet-card">
-                    <img src="{{ $mascota->imagen ? asset('storage/' . $mascota->imagen) : asset('images/default-pet.jpg') }}"
-                         alt="Foto de {{ $mascota->nombre }}">
-                    <h3>{{ $mascota->nombre }}</h3>
-                    <p>Especie: {{ ucfirst($mascota->especie) }}</p>
-                    <p>Edad: {{ $mascota->edad }} años</p>
-                    <a href="{{ route('mascotas.show', $mascota->id) }}" class="btn btn-primary">
-                        Ver detalles
-                    </a>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong>Especie:</strong> {{ ucfirst($mascota->especie) }}<br>
+                            <strong>Edad:</strong> {{ $mascota->edad }} {{ $mascota->edad == 1 ? 'año' : 'años' }}
+                        </p>
+
+                        <div class="botones-accion text-center">
+                            <a href="{{ route('mascotas.show', $mascota->id) }}" class="btn btn-primary">
+                                Ver Detalles
+                            </a>
+
+                            @auth
+                                @if(auth()->user()->id === $mascota->usuario_id || auth()->user()->rol === 'admin')
+                                    <div class="mt-2">
+                                        <a href="{{ route('mascotas.edit', $mascota->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <form action="{{ route('mascotas.destroy', $mascota->id) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('¿Estás seguro de eliminar esta mascota?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endauth
+                        </div>
+                    </div>
                 </div>
-            @endforeach
-        @endif
+            </div>
+        @empty
+            <div class="col-12 text-center">
+                <div class="alert alert-info">
+                    No hay mascotas disponibles para adopción en este momento.
+                </div>
+            </div>
+        @endforelse
     </div>
-</body>
-</html>
+</div>
+
+<style>
+    /* Estilos simplificados */
+    .hero-section {
+        background-image: url('img/newpatas.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        padding: 30px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+    }
+
+    .mascota-card {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: white;
+    }
+
+    .mascota-imagen {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border: none;
+    }
+
+    .mascota-nombre-banner {
+        background-color: #343a40;
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .botones-accion {
+        margin-top: 15px;
+    }
+</style>
 @endsection

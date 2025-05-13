@@ -66,4 +66,35 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/')->with('success', 'Has cerrado sesión correctamente');
     }
+
+    public function register(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:usuarios',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+
+            \Log::info('Datos de registro recibidos', ['email' => $request->email]);
+
+            $usuario = Usuario::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'rol' => 'usuario', // Por defecto es usuario normal
+            ]);
+
+            // Login automático después del registro
+            Auth::login($usuario);
+
+            return redirect()->route('home')
+                ->with('success', '¡Usuario registrado exitosamente!');
+        } catch (\Exception $e) {
+            \Log::error('Error en registro: ' . $e->getMessage());
+            return back()
+                ->withInput()
+                ->withErrors(['email' => 'Error al registrar el usuario. ' . $e->getMessage()]);
+        }
+    }
 }

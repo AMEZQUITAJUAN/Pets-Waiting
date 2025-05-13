@@ -37,9 +37,9 @@ class UsuariosController extends Controller
             // Autenticar al usuario después del registro
             auth()->login($usuario);
 
-            // Redirigir al formulario de adopción
-            return redirect()->route('adopciones.create', ['mascota' => 1]) // Cambia '1' por el ID de la mascota si es necesario
-                ->with('success', '¡Registro exitoso! Ahora puedes llenar el formulario de adopción.');
+            // Cambiar la redirección para ir a la página de adopción general
+            return redirect()->route('adopcion')
+                ->with('success', '¡Registro exitoso! Ahora puedes explorar las mascotas en adopción.');
 
         } catch (\Exception $e) {
             Log::error('Error al registrar usuario: ' . $e->getMessage());
@@ -47,10 +47,12 @@ class UsuariosController extends Controller
                         ->withInput($request->except('password'));
         }
     }
+
     public function showUsuarioWithMascotas($id) {
         $usuario = Usuario::with('mascotas')->find($id); // Reemplaza $id con el ID que necesites
         return view('usuarios.show', compact('usuario'));
     }
+
     public function destroy($id) {
         $usuario = Usuario::find($id);
         if ($usuario) {
