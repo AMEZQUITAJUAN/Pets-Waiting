@@ -89,7 +89,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     color: white;
-    z-index: 2;
+    z-index: 1;
 }
 
 .hero-content {
@@ -387,7 +387,7 @@ body {
 }
 
 /* index*/
-.container .mt-4 .text-center{
+.container .mt-5 .text-center{
     background-image: url('img/newpatas.jpg');
             background-size: cover;
             background-position: center;
