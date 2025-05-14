@@ -168,10 +168,33 @@ class MascotasController extends Controller
 
     public function destroy($id)
     {
-        $mascota = Mascota::findOrFail($id);
-        $mascota->delete();
+        try {
+            // Encontrar la mascota
+            $mascota = Mascota::findOrFail($id);
 
-        return redirect()->route('mascotas.index')->with('success', 'Mascota eliminada exitosamente.');
+            // Verificar permiso (opcional, puedes conservar esta validación si la necesitas)
+            if (auth()->id() !== $mascota->usuario_id && auth()->user()->rol !== 'admin') {
+                return back()->with('error', 'No tienes permiso para eliminar esta mascota');
+            }
+
+            // Guardar información para el mensaje
+            $nombre = $mascota->nombre;
+
+            // Eliminar la imagen si existe
+            if ($mascota->imagen && Storage::disk('public')->exists($mascota->imagen)) {
+                Storage::disk('public')->delete($mascota->imagen);
+            }
+
+            // Eliminar la mascota
+            $mascota->delete();
+
+            // Redireccionar a la página de adopción con mensaje de éxito
+            return redirect()->route('adopcion')->with('success', "La mascota '$nombre' ha sido eliminada exitosamente");
+        }
+        catch (\Exception $e) {
+            \Log::error('Error al eliminar mascota: ' . $e->getMessage());
+            return back()->with('error', 'Error al eliminar la mascota');
+        }
     }
 
     public function adopcionIndex()

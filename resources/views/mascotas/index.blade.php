@@ -3,19 +3,9 @@
 @section('content')
 <div class="container mt-5">
     <!-- Tabs de navegación -->
-    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="mascotas-tab" data-bs-toggle="tab" data-bs-target="#mascotas" type="button" role="tab">
-                Mascotas en Adopción
-            </button>
-        </li>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="adopciones-tab" data-bs-toggle="tab" data-bs-target="#adopciones" type="button" role="tab">
-                Solicitudes de Adopción
-            </button>
-        </li>
-    </ul>
+
+
 
     <!-- Contenido de los tabs -->
     <div class="tab-content" id="myTabContent">
@@ -25,7 +15,7 @@
 
             @if (auth()->user()->rol === 'admin')
                 <!-- Contenido para administradores -->
-                <a href="{{ route('mascotas.create') }}" class="btn btn-primary mb-4">Registrar Nueva Mascota</a>
+                
             @else
                 <p class="text-center text-danger">No tienes permiso para ver esta página.</p>
             @endif
@@ -68,44 +58,5 @@
         </div>
 
         <!-- Tab Mascotas Perdidas -->
-        <
-        <!-- Tab Solicitudes de Adopción -->
-        <div class="tab-pane fade" id="adopciones" role="tabpanel">
-            <h2 class="text-center mb-4">Solicitudes de Adopción</h2>
 
-            @if ($adopciones->isEmpty())
-                <p class="text-center">No hay solicitudes de adopción.</p>
-            @else
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>ID</th>
-                            <th>Solicitante</th>
-                            <th>Mascota</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($adopciones as $adopcion)
-                            <tr>
-                                <td>{{ $adopcion->created_at->format('d/m/Y') }}</td>
-                                <td>{{ $adopcion->id }}</td>
-                                <td>{{ $adopcion->nombre }}</td>
-                                <td>{{ $adopcion->mascota->nombre }}</td>
-                            
 
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
-    </div>
-
-    <!-- Paginación -->
-    <div class="d-flex justify-content-center mt-4">
-        {{ $mascotas->links() }}
-    </div>
-</div>
-@endsection

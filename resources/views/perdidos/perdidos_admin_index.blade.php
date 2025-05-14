@@ -3,16 +3,12 @@
 @section('content')
 <div class="container mt-5">
     <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Solicitudes de Adopción</a>
-        </li>
+
     </ul>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Mascotas Perdidas</h2>
-        <a href="{{ route('perdidos.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Registrar Nueva Mascota Perdida
-        </a>
+        
     </div>
 
     @if($perdidos->isEmpty())

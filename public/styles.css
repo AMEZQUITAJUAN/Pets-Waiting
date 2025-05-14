@@ -387,19 +387,6 @@ body {
 }
 
 /* index*/
-.container .mt-5 .text-center{
-    background-image: url('img/newpatas.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            padding:1cm 30px;
-}
 
 h1 {
     color: #000000;
