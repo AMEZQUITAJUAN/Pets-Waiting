@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Perdido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\NotificacionesController;
+use App\Models\Notificacion;
 
 class PerdidosController extends Controller
 {
@@ -111,5 +113,48 @@ class PerdidosController extends Controller
 
         return redirect()->route('perdidos.index')
             ->with('success', 'Registro eliminado exitosamente');
+    }
+
+    public function reportarEncontrada(Request $request, $id)
+    {
+        try {
+            $perdido = Perdido::findOrFail($id);
+
+            // Verificar que la mascota esté actualmente perdida
+            if ($perdido->estado !== 'perdido') {
+                return back()->with('error', 'Esta mascota ya ha sido reportada como encontrada anteriormente.');
+            }
+
+            // Detalles sobre cómo se encontró
+            $ubicacion = $request->input('ubicacion', 'No especificada');
+            $detalles = $request->input('detalles', 'No se proporcionaron detalles adicionales.');
+
+            // Cambiar estado a encontrado
+            $perdido->estado = 'encontrado';
+            $perdido->save();
+
+            // Crear notificación para el dueño
+            $mensaje = "¡Buenas noticias! Tu mascota {$perdido->nombre} ha sido reportada como encontrada. Ubicación: {$ubicacion}";
+            if (!empty($detalles)) {
+                $mensaje .= ". Detalles: {$detalles}";
+            }
+
+            // Guardar la notificación directamente sin instanciar el controlador
+            Notificacion::create([
+                'usuario_id' => $perdido->usuario_id,
+                'tipo' => 'encontrado',
+                'mensaje' => $mensaje,
+                'url' => route('perdidos.show', $perdido->id),
+                'leido' => false,
+                'referencia_id' => $perdido->id,
+                'referencia_tipo' => 'App\Models\Perdido'
+            ]);
+
+            return redirect()->route('perdidos.show', $perdido->id)
+                ->with('success', 'Mascota reportada como encontrada. Se ha notificado al dueño.');
+        } catch (\Exception $e) {
+            \Log::error('Error al reportar mascota encontrada: ' . $e->getMessage());
+            return back()->with('error', 'Ocurrió un error al reportar la mascota como encontrada.');
+        }
     }
 }

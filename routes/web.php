@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\PerdidosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificacionesController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta principal
@@ -52,12 +53,19 @@ Route::get('/perdidos/{perdido}', [PerdidosController::class, 'show'])->name('pe
 Route::get('/perdidos/{perdido}/edit', [PerdidosController::class, 'edit'])->name('perdidos.edit');
 Route::put('/perdidos/{perdido}', [PerdidosController::class, 'update'])->name('perdidos.update');
 Route::delete('/perdidos/{perdido}', [PerdidosController::class, 'destroy'])->name('perdidos.destroy');
+Route::post('/perdidos/{id}/encontrada', [PerdidosController::class, 'reportarEncontrada'])->name('perdidos.encontrada');
 
 // Rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
     Route::get('/publicar-mascota', [MascotasController::class, 'create'])->name('mascotas.create');
     Route::post('/mascotas', [MascotasController::class, 'store'])->name('mascotas.store');
     Route::get('/mascotas/crear', [MascotasController::class, 'create'])->name('mascotas.create');
+
+    // Rutas para notificaciones
+    Route::get('/notificaciones', [NotificacionesController::class, 'index'])->name('notificaciones.index');
+    Route::post('/notificaciones/{id}/marcar-leida', [NotificacionesController::class, 'marcarComoLeida'])->name('notificaciones.marcar-leida');
+    Route::post('/notificaciones/marcar-todas', [NotificacionesController::class, 'marcarTodasComoLeidas'])->name('notificaciones.marcar-todas');
+    Route::delete('/notificaciones/{id}', [NotificacionesController::class, 'eliminar'])->name('notificaciones.eliminar');
 });
 
 // Rutas protegidas por autenticación y rol de administrador

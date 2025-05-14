@@ -58,7 +58,7 @@
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
-                                
+
                             </ul>
                         </li>
                     @endif
@@ -67,6 +67,94 @@
 
             <div class="d-flex">
                 @auth
+                    <!-- Notificaciones -->
+                    <div class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle notification-icon" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            @php
+                                $notificacionesNoLeidas = \App\Models\Notificacion::where('usuario_id', auth()->id())
+                                                    ->where('leido', false)
+                                                    ->count();
+                            @endphp
+                            @if($notificacionesNoLeidas > 0)
+                                <span class="badge bg-danger rounded-pill position-absolute top-0 end-0">
+                                    {{ $notificacionesNoLeidas }}
+                                </span>
+                            @endif
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" style="width: 300px; max-height: 400px; overflow-y: auto;">
+                            <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light">
+                                <h6 class="mb-0">Notificaciones</h6>
+                                @if($notificacionesNoLeidas > 0)
+                                    <form action="{{ route('notificaciones.marcar-todas') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-link p-0 text-muted">
+                                            Marcar todas como leídas
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+
+                            <div class="dropdown-divider my-0"></div>
+
+                            @php
+                                $ultimasNotificaciones = \App\Models\Notificacion::where('usuario_id', auth()->id())
+                                                    ->orderBy('created_at', 'desc')
+                                                    ->limit(5)
+                                                    ->get();
+                            @endphp
+
+                            @forelse($ultimasNotificaciones as $notificacion)
+                                <div class="dropdown-item py-2 px-3 {{ $notificacion->leido ? '' : 'fw-bold' }}">
+                                    <div class="d-flex align-items-start">
+                                        @if($notificacion->tipo == 'encontrado')
+                                            <div class="flex-shrink-0 me-2 mt-1">
+                                                <i class="fas fa-search text-success"></i>
+                                            </div>
+                                        @else
+                                            <div class="flex-shrink-0 me-2 mt-1">
+                                                <i class="fas fa-bell"></i>
+                                            </div>
+                                        @endif
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <div style="white-space: normal;">{{ $notificacion->mensaje }}</div>
+                                            <small class="text-muted">{{ $notificacion->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex mt-2">
+                                        @if(!$notificacion->leido)
+                                            <form action="{{ route('notificaciones.marcar-leida', $notificacion->id) }}" method="POST" class="me-2">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-success">
+                                                    <i class="fas fa-check me-1"></i>Marcar leída
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                        @if($notificacion->url)
+                                            <form action="{{ route('notificaciones.marcar-leida', $notificacion->id) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="redirect_url" value="{{ $notificacion->url }}">
+                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-eye me-1"></i>Ver detalles
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="dropdown-item text-center py-3">
+                                    <span class="text-muted">No tienes notificaciones</span>
+                                </div>
+                            @endforelse
+
+                            <div class="dropdown-divider my-0"></div>
+                            <a class="dropdown-item text-center py-2" href="{{ route('notificaciones.index') }}">
+                                Ver todas las notificaciones
+                            </a>
+                        </div>
+                    </div>
                     <div class="user-circle me-3">
                         {{ strtoupper(substr(auth()->user()->nombre, 0, 1)) }}
                     </div>

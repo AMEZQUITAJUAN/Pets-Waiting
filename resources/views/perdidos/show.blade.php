@@ -6,8 +6,8 @@
         <!-- Imagen de la mascota perdida -->
         <div class="col-md-6">
             <div class="card shadow-sm">
-                <img src="{{ $perdido->imagen ? asset('storage/' . $perdido->imagen) : 'https://via.placeholder.com/600x400' }}" 
-                     alt="Imagen de {{ $perdido->nombre }}" 
+                <img src="{{ $perdido->imagen ? asset('storage/' . $perdido->imagen) : 'https://via.placeholder.com/600x400' }}"
+                     alt="Imagen de {{ $perdido->nombre }}"
                      class="img-fluid rounded">
             </div>
         </div>
@@ -34,6 +34,52 @@
                 <p class="mb-1"><strong>Email:</strong> {{ $perdido->contacto_email ?? 'No especificado' }}</p>
                 <p class="mb-0"><strong>Teléfono:</strong> {{ $perdido->contacto_telefono ?? 'No especificado' }}</p>
             </div>
+
+            @if($perdido->estado === 'perdido')
+                <div class="mt-4 text-center">
+                    <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#reportarEncontradaModal">
+                        <i class="fas fa-check-circle me-2"></i>Reportar como encontrada
+                    </button>
+                </div>
+
+                <!-- Modal para reportar mascota encontrada -->
+                <div class="modal fade" id="reportarEncontradaModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title">Reportar mascota encontrada</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('perdidos.encontrada', $perdido->id) }}" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <p>Vas a reportar que has encontrado a <strong>{{ $perdido->nombre }}</strong>.</p>
+                                    <p>Esta acción enviará una notificación al dueño de la mascota.</p>
+
+                                    <div class="mb-3">
+                                        <label for="ubicacion" class="form-label">Ubicación donde la encontraste:</label>
+                                        <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="detalles" class="form-label">Detalles adicionales:</label>
+                                        <textarea class="form-control" id="detalles" name="detalles" rows="3"
+                                                  placeholder="Describe cómo, cuándo o en qué condiciones encontraste a la mascota"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-success">Confirmar y notificar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="alert alert-success mt-4">
+                    <i class="fas fa-check-circle me-2"></i>Esta mascota ya ha sido reportada como encontrada.
+                </div>
+            @endif
         </div>
     </div>
 </div>

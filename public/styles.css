@@ -554,3 +554,26 @@ p {
 }
 
 /*boton de registra mascota perdida */
+
+/* Estilos para notificaciones */
+.notification-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.fw-bold {
+    font-weight: 600 !important;
+}
+
+.dropdown-item.fw-bold {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.dropdown-item.fw-bold:hover {
+    background-color: rgba(25, 135, 84, 0.15);
+}
+
+.dropdown-menu {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+}
