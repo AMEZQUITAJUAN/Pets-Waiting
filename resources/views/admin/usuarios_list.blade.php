@@ -48,15 +48,11 @@
                         <td>{{ $usuario->created_at->format('d/m/Y') }}</td>
                         <td>
                             @if($usuario->rol !== 'admin')
-                                <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}"
-                                      method="POST"
-                                      class="d-inline">
+                                <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                            class="btn btn-danger btn-sm"
-                                            onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
-                                        <i class="fas fa-trash"></i>
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i> Eliminar
                                     </button>
                                 </form>
                             @endif

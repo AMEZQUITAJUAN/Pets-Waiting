@@ -146,13 +146,7 @@
                                    value="{{ old('contacto', $perdido->contacto) }}" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="estado" class="form-label">Estado:</label>
-                            <select class="form-select" id="estado" name="estado" required>
-                                <option value="perdido" {{ old('estado', $perdido->estado) == 'perdido' ? 'selected' : '' }}>Perdido</option>
-                                <option value="encontrado" {{ old('estado', $perdido->estado) == 'encontrado' ? 'selected' : '' }}>Encontrado</option>
-                            </select>
-                        </div>
+                      
 
                         @if ($perdido->imagen)
                             <div class="mb-4">

@@ -127,14 +127,27 @@ class UsuariosController extends Controller
         }
     }
 
-    public function adminDestroy(User $usuario)
+    public function adminDestroy($id)
     {
-        if($usuario->rol === 'admin') {
-            return back()->with('error', 'No se puede eliminar un administrador');
-        }
+        try {
+            $usuario = Usuario::findOrFail($id);
 
-        $usuario->delete();
-        return redirect()->route('adopcion')->with('success', 'Usuario eliminado correctamente');
+            if($usuario->rol === 'admin') {
+                return back()->with('error', 'No se puede eliminar un administrador');
+            }
+
+            // Guardar el nombre para el mensaje
+            $nombre = $usuario->nombre;
+
+            // Eliminar el usuario
+            $usuario->delete();
+
+            // Regresar a la misma página con un mensaje
+            return redirect()->route('admin.usuarios.index')->with('success', "Usuario '$nombre' eliminado correctamente");
+        } catch (\Exception $e) {
+            Log::error('Error al eliminar usuario: ' . $e->getMessage());
+            return back()->with('error', 'Error al eliminar el usuario: no se encontró en la base de datos');
+        }
     }
 }
 
