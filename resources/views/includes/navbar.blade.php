@@ -122,26 +122,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex mt-2">
-                                        @if(!$notificacion->leido)
-                                            <form action="{{ route('notificaciones.marcar-leida', $notificacion->id) }}" method="POST" class="me-2">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-outline-success">
-                                                    <i class="fas fa-check me-1"></i>Marcar leída
-                                                </button>
-                                            </form>
-                                        @endif
 
-                                        @if($notificacion->url)
-                                            <form action="{{ route('notificaciones.marcar-leida', $notificacion->id) }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="redirect_url" value="{{ $notificacion->url }}">
-                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-eye me-1"></i>Ver detalles
-                                                </button>
-                                            </form>
-                                        @endif
-                                    </div>
+
+                                     
                                 </div>
                             @empty
                                 <div class="dropdown-item text-center py-3">

@@ -27,4 +27,16 @@ class Notificacion extends Model
     {
         return $this->belongsTo(Usuario::class);
     }
+
+    public function adopcion()
+    {
+        return $this->belongsTo(Adopcion::class, 'referencia_id')
+                    ->where('referencia_tipo', 'App\Models\Adopcion');
+    }
+
+    public function perdido()
+    {
+        return $this->belongsTo(Perdido::class, 'referencia_id')
+                    ->where('referencia_tipo', 'App\Models\Perdido');
+    }
 }

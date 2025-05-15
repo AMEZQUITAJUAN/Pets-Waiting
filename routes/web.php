@@ -63,9 +63,16 @@ Route::middleware(['auth'])->group(function () {
 
     // Rutas para notificaciones
     Route::get('/notificaciones', [NotificacionesController::class, 'index'])->name('notificaciones.index');
+    Route::get('/notificaciones/{id}', [NotificacionesController::class, 'show'])->name('notificaciones.show');
     Route::post('/notificaciones/{id}/marcar-leida', [NotificacionesController::class, 'marcarComoLeida'])->name('notificaciones.marcar-leida');
     Route::post('/notificaciones/marcar-todas', [NotificacionesController::class, 'marcarTodasComoLeidas'])->name('notificaciones.marcar-todas');
     Route::delete('/notificaciones/{id}', [NotificacionesController::class, 'eliminar'])->name('notificaciones.eliminar');
+
+    // Ruta para reportar mascota como encontrada
+    Route::get('/perdidos/{perdido}/reportar', [PerdidosController::class, 'mostrarFormularioReporte'])
+        ->name('perdidos.reportar');
+    Route::post('/perdidos/{perdido}/reportar', [PerdidosController::class, 'procesarReporte'])
+        ->name('perdidos.procesar-reporte');
 });
 
 // Rutas protegidas por autenticación y rol de administrador

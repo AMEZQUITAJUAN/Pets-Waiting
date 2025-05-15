@@ -34,7 +34,7 @@
                     @else
                         <div class="list-group list-group-flush">
                             @foreach($notificaciones as $notificacion)
-                                <div class="list-group-item list-group-item-action p-3 {{ $notificacion->leido ? 'bg-light' : 'bg-success bg-opacity-10' }}">
+                                <div class="list-group-item p-3 {{ $notificacion->leido ? 'bg-light' : 'bg-success bg-opacity-10' }}">
                                     <div class="d-flex w-100 justify-content-between align-items-center">
                                         <h5 class="mb-1">
                                             @if(!$notificacion->leido)
@@ -43,16 +43,20 @@
 
                                             @if($notificacion->tipo == 'encontrado')
                                                 <i class="fas fa-search text-success me-2"></i>Mascota Encontrada
+                                            @elseif($notificacion->tipo == 'adopcion')
+                                                <i class="fas fa-heart text-danger me-2"></i>Solicitud de Adopción
                                             @else
                                                 <i class="fas fa-bell me-2"></i>Notificación
                                             @endif
+                                            <small class="text-muted ms-2">{{ $notificacion->created_at->diffForHumans() }}</small>
                                         </h5>
-                                        <small class="text-muted">{{ $notificacion->created_at->diffForHumans() }}</small>
                                     </div>
 
-                                    <p class="mb-2">{{ $notificacion->mensaje }}</p>
+                                    <div class="p-2 my-2 bg-light rounded" style="white-space: pre-line;">
+                                        {{ $notificacion->mensaje }}
+                                    </div>
 
-                                    <div class="d-flex justify-content-end">
+                                    <div class="d-flex justify-content-end mt-2">
                                         @if(!$notificacion->leido)
                                             <form action="{{ route('notificaciones.marcar-leida', $notificacion->id) }}" method="POST" class="me-2">
                                                 @csrf
@@ -63,33 +67,20 @@
                                         @endif
 
                                         @if($notificacion->url)
-                                            <form action="{{ route('notificaciones.marcar-leida', $notificacion->id) }}" method="POST" class="me-2">
-                                                @csrf
-                                                <input type="hidden" name="redirect_url" value="{{ $notificacion->url }}">
-                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                    <i class="fas fa-eye me-1"></i>Ver detalles
-                                                </button>
-                                            </form>
+                                            <a href="{{ route('home') }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-home me-1"></i>Volver al inicio
+                                            </a>
                                         @endif
-
-                                        <form action="{{ route('notificaciones.eliminar', $notificacion->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('¿Estás seguro de eliminar esta notificación?')">
-                                                <i class="fas fa-trash me-1"></i>Eliminar
-                                            </button>
-                                        </form>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-
-                        <div class="d-flex justify-content-center p-3">
-                            {{ $notificaciones->links() }}
-                        </div>
                     @endif
                 </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                {{ $notificaciones->links() }}
             </div>
         </div>
     </div>
