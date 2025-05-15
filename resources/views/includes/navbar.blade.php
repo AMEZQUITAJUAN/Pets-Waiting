@@ -75,6 +75,11 @@
                                 $notificacionesNoLeidas = \App\Models\Notificacion::where('usuario_id', auth()->id())
                                                     ->where('leido', false)
                                                     ->count();
+
+                                $ultimasNotificaciones = \App\Models\Notificacion::where('usuario_id', auth()->id())
+                                                    ->latest()
+                                                    ->take(5)
+                                                    ->get();
                             @endphp
                             @if($notificacionesNoLeidas > 0)
                                 <span class="badge bg-danger rounded-pill position-absolute top-0 end-0">
@@ -86,23 +91,11 @@
                             <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light">
                                 <h6 class="mb-0">Notificaciones</h6>
                                 @if($notificacionesNoLeidas > 0)
-                                    <form action="{{ route('notificaciones.marcar-todas') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-link p-0 text-muted">
-                                            Marcar todas como leídas
-                                        </button>
-                                    </form>
+                                    <span class="badge bg-primary rounded-pill">{{ $notificacionesNoLeidas }}</span>
                                 @endif
                             </div>
 
                             <div class="dropdown-divider my-0"></div>
-
-                            @php
-                                $ultimasNotificaciones = \App\Models\Notificacion::where('usuario_id', auth()->id())
-                                                    ->orderBy('created_at', 'desc')
-                                                    ->limit(5)
-                                                    ->get();
-                            @endphp
 
                             @forelse($ultimasNotificaciones as $notificacion)
                                 <div class="dropdown-item py-2 px-3 {{ $notificacion->leido ? '' : 'fw-bold' }}">
@@ -124,7 +117,7 @@
 
 
 
-                                     
+
                                 </div>
                             @empty
                                 <div class="dropdown-item text-center py-3">

@@ -41,6 +41,67 @@
             </div>
         </div>
     </div>
+
+    <!-- Detalles de solicitud de adopción -->
+    @if(isset($notificacion) && $notificacion->tipo == 'adopcion' && isset($adopcion))
+        <div class="card mb-4">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">Detalles de la solicitud de adopción</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        @if($adopcion->mascota && $adopcion->mascota->imagen)
+                            <img src="{{ asset('storage/' . $adopcion->mascota->imagen) }}"
+                                 alt="{{ $adopcion->mascota->nombre }}"
+                                 class="img-fluid rounded mb-3">
+                        @else
+                            <div class="text-center p-4 bg-light rounded mb-3">
+                                <i class="fas fa-paw fa-3x text-muted"></i>
+                                <p class="mt-2 text-muted">Sin imagen disponible</p>
+                            </div>
+                        @endif
+                        <h5>{{ $adopcion->mascota->nombre ?? 'Mascota' }}</h5>
+                        <p><strong>Especie:</strong> {{ ucfirst($adopcion->mascota->especie ?? 'No especificada') }}</p>
+                        <p><strong>Edad:</strong> {{ $adopcion->mascota->edad ?? 'No especificada' }} años</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2">Datos del solicitante</h5>
+                        <p><strong>Nombre:</strong> {{ $adopcion->nombre }}</p>
+                        <p><strong>Email:</strong> {{ $adopcion->email }}</p>
+                        <p><strong>Teléfono:</strong> {{ $adopcion->telefono }}</p>
+                        <p><strong>Ciudad:</strong> {{ $adopcion->ciudad }}</p>
+                        <p><strong>Ocupación:</strong> {{ $adopcion->ocupacion }}</p>
+                        <p><strong>Tipo de mascota que busca:</strong> {{ $adopcion->tipo_mascota }}</p>
+                        @if($adopcion->razas)
+                            <p><strong>Razas preferidas:</strong> {{ $adopcion->razas }}</p>
+                        @endif
+                        <p><strong>Motivo:</strong></p>
+                        <div class="p-3 bg-light rounded">
+                            {{ $adopcion->porque }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nueva sección de contactos -->
+                <div class="mt-4">
+                    <h5 class="border-bottom pb-2 text-primary">Información de contacto</h5>
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><i class="fas fa-envelope me-2"></i> <strong>Email:</strong> {{ $adopcion->email }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><i class="fas fa-phone me-2"></i> <strong>Teléfono:</strong> {{ $adopcion->telefono }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
 
 <style>

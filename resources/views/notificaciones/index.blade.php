@@ -85,4 +85,41 @@
         </div>
     </div>
 </div>
+
+<div class="dropdown-menu">
+    @forelse($ultimasNotificaciones as $notificacion)
+        <a href="{{ route('notificaciones.show', $notificacion->id) }}"
+           class="dropdown-item py-2 {{ !$notificacion->leido ? 'fw-bold' : '' }}">
+            <div class="d-flex align-items-center">
+                <div class="flex-shrink-0 me-2 mt-1">
+                    @if($notificacion->tipo == 'adopcion')
+                        <i class="fas fa-heart text-danger"></i>
+                    @elseif($notificacion->tipo == 'encontrado')
+                        <i class="fas fa-search text-success"></i>
+                    @else
+                        <i class="fas fa-bell text-primary"></i>
+                    @endif
+                </div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <p class="mb-1 text-truncate">
+                        @if($notificacion->tipo == 'adopcion')
+                            Solicitud de adopción
+                        @elseif($notificacion->tipo == 'encontrado')
+                            Mascota encontrada
+                        @else
+                            Nueva notificación
+                        @endif
+                    </p>
+                    <small class="text-muted">{{ $notificacion->created_at->diffForHumans() }}</small>
+                </div>
+                @if(!$notificacion->leido)
+                    <span class="badge bg-primary rounded-pill ms-2">Nuevo</span>
+                @endif
+            </div>
+        </a>
+        <div class="dropdown-divider"></div>
+    @empty
+        <p class="dropdown-item text-muted py-2 mb-0 text-center">No tienes notificaciones</p>
+    @endforelse
+</div>
 @endsection
