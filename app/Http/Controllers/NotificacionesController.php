@@ -20,7 +20,13 @@ class NotificacionesController extends Controller
                                    ->orderBy('created_at', 'desc')
                                    ->paginate(10);
 
-        return view('notificaciones.index', compact('notificaciones'));
+        // Agregar esta línea para definir ultimasNotificaciones
+        $ultimasNotificaciones = Notificacion::where('usuario_id', auth()->id())
+                                   ->orderBy('created_at', 'desc')
+                                   ->take(5)
+                                   ->get();
+
+        return view('notificaciones.index', compact('notificaciones', 'ultimasNotificaciones'));
     }
 
     /**
@@ -36,6 +42,12 @@ class NotificacionesController extends Controller
                 return back()->with('error', 'No tienes permiso para ver esta notificación');
             }
 
+            // Agregar esta línea para definir ultimasNotificaciones
+            $ultimasNotificaciones = Notificacion::where('usuario_id', auth()->id())
+                                   ->orderBy('created_at', 'desc')
+                                   ->take(5)
+                                   ->get();
+
             // Marcar como leída si no lo está
             if (!$notificacion->leido) {
                 $notificacion->leido = true;
@@ -45,16 +57,16 @@ class NotificacionesController extends Controller
             // Cargar datos relacionados según el tipo de notificación
             if ($notificacion->tipo == 'adopcion' && $notificacion->referencia_id) {
                 $adopcion = Adopcion::with('mascota')->find($notificacion->referencia_id);
-                return view('notificaciones.show', compact('notificacion', 'adopcion'));
+                return view('notificaciones.show', compact('notificacion', 'adopcion', 'ultimasNotificaciones'));
             }
 
             if ($notificacion->tipo == 'encontrado' && $notificacion->referencia_id) {
                 $perdido = Perdido::find($notificacion->referencia_id);
-                return view('notificaciones.show', compact('notificacion', 'perdido'));
+                return view('notificaciones.show', compact('notificacion', 'perdido', 'ultimasNotificaciones'));
             }
 
             // Para otros tipos de notificación o sin referencia
-            return view('notificaciones.show', compact('notificacion'));
+            return view('notificaciones.show', compact('notificacion', 'ultimasNotificaciones'));
 
         } catch (\Exception $e) {
             \Log::error('Error al mostrar notificación: ' . $e->getMessage());
